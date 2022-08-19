@@ -4,13 +4,13 @@
 title: "Development of a Chagas Disease Antigen and Epitope Atlas using massively parallel serological assays"
 event: 15th International Congress of Parasitology (ICOPA2022)
 event_url: https://icopa2022.org/
-location: Bella Center & Virtual (Online)
+location: Denmark & Virtual (Online)
 address: 
   street: 
   city: Copenhagen
-  region: 
+  region: Hovedstaden
   postcode: 
-  country: DK
+  country: Denmark
 summary: "How we used peptide arrays to discover new antigens and epitopes and map the presence of antibodies in patients"
 abstract:
 
