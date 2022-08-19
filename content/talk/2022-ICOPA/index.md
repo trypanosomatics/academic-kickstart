@@ -11,7 +11,7 @@ address:
   region: 
   postcode: 
   country: DK
-summary: "How we used this technology to discover new antigens and epitopes and map the presence of anti"
+summary: "How we used peptide arrays to discover new antigens and epitopes and map the presence of antibodies in patients"
 abstract:
 
 # Talk start and end times.
