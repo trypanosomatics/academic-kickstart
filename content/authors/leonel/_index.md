@@ -75,7 +75,7 @@ user_groups = ["Grad Students"]
 
 [[social]]
   icon = "linkedin"
-  icon_pack = "fas"
+  icon_pack = "fab"
   link = "https://www.linkedin.com/in/leonel-bracco-14121950/"
 
 # Link to a PDF of your resume/CV from the About widget.
