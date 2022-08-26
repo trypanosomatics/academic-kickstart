@@ -9,7 +9,7 @@ weight = 10
 authors = ["Armando"]
 
 # Author name (this is required for people without content)
- = [""]
+armando = [""]
 
 # Role/position
 role = "PhD Student"
@@ -19,7 +19,7 @@ role = "PhD Student"
 organizations = [ { name = "Agencia Nacional de Promoción Científica y Tecnológica (FONCYT), Agencia I+D+i", url = "https://www.argentina.gob.ar/ciencia/agencia"}, {name="Universidad de San Martín", url="http://www.unsam.edu.ar"} ]
 
 # Short bio (displayed in user profile at end of posts)
-bio = ""
+bio = "PhD Fellow"
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email = "afernandez@iib.unsam.edu.ar"
