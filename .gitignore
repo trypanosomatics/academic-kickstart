@@ -4,3 +4,4 @@ public/
 netlify*
 *.exe
 thumbs.db
+.vscode/settings.json
