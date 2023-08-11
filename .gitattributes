@@ -1,0 +1,8 @@
+# by default, guess
+* text=auto
+# then we have some mappings
+*.sh text eol=lf
+*.md text eol=lf
+*.bat text eol=crlf
+*.jpg binary
+*.png binary
