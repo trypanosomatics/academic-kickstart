@@ -52,31 +52,31 @@ user_groups = ["Grad Students"]
   icon = "envelope"
   icon_pack = "fas"
   link = "mailto:lbracco@iib.unsam.edu.ar"
-#
-#[[social]]
-#  icon = "twitter"
-#  icon_pack = "fab"
-#  link = "https://twitter.com/fernan_aguero"
-#
-#[[social]]
-#  icon = "google-scholar"
-#  icon_pack = "ai"
-#  link = "https://scholar.google.co.uk/citations?user=zycaIZQAAAAJ"
-#
+
+[[social]]
+  icon = "twitter"
+  icon_pack = "fab"
+  link = "https://twitter.com/leonelatm44"
+
+[[social]]
+  icon = "google-scholar"
+  icon_pack = "ai"
+  link = "https://scholar.google.com/citations?user=Ggl6NBIAAAAJ"
+
 [[social]]
   icon = "github"
   icon_pack = "fab"
   link = "https://github.com/atm44"
   
-#[[social]]
-#  icon = "orcid"
-#  icon_pack = "ai"
-#  link = "https://orcid.org/0000-0003-1331-5741"
-#
-#[[social]]
-#  icon = "pubmed"
-#  icon_pack = "ai"
-#  link = "http://1.usa.gov/12p0C2W"
+[[social]]
+  icon = "orcid"
+  icon_pack = "ai"
+  link = "https://orcid.org/0000-0003-0966-2994"
+
+[[social]]
+  icon = "linkedin"
+  icon_pack = "fab"
+  link = "https://www.linkedin.com/in/leonel-bracco-14121950/"
 
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.

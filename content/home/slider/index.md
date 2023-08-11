@@ -74,8 +74,8 @@ interval = false
   overlay_filter = 0.7  # Darken the image. Value in range 0-1.
 
   # Call to action 
-  cta_label = "Upcoming"
+  cta_label = "Visit"
   cta_url = "https://chagastope.org"
   cta_icon_pack = "fas"
-  cta_icon = "clock"
+  cta_icon = "map"
 +++
