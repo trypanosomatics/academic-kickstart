@@ -1,35 +1,39 @@
 +++
 # Display name
-name = "Alejandro Ricci"
+name = "Franco Aguero"
 
 # Author weight -- for sort purposes
 weight = 10
 
 # Username (this should match the folder name)
-authors = ["alejandro"]
+authors = ["franco"]
 
 # Author name (this is required for people without content)
-alejandro = [""]
+franco = [""]
 
 # Role/position
-role = "Former Lab Member"
+role = "Undergrad Student (BSc Thesis)"
 
 # Organizations/Affiliations
 #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-organizations = [ { name = "Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)", url = "http://www.conicet.gob.ar" }, {name="Universidad de San Martín", url="http://www.unsam.edu.ar"} ]
+organizations = [ {name="Universidad de San Martín", url="http://www.unsam.edu.ar"} ]
 
 # Short bio (displayed in user profile at end of posts)
-bio = "PhD Fellow. Processing big data to draw biological conclusions."
+bio = "Undergrad student pursuing a bachelor's degree thesis"
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email = "aricci@iib.unsam.edu.ar"
+email = "faaguero@estudiantes.unsam.edu.ar"
 
 # List (academic) interests or hobbies
-interests = ["Chagas Disease", "Bioinformatics", "Neural Networks"]
+interests = [   "Biochemistry of Proteins",
+  "Molecular Biology",
+  "Chagas Diseases",
+  "Recombinant Proteins"
+]
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
-user_groups = ["Past Lab Members"]
+user_groups = ["Alumni"]
 
 # List qualifications (such as academic degrees)
 #[[education.courses]]
@@ -38,9 +42,10 @@ user_groups = ["Past Lab Members"]
 #  year = 2001
 #
 [[education.courses]]
-  course = "BSc in Biology (Licenciatura)"
-  institution = "Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires"
-  year = 2014
+  course = "BSc in Biotechnology (in progress)"
+  institution = "Escuela de Bio y Nanotecnologías, Universidad Nacional de San Martin"
+  year = 2027
+
 
 # Social/Academic Networking
 # For available icons, see: https://sourcethemes.com/academic/docs/widgets/#icons
@@ -50,12 +55,8 @@ user_groups = ["Past Lab Members"]
 [[social]]
   icon = "envelope"
   icon_pack = "fas"
-  link = "mailto:aricci@iib.unsam.edu.ar"
+  link = "mailto:faaguero@estudiantes.unsam.edu.ar"
   
-[[social]]
-  icon = "orcid"
-  icon_pack = "ai"
-  link = "https://orcid.org/0000-0002-1814-0568"
 #
 #[[social]]
 #  icon = "twitter"
@@ -66,12 +67,7 @@ user_groups = ["Past Lab Members"]
 #  icon = "google-scholar"
 #  icon_pack = "ai"
 #  link = "https://scholar.google.co.uk/citations?user=zycaIZQAAAAJ"
-#
-#[[social]]
-#  icon = "github"
-#  icon_pack = "fab"
-#  link = "https://github.com/fernan"
-#
+
 #[[social]]
 #  icon = "pubmed"
 #  icon_pack = "ai"
@@ -84,14 +80,9 @@ user_groups = ["Past Lab Members"]
 #   icon_pack = "ai"
 #   link = "files/cv.pdf"
 
+
 +++
 
 # About me 
 
-I specialize in the use of bioinformatics to process data and draw conclusions from biological experiments, specially those resulting in large amounts of data, such as high-throughput microarrays. I also use said data to create predictors that infer new biological knowledge or help designing new experiments.
-
-I'm doing a PhD in Molecular Biology and Biotechnology in the "Instituto de Investigaciones Biotecnológicas" (IIB) at the "Universidad de San Martín" (UNSAM, Argentina).
-
-I gave talks about my research at the "VIII Congreso Argentino de Bioinformática y Biología Computacional" (Argentina, Misiones, 2017) and at “ASTMH 67th Annual Meeting” (United Stated, New Orleans, 2018), amongst other places.
-
-I have a Bachelor's Degree in Biological Sciences from the University of Buenos Aires (UBA).
+I am currently doing a bachelor's degree in biotechnology at the National University of San Martín (UNSAM).  
