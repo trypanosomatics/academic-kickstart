@@ -19,10 +19,10 @@ publication_types: ["2"]
 publication: "Biochemical Society Transactions"
 publication_short: "Biochem Soc Trans"
 
-abstract: "The abstract is available at the publisher ([read Abstract at Biochemical Society Transactions](https://portlandpress.com/biochemsoctrans/article-abstract/51/1/195/232416/Targeting-trypanosomes-how-chemogenomics-and?redirectedFrom=fulltext). Trypanosomatids are protozoan parasites that cause human and animal neglected diseases. Despite global efforts, effective treatments are still much needed. Phenotypic screens have provided several chemical leads for drug discovery, but the mechanism of action for many of these chemicals is currently unknown. Recently, chemogenomic screens assessing the susceptibility or resistance of parasites carrying genome-wide modifications started to define the mechanism of action of drugs at large scale. In this review, we discuss how genomics is being used for drug discovery in trypanosomatids, how integration of chemical and genomics data from these and other organisms has guided prioritisations of candidate therapeutic targets and additional chemical starting points, and how these data can fuel the expansion of drug discovery pipelines into the era of artificial intelligence."
+abstract: "Trypanosomatids are protozoan parasites that cause human and animal neglected diseases. Despite global efforts, effective treatments are still much needed. Phenotypic screens have provided several chemical leads for drug discovery, but the mechanism of action for many of these chemicals is currently unknown. Recently, chemogenomic screens assessing the susceptibility or resistance of parasites carrying genome-wide modifications started to define the mechanism of action of drugs at large scale. In this review, we discuss how genomics is being used for drug discovery in trypanosomatids, how integration of chemical and genomics data from these and other organisms has guided prioritisations of candidate therapeutic targets and additional chemical starting points, and how these data can fuel the expansion of drug discovery pipelines into the era of artificial intelligence."
 
 # Summary. An optional shortened abstract.
-summary: "APRANK takes a pathogen proteome as input, and provides a ranked list of the _best_ candidate antigens and epitopes."
+summary: "n this review, we discuss how genomics is being used for drug discovery in trypanosomatids."
 
 tags: ["chemogenomics", "drug discovery" , "trypanosomes"]
 featured: false
