@@ -42,7 +42,7 @@ user_groups = ["Alumni"]
 #  year = 2001
 #
 [[education.courses]]
-  course = "BSc in Biology(in progress)"
+  course = "BSc in Biology (in progress)"
   institution = "Universidad de Buenos Aires (UBA)"
   year = 2024
 

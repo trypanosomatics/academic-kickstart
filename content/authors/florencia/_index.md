@@ -43,7 +43,7 @@ user_groups = ["Alumni"]
 #
 [[education.courses]]
   course = "BSc in Biotechnology (in progress)"
-  institution = "Universidad de Favaloro"
+  institution = "Universidad Favaloro"
   year = 2025
 
 # Social/Academic Networking

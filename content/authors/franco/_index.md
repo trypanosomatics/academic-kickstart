@@ -1,6 +1,6 @@
 +++
 # Display name
-name = "Franco Aguero"
+name = "Franco Agüero"
 
 # Author weight -- for sort purposes
 weight = 10
