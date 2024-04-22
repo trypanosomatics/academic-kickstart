@@ -25,6 +25,7 @@ abstract: "Trypanosomatids are protozoan parasites that cause human and animal n
 summary: "n this review, we discuss how genomics is being used for drug discovery in trypanosomatids."
 
 tags: ["chemogenomics", "drug discovery" , "trypanosomes"]
+categories: ["Databases", "Drug Discovery"]
 featured: false
 
 # Custom links (optional).
@@ -52,7 +53,7 @@ image:
 #   Simply enter your project's folder or file name without extension.
 #   E.g. `internal-project` references `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
-projects: ["immunomics"]
+projects: ["chemogenomics"]
 
 # Slides (optional).
 #   Associate this publication with Markdown slides.
