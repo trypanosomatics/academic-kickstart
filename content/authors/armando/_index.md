@@ -1,6 +1,6 @@
 +++
 # Display name
-name = "Armando E.Fernandez"
+name = "Armando E. Fernandez"
 
 # Author weight -- for sort purposes
 weight = 10
