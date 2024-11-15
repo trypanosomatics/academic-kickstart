@@ -1,5 +1,4 @@
 ---
-
 title: "Antibody dynamics against specific T.cruzi antigens in patients undergoing chemotherapeutic treatments"
 event: "XXVII Congreso de la Federación Latinoamericana de Parasitología y XII Congreso de la Sociedad Argentina de Protozoología"
 event_url: https://flap.protozoologia.org.ar/
@@ -19,7 +18,7 @@ date: 2024-11-27T18:00:00-03:00
 date_end: 2024-11-27T20:00:00-03:00
 all_day: false
 
-authors: ["Ramiro Quinteros", "Alejandro Ricci", "Isabela Ribeiro", "Sergio Sosa-Estani", "Maria Jesús Pinazo", "Cristina Alonso Vega", "Joaquim Gascon", "Faustino Torrico", "Fernán Agüero"]
+authors: ["@ramiro", "@alejandro", "Isabela Ribeiro", "Sergio Sosa-Estani", "Maria Jesús Pinazo", "Cristina Alonso Vega", "Joaquim Gascon", "Faustino Torrico", "@fernan"]
 tags: ["antibody-dynamics","chagas-disease"]
 
 # Is this a featured talk? (true/false)
