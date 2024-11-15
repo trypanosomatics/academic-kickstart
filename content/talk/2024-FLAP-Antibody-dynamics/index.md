@@ -71,11 +71,9 @@ In this work we seek to analyze the dynamics of specific antibodies of patients 
 As a result we identified two main antibody compartments with different dynamic behavior over time. One compartment was more dynamic and displayed larger signal changes, whereas the other was more stable. The antigens found in each compartment are clearly defined. A small subset of 31 peptides was prioritized based on stable and dynamic compartment associations, signal magnitude, and seroprevalence.
 We will explore correlations of these serological markers with other clinical or molecular data linked to treatment failure or success.
 
-![Graphical abstract](table_trial_poster.png)
-
 ## Clinical trial
 
-![Clinical trial](Graphical-Abstract.png)
+![Clinical trial](table_trial_poster.png)
 
 ### Times
 
