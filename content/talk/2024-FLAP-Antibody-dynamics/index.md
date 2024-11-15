@@ -1,3 +1,5 @@
+---
+
 title: "Antibody dynamics against specific T.cruzi antigens in patients undergoing chemotherapeutic treatments"
 event: "XXVII Congreso de la Federación Latinoamericana de Parasitología y XII Congreso de la Sociedad Argentina de Protozoología"
 event_url: https://flap.protozoologia.org.ar/
