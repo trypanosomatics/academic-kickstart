@@ -2,7 +2,7 @@
 title: "Antibody dynamics against specific T.cruzi antigens in patients undergoing chemotherapeutic treatments"
 event: "XXVII Congreso de la Federación Latinoamericana de Parasitología y XII Congreso de la Sociedad Argentina de Protozoología"
 event_url: https://flap.protozoologia.org.ar/
-location: Campus Monserrat de la Universidad Argentina de la Empresa (UADE), Ciudad de Buenos Aires
+location: Universidad Argentina de la Empresa (UADE), Ciudad de Buenos Aires
 address:
   street: Lima 717
   city: CABA
@@ -14,7 +14,7 @@ abstract:
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: 2024-11-27T18:00:00-03:00
+date: 2024-11-19T18:00:00-03:00
 date_end: 2024-11-27T20:00:00-03:00
 all_day: false
 
