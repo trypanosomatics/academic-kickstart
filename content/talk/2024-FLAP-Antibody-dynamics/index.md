@@ -42,7 +42,7 @@ image:
 
 # Optional filename of your slides within your talk's folder or a URL.
 url_slides:
-
+url_poster: "https://www.dropbox.com/scl/fi/zuv86t9qsfc3kununk80c/poster_flap_2024_ramiro_quinteros.pdf?rlkey=56046l15e65o51suypsp7vx33&st=iaf6lrfx&dl=0"
 url_code:
 url_pdf:
 url_video:
