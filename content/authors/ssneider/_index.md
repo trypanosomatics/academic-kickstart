@@ -9,7 +9,7 @@ weight = 10
 authors = ["ssneider"]
 
 # Author name (this is required for people without content)
-sebastian = ["Santiago Sneidermanis"]
+santiago = ["Santiago Sneidermanis"]
 
 # Role/position
 role = "Undergrad Student (BSc Thesis)"
@@ -19,28 +19,28 @@ role = "Undergrad Student (BSc Thesis)"
 organizations = [ {name="Universidad de San Martín", url="http://www.unsam.edu.ar"} ]
 
 # Short bio (displayed in user profile at end of posts)
-bio = "Undergrad student pursuing a bachelor's degree thesis"
+bio = "Undergrad student pursuing a bachelor's degree thesis. Drug discovery and cheminformatics"
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email = "ssneidermanis@estudiantes.unsam.edu.ar"
 
 # List (academic) interests or hobbies
-interests = [ "Bioinformatics", "Drug Discovery", "Neglected diseases", "Computer Science" ]
+interests = [ "Bioinformatics", "Cheminformatics", "Drug Discovery", "Neglected diseases", "Computer Science" ]
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups = ["Alumni"]
 
 # List qualifications (such as academic degrees)
-#[[education.courses]]
-#  course = "PhD in Chemistry"
-#  institution = "Universidad de Buenos Aires"
-#  year = 2001
-#
 [[education.courses]]
-  course = "BSc in Biotechnology (in progress)"
+  course = "Programming in React"
+  institution = "Coderhouse"
+  year = 2023
+
+[[education.courses]]
+  course = "Introduction to chemoinformatics"
   institution = "Escuela de Bio y Nanotecnologías, Universidad Nacional de San Martin"
-  year = 2025
+  year = 2023
 
 
 # Social/Academic Networking
@@ -67,7 +67,7 @@ user_groups = ["Alumni"]
 [[social]]
   icon = "github"
   icon_pack = "fab"
-  link = "https://github.com/trypanosomatics"
+  link = "https://github.com/Sneider3344"
 
 #[[social]]
 #  icon = "pubmed"
@@ -84,11 +84,13 @@ user_groups = ["Alumni"]
 [[social]]
   icon = "linkedin"
   icon_pack = "fab"
-  link = "https://www.linkedin.com/"
+  link = "https://www.linkedin.com/in/santisneider/"
 
 +++
 
 # About me 
 
-I am currently doing a bachelor's degree in biotechnology at the National University of San Martín (UNSAM)...
+I am currently pursuing a bachelor’s degree in Biotechnology at the National University of San Martín (UNSAM). I am equally passionate about computer science and biotechnology, and I aim to build a career in Bioinformatics.
+
+In the lab, I am collaborating on updating and improving the TDR Targets website, integrating genomes and datasets from multiple online resources to create a functional platform that supports drug discovery for neglected diseases. This work is helping me strengthen my skills in software development, software architecture, data integration, and, in particular, my growth in cheminformatics. My bachelor’s thesis focuses on Neglected diseases, such as Chagas, leveraging curated chemogenomic data to contribute to this global health challenge.
 
