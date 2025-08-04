@@ -12,11 +12,11 @@ authors = ["lionel"]
 lionel = [""]
 
 # Role/position
-role = "Former Lab Member (2016 -- 2023)"
+role = "Former Lab Member (2015 -- 2023)"
 
 # Organizations/Affiliations
 #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-organizations = [ { name = "Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)", url = "http://www.conicet.gob.ar" }, {name="Universidad de San Martín", url="http://www.unsam.edu.ar"} ]
+# organizations = [ { name = "Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)", url = "http://www.conicet.gob.ar" }, {name="Universidad de San Martín", url="http://www.unsam.edu.ar"} ]
 
 # Short bio (displayed in user profile at end of posts)
 bio = "PhD Fellow, teacher and science divulgation enthusiast."
@@ -36,6 +36,10 @@ user_groups = ["Past Lab Members"]
   course = "Ms in Biotechnology"
   institution = "Universidad Nacional de Quilmes"
   year = 2015
+[[education.courses]]
+  course = "PhD Biotechnology and Molecular Biology"
+  institution = "Universidad Nacional de San Martín"
+  year = 2023
 
 
 # Social/Academic Networking
@@ -87,6 +91,8 @@ user_groups = ["Past Lab Members"]
 
 +++
 
-# About me 
+# Previous positions in the lab
 
-Lionel Uran Landaburu holds an MS degree in Biotechnology from the Universidad Nacional de Quilmes, Argentina. Is passionate about, and has been working on since 2011, global health problems. He has had welcoming experiences in the wet lab, but is now aiming towards Bioinformatics as a PhD fellow at IIBIO-CONICET. He is currently doing research in applied chemogenomics, using genome-wide data and chemical libraries to find novel treatments for a wide variety of neglected diseases, Chagas disease in particular.
+ * PhD Student (2015-2023)
+
+

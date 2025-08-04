@@ -12,7 +12,7 @@ authors = ["leonel"]
 leonel = [""]
 
 # Role/position
-role = "PhD Student"
+role = "Former Lab Member (2016 -- 2023)"
 
 # Organizations/Affiliations
 #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
@@ -35,7 +35,7 @@ interests = [
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
-user_groups = ["Grad Students"]
+user_groups = ["Past Lab Members"]
 
 # List qualifications (such as academic degrees)
 [[education.courses]]
@@ -87,9 +87,9 @@ user_groups = ["Grad Students"]
 
 +++
 
-# About me 
+# Previous positions in the lab
 
-Specialist in the computer analysis of large volumes of data with applications in biological or health sciences. Mainly focused on improving the diagnosis of congenital Chagas disease.
-As my master degree thesis, from 2016 to 2018, i carried out an exhaustive analysis of high density peptide microarrays that allowed the discovery of new candidate antigens for the diagnosis of congenital Chagas. Currently a doctoral fellow CONICET-UNSAM, with a place of work at the IIBIO and with the prospect of graduating in 2023, under the direction of Dr. Fernán Agüero. 
-Engineer in Agrobiotechnology, one of the first graduates in the UNSAM.
+ * 2016-2018 Undergraduate Student (Eng. Thesis)
+ * 2018-2012 (PhD Student)
+
 
