@@ -212,19 +212,88 @@ Do **not** adopt the upstream `permalinks:` block, which would rewrite
 
 ---
 
-## 8. Open questions
+## 8. Open questions — resolved 2026-09-04
 
-Not blocking Phase 1. Needed during Phase 2.
+| # | Question | Decision |
+|---|---|---|
+| 1 | Dark mode | Use the `tryps` palette. `data/themes/tryps.yaml`. See §8.1. |
+| 2 | Hero image | `static/img/headers/bubbles-wide-tryp-binary.jpg`, copied to `assets/media/`. |
+| 3 | Analytics | Keep `UA-1674362-6`. See §8.3 — **not** a GA4 id. |
+| 4 | Superuser | `fernan`. `trypanosomatics` keeps a profile but is no longer owner. |
+| 5 | Inactive widgets | Parked in `archive/home-widgets/`. See §8.5. |
+| 6 | Map | MapLibre/OpenFreeMap active; Google embed documented alongside. |
+| 7 | Repo name | `trypanosomatics-website`. See §8.7 for the Netlify procedure. |
 
-1. **Dark mode** — real `tryps` dark palette, a stock dark theme, or off?
-2. **Hero image** — supply one, or drop it? (broken since before this migration)
-3. **Analytics** — GA4, a privacy-preserving alternative, or none? (`UA-1674362-6` is dead)
-4. **Superuser** — `fernan` or `trypanosomatics`?
-5. **Inactive widgets** — delete `demo`, `skills`, `experience`, `accomplishments`, or park them?
-6. **Maps API key** — rotate; MapLibre/OpenFreeMap needs no key at all
-7. **Repo name** — rename `academic-kickstart` to what?
+### 8.1 Dark mode — proposed palette
 
----
+The old theme was light-only (`light = true`), so there was no dark variant to
+port; these values are new and are the part worth reviewing.
+
+| Role | Light (unchanged) | Dark (proposed) |
+|---|---|---|
+| primary | `#69870E` | `#CFF462` |
+| secondary | `#54914D` | `#7DA211` |
+| background | `#ffffff` | `#0b1f24` |
+| foreground | `#1b2a2e` | `#e9f1e4` |
+| header bg / fg | `#7DA211` / `#024452` | `#04333c` / `#CFF462` |
+
+Reasoning: `#69870E` is a dark olive and fails contrast on a dark ground, so
+primary lifts to `#CFF462` — a colour the palette already contains (it was the
+alert background in the old `custom.scss`) rather than an invented one. The dark
+background derives from the palette's own `#024452` teal instead of a neutral
+grey, so both modes read as the same brand.
+
+### 8.3 Analytics is Universal Analytics, not GA4
+
+Checked against the live site: `trypanosomatics.org` serves
+
+```html
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1674362-6">
+```
+
+There is **no `G-` measurement id** in the served HTML, and none in the repo.
+The migrated config reproduces this exactly, so whatever GA4 property is
+currently receiving this traffic keeps receiving it — Google can forward a UA
+`gtag.js` tag into a GA4 property through a connected site tag.
+
+That bridge is a legacy mechanism. The durable fix is to read the real `G-…`
+measurement id off the GA4 property (Admin → Data Streams → the web stream) and
+put it in `hugoblox.analytics.google.measurement_id`. Until then this is
+carried-over behaviour, not a working GA4 install.
+
+### 8.5 The parked widgets are old, not new
+
+`archive/home-widgets/` holds the **Academic v4** widgets that were already
+`active = false` before the migration: `demo` (blank), `skills` (featurette),
+`experience`, `accomplishments`. They are history, not new features.
+
+The new things worth trying are Hugo Blox blocks this site does not yet use:
+`resume-experience`, `resume-skills`, `resume-awards` (the direct counterparts
+of those four), plus `stats`, `testimonials`, `faq`, `gallery`, `steps`,
+`focus-areas`, `logos`, `tech-stack`, `cta-card`.
+
+### 8.7 Renaming the repository and Netlify
+
+Renaming `academic-kickstart` → `trypanosomatics-website` is safe, but relink
+Netlify rather than relying on the redirect.
+
+- GitHub redirects the old path, and Netlify builds generally keep working
+  through it — but the documented failure mode is builds failing at
+  *"preparing repo"*, and Netlify's UI keeps showing the old name either way.
+- The supported fix is **Project configuration → Build & deploy → Continuous
+  deployment → Repository → Manage repository → Link to a different repository**.
+  This relinks in place: it does **not** create a new site, so the site ID,
+  custom domain, DNS, environment variables, Forms submissions, and deploy
+  history are all preserved.
+- Order of operations: land this migration and confirm a green production
+  build first, then rename, then relink, then push a trivial commit to prove
+  the hook fires. Renaming mid-migration adds a variable to an already large
+  change.
+- Also update afterwards: the Netlify badge URL in `README.md`, and
+  `hugoblox.repository.url` in `config/_default/params.yaml`.
+
+Sources: [Netlify docs — repo permissions and linking](https://docs.netlify.com/build/git-workflows/repo-permissions-linking/),
+[Netlify forum — renaming a git repository](https://answers.netlify.com/t/renaming-a-git-repository/37168)
 
 ## 9. Progress log
 
@@ -232,7 +301,7 @@ Not blocking Phase 1. Needed during Phase 2.
 |---|---|---|
 | 2026-09-04 | Baseline | ✅ 256 URLs / 262 author links / 359 pages captured |
 | 2026-09-04 | Phase 1 | ✅ complete on `content/normalise-front-matter` — 4 commits, all gates green |
-| 2026-09-04 | Phase 2 | 🚧 **builds on Hugo 0.165.0** — 466 pages, no errors; 256/256 baseline URLs resolve. Remaining work in §5.5. |
+| 2026-09-04 | Phase 2 | 🚧 open questions 1-6 resolved; **builds on Hugo 0.165.0** — 466 pages, no errors; 256/256 baseline URLs resolve. Remaining work in §5.5. |
 
 #### 5.3 Hugo Blox needs `tailwindcss` on `security.exec.allow`
 
@@ -264,8 +333,10 @@ the defaults already permit it. They do for the Node *permission* sandbox
 2. **Publication front matter deprecations** — 79 warnings, two classes:
    top-level `doi` → `hugoblox.ids.doi`, and the flat `publication` string →
    `publication: {name, short_name, volume, issue, pages, publisher}`.
-3. **Design** — the `tryps` primary/secondary colours are set, but fonts (Play /
-   Open Sans / PT Mono) and dark mode are untouched. Open question 1.
+3. **Design → Phase 4.** The `tryps` palette and dark mode are done; fonts
+   (Play / Open Sans / PT Mono) and overall styling are not. Kit font packs live
+   in the module's `data/fonts/`; a `tryps` pack would be authored the same way
+   as the theme pack.
 4. **External co-authors are no longer hyperlinked.** Kit links an author only
    when it can resolve profile data, so lab members link to their profiles and
    external co-authors render as plain text. Their taxonomy pages still exist
