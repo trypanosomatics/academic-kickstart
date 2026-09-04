@@ -232,6 +232,48 @@ Not blocking Phase 1. Needed during Phase 2.
 |---|---|---|
 | 2026-09-04 | Baseline | ✅ 256 URLs / 262 author links / 359 pages captured |
 | 2026-09-04 | Phase 1 | ✅ complete on `content/normalise-front-matter` — 4 commits, all gates green |
+| 2026-09-04 | Phase 2 | 🚧 **builds on Hugo 0.165.0** — 466 pages, no errors; 256/256 baseline URLs resolve. Remaining work in §5.5. |
+
+#### 5.3 Hugo Blox needs `tailwindcss` on `security.exec.allow`
+
+An unmodified Kit template does **not** build on Hugo 0.165. Hugo's built-in
+`security.exec.allow` is `sass`/`go`/`git`/`node`/`postcss`; the blox module's
+Tailwind v4 pipeline shells out to `tailwindcss` and its config comments assume
+the defaults already permit it. They do for the Node *permission* sandbox
+(`allowChildProcess`), but not for `exec`. Added to `config/_default/hugo.yaml`.
+
+#### 5.4 Blocks: what mapped, what had to be written
+
+| v4 widget | Kit block |
+|---|---|
+| `about` | `resume-biography` |
+| `pages`, `featured` | `collection` (`view: card` / `article-grid` / `citation`) |
+| `portfolio` | `portfolio` |
+| `people` | `team-showcase` |
+| `contact` | `contact-info` |
+| `hero` | `hero` |
+| `slider` | `logos` — Kit has no carousel; `logos` carries the same name/image/url/description per item |
+| `tag_cloud` | **written for this site** — `hugo-blox/blox/all-access/tag-cloud/` |
+
+#### 5.5 Phase 2 remaining
+
+1. **Altmetric + Dimensions badges** — not yet reinstated. The v4 overrides read
+   `$item.Params.doi`; Kit deprecates top-level `doi` in favour of
+   `hugoblox.ids.doi`, so do the front-matter move first, then write the
+   override against `_partials/views/citation.html` and `single.html`.
+2. **Publication front matter deprecations** — 79 warnings, two classes:
+   top-level `doi` → `hugoblox.ids.doi`, and the flat `publication` string →
+   `publication: {name, short_name, volume, issue, pages, publisher}`.
+3. **Design** — the `tryps` primary/secondary colours are set, but fonts (Play /
+   Open Sans / PT Mono) and dark mode are untouched. Open question 1.
+4. **External co-authors are no longer hyperlinked.** Kit links an author only
+   when it can resolve profile data, so lab members link to their profiles and
+   external co-authors render as plain text. Their taxonomy pages still exist
+   and are still in the sitemap; nothing links to them. Arguably an improvement
+   — needs a decision, not a silent change.
+5. **README** — still describes the pinned 0.69.2 workflow.
+6. **`hugo mod get ./...` drifts.** It upgraded the netlify integration and
+   pulled `HugoBlox/kit v4.8.0+incompatible`. Pin exact versions before merge.
 
 ### Findings from Phase 1
 
