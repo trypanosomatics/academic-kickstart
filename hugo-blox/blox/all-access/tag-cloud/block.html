@@ -1,0 +1,60 @@
+{{/*
+  Tag Cloud block.
+
+  Hugo Blox Kit has no tag-cloud block; the Bootstrap-era framework did, and
+  this site's landing page used it. Reimplemented here against the Kit v3
+  block contract (see MIGRATION.md section 5.4).
+
+  content:
+    title, subtitle, text  - optional headings
+    taxonomy               - taxonomy to render (default "tags")
+    count                  - max terms, 0 = all (default 25)
+  design:
+    font_size_min/max      - rem sizes for the least/most used term
+*/}}
+
+{{ $page := .wcPage | default .page }}
+{{ $block := .wcBlock | default .block }}
+{{ $content := $block.content | default dict }}
+{{ $design := $block.design | default dict }}
+
+{{ $taxonomy := $content.taxonomy | default "tags" }}
+{{ $count := int ($content.count | default 25) }}
+{{ $min := float ($design.font_size_min | default 0.8) }}
+{{ $max := float ($design.font_size_max | default 2.0) }}
+
+{{ $terms := index site.Taxonomies $taxonomy }}
+{{ if $terms }}
+  {{ $sorted := $terms.ByCount }}
+  {{ if gt $count 0 }}{{ $sorted = first $count $sorted }}{{ end }}
+
+  {{/* Scale font size linearly between the least and most used term. */}}
+  {{ $counts := slice }}
+  {{ range $sorted }}{{ $counts = $counts | append (len .Pages) }}{{ end }}
+  {{ $hi := 1 }}{{ $lo := 1 }}
+  {{ with $counts }}{{ $hi = math.Max (index (sort . "value" "desc") 0) 1 }}{{ $lo = math.Max (index (sort . "value" "asc") 0) 1 }}{{ end }}
+  {{ $span := math.Max (sub $hi $lo) 1 }}
+
+  <div class="mx-auto max-w-4xl px-6 py-12">
+    {{ with $content.title }}
+      <h2 class="text-3xl font-bold text-center mb-2">{{ . | markdownify | emojify }}</h2>
+    {{ end }}
+    {{ with $content.subtitle }}
+      <p class="text-center text-gray-600 dark:text-gray-400 mb-8">{{ . | markdownify | emojify }}</p>
+    {{ end }}
+    {{ with $content.text }}
+      <div class="prose dark:prose-invert mx-auto mb-8">{{ . | markdownify | emojify }}</div>
+    {{ end }}
+
+    <div class="flex flex-wrap justify-center items-baseline gap-x-4 gap-y-2">
+      {{ range $sorted }}
+        {{ $n := len .Pages }}
+        {{ $size := add $min (mul (div (float (sub $n $lo)) (float $span)) (sub $max $min)) }}
+        <a href="{{ (site.GetPage (printf "/%s/%s" $taxonomy .Page.File.ContentBaseName)).RelPermalink | default .Page.RelPermalink }}"
+           class="text-primary-600 dark:text-primary-400 hover:underline whitespace-nowrap"
+           style="font-size: {{ printf "%.2f" $size }}rem"
+           title="{{ $n }} {{ cond (eq $n 1) "page" "pages" }}">{{ .Page.Title | default .Term }}</a>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}

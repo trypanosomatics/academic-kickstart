@@ -1,0 +1,12 @@
+# Section renames from the Hugo Blox migration. Every one of these paths is in
+# the pre-migration sitemap and may be cited in a paper. See MIGRATION.md §6.
+/post/*                 /blog/:splat            301
+/talk/*                 /events/:splat          301
+/publication/*          /publications/:splat    301
+/project/*              /projects/:splat        301
+
+# Publication type taxonomy: numeric ids became CSL type names.
+/publication_types/1/*  /publication_types/paper-conference/   301
+/publication_types/2/*  /publication_types/article-journal/    301
+/publication_types/3/*  /publication_types/article/            301
+/publication_types/6/*  /publication_types/chapter/            301
