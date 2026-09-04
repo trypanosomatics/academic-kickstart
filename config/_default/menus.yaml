@@ -1,30 +1,39 @@
-# Navigation. Anchors (#id) target sections on the landing page and must match
-# the `id:` of the corresponding block in content/_index.md.
+# Navigation. Anchors target sections on the landing page and must match the
+# `id:` of the corresponding block in content/_index.md.
+#
+# Written as `/#id`, NOT `#id`. A bare fragment resolves against whatever page
+# you are on, so from /publications/foo/ clicking "Talks" just appended #talks
+# to that URL instead of going home. Hugo Blox's navbar.html tries to handle
+# this — it computes site.Home.RelPermalink for non-home pages — but then
+# overwrites the result unconditionally on the next line, so the prefix is
+# always discarded (blox v0.0.0-20260527025321). Writing the path here avoids
+# overriding a 220-line template: `/#id` does not match its `^#` branch and is
+# passed through relLangURL unchanged.
 main:
   - name: Home
-    url: '#about'
+    url: '/#about'
     weight: 10
   - name: Posts
-    url: '#posts'
+    url: '/#posts'
     weight: 20
   - name: Featured
-    url: '#featured'
+    url: '/#featured'
     weight: 25
   - name: Talks
-    url: '#talks'
+    url: '/#talks'
     weight: 30
   - name: Projects
-    url: '#projects'
+    url: '/#projects'
     weight: 40
   - name: Publications
-    url: '#publications'
+    url: '/#publications'
     weight: 50
   - name: Popular Topics
-    url: '#tags'
+    url: '/#tags'
     weight: 55
   - name: People
-    url: '#people'
+    url: '/#people'
     weight: 60
   - name: Contact
-    url: '#contact'
+    url: '/#contact'
     weight: 70

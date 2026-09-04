@@ -465,3 +465,35 @@ absorbs every following top-level key into the table. This bit the earlier
 all intact, `publication` a map, no `publication_short` left); build clean with
 **0 warnings and 0 errors**; every rendered citation string read back and
 eyeballed.
+
+---
+
+## 8.10 Navbar anchors broke on every page except the home page
+
+From a subpage, clicking a nav item appended the fragment to the current URL —
+`/publications/foo/` + *Talks* gave `/publications/foo/#talks` instead of going
+home and scrolling.
+
+Cause: the menu used bare fragments (`#talks`), which resolve against the
+current document. Hugo Blox's `navbar.html` tries to handle exactly this, but
+the fix is broken (blox `v0.0.0-20260527025321`):
+
+```gotemplate
+{{- if findRE `^#` .URL -}}
+  {{- if not $.IsHome -}}
+    {{- $url = site.Home.RelPermalink -}}   {{/* computes the "/" prefix … */}}
+  {{- end }}
+  {{- $url = .URL -}}                        {{/* … then discards it, always */}}
+```
+
+The second assignment sits outside the `if`, so the prefix is overwritten on
+every page. The same shape appears in the dropdown branch a few lines above.
+
+Fixed **without an override** by writing the menu URLs as `/#talks` in
+`config/_default/menus.yaml`. A leading slash means `findRE "^#"` no longer
+matches, so the URL takes the normal `relLangURL` path and is emitted verbatim.
+That avoids copying a 220-line template to change two lines.
+
+Verified: every header anchor on the home page, a publication page and an author
+page is `/#…`, no bare `#…` href remains anywhere, and all nine target ids exist
+on the landing page.
