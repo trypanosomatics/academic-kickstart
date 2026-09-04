@@ -12,7 +12,10 @@ baseURL: 'https://trypanosomatics.org/'
 defaultContentLanguage: en
 hasCJKLanguage: false
 defaultContentLanguageInSubdir: false
-removePathAccents: true
+# The upstream template sets this true, which would turn
+# /authors/andrés-e-ciocchini/ into /authors/andres-e-ciocchini/ and move 12
+# existing author URLs. Accent handling is not part of this migration.
+removePathAccents: false
 
 ############################
 ## ADVANCED

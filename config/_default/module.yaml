@@ -10,9 +10,9 @@ imports:
 mounts:
   # Locally-authored blocks. Kit has no tag-cloud block, so this site ships one.
   - source: hugo-blox/blox/all-access
-    target: layouts/_partials/hbx/blocks/
+    target: layouts/_partials/hbx/blocks
     files:
-      - '**.html'
+      - '**/block.html'
   - source: layouts
     target: layouts
   - source: assets

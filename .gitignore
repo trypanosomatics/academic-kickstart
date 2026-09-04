@@ -1,8 +1,9 @@
 resources/
 public/
 .idea/
-netlify*
 *.exe
 thumbs.db
 .vscode/settings.json
 claude.session
+node_modules/
+.hugo_build.lock

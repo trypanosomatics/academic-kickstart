@@ -50,10 +50,10 @@
       {{ range $sorted }}
         {{ $n := len .Pages }}
         {{ $size := add $min (mul (div (float (sub $n $lo)) (float $span)) (sub $max $min)) }}
-        <a href="{{ (site.GetPage (printf "/%s/%s" $taxonomy .Page.File.ContentBaseName)).RelPermalink | default .Page.RelPermalink }}"
+        <a href="{{ .Page.RelPermalink }}"
            class="text-primary-600 dark:text-primary-400 hover:underline whitespace-nowrap"
            style="font-size: {{ printf "%.2f" $size }}rem"
-           title="{{ $n }} {{ cond (eq $n 1) "page" "pages" }}">{{ .Page.Title | default .Term }}</a>
+           title="{{ $n }} {{ cond (eq $n 1) "page" "pages" }}">{{ .Page.LinkTitle | default .Term }}</a>
       {{ end }}
     </div>
   </div>
