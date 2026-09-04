@@ -1,0 +1,29 @@
+schema: hugoblox/author/v1
+slug: franco
+name:
+  display: Franco Agüero
+  given: Franco
+  family: Agüero
+role: Undergrad Student (BSc Thesis)
+bio: "# About me \n\nI am currently doing a bachelor's degree in biotechnology at the National University\
+  \ of San Martín (UNSAM)."
+affiliations:
+- name: Universidad de San Martín
+  url: http://www.unsam.edu.ar
+links:
+- icon: at-symbol
+  url: mailto:faaguero@estudiantes.unsam.edu.ar
+  label: E-mail
+interests:
+- Biochemistry of Proteins
+- Molecular Biology
+- Chagas Diseases
+- Recombinant Proteins
+education:
+- degree: BSc in Biotechnology (in progress)
+  institution: Escuela de Bio y Nanotecnologías, Universidad Nacional de San Martin
+  year: 2027
+user_groups:
+- Alumni
+weight: 10
+email: faaguero@estudiantes.unsam.edu.ar

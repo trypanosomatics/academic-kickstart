@@ -1,0 +1,35 @@
+schema: hugoblox/author/v1
+slug: mercedes
+name:
+  display: Mercedes Didier Garnham
+  given: Mercedes
+  family: Didier Garnham
+role: PhD Student
+bio: "# About me \n\nI am currently doing my bachelor’s degree in Biotechnology at the University of Hurlingham\
+  \ (UNAHUR). I work in Bioinformatics, using computer science and programming to analize chemogenomic\
+  \ information. I’m researching new compounds that might be useful to treat Chagas disease by using genome-wide\
+  \ data and chemical libraries at IIBIO-CONICET.\n\n# Previous positions in the lab\n\n * 2018-2020 Undergrad\
+  \ Student\n\n# Current Position\n\n * 2021-- PhD Student"
+affiliations:
+- name: Universidad Nacional de Hurlingham
+  url: http://www.unahur.edu.ar
+- name: Universidad de San Martín
+  url: http://www.unsam.edu.ar
+links:
+- icon: at-symbol
+  url: '#contact'
+  label: E-mail
+- icon: brands/linkedin
+  url: https://www.linkedin.com/in/mercedes-didier-garnham-67242a151
+- icon: brands/github
+  url: https://github.com/mercedesgarnham
+- icon: brands/twitter
+  url: https://twitter.com/MMDidierGarnham
+interests:
+- Chemogenomics
+- Neglected Diseases
+- Drug Discovery
+user_groups:
+- Postdocs
+weight: 10
+email: mdidiergarnham@iib.unsam.edu.ar

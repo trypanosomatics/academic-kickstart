@@ -1,0 +1,11 @@
+schema: hugoblox/author/v1
+slug: aleacker
+name:
+  display: Alejandro A Ackermann
+  given: Alejandro
+  family: Ackermann
+role: Former Lab Member (2005 -- 2012)
+bio: "# Previous positions in the lab\n \n * 2005-2012 PhD Student"
+user_groups:
+- Past Lab Members
+weight: 10

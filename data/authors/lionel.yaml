@@ -1,0 +1,35 @@
+schema: hugoblox/author/v1
+slug: lionel
+name:
+  display: Lionel Urán Landaburu
+  given: Lionel
+  family: Urán Landaburu
+role: Former Lab Member (2015 -- 2023)
+bio: "# Previous positions in the lab\n\n * PhD Student (2015-2023)"
+links:
+- icon: at-symbol
+  url: mailto:lionel.u.l@iib.unsam.edu.ar
+  label: E-mail
+- icon: brands/twitter
+  url: https://twitter.com/leitouran
+- icon: academicons/google-scholar
+  url: https://scholar.google.com/citations?user=fIjAs5UAAAAJ
+- icon: brands/linkedin
+  url: https://www.linkedin.com/in/lionelul/
+- icon: brands/github
+  url: https://github.com/leitouran
+- icon: academicons/orcid
+  url: https://orcid.org/0000-0002-6202-9779
+interests:
+- Chemogenomics, Neglected diseases, Drug Discovery
+education:
+- degree: Ms in Biotechnology
+  institution: Universidad Nacional de Quilmes
+  year: 2015
+- degree: PhD Biotechnology and Molecular Biology
+  institution: Universidad Nacional de San Martín
+  year: 2023
+user_groups:
+- Past Lab Members
+weight: 10
+email: lionel.u.l@iib.unsam.edu.ar

@@ -1,0 +1,28 @@
+schema: hugoblox/author/v1
+slug: arianna
+name:
+  display: Arianna Zuccolo Niño
+  given: Arianna
+  family: Zuccolo Niño
+role: Undergrad Student (BSc Thesis)
+bio: '# About me'
+affiliations:
+- name: Universidad de San Martín
+  url: http://www.unsam.edu.ar
+links:
+- icon: at-symbol
+  url: mailto:arianna2003@hotmail.com.ar
+  label: E-mail
+interests:
+- Biochemistry of Proteins
+- Molecular Biology
+- Chagas Diseases
+- Recombinant Proteins
+education:
+- degree: BSc in Biotechnology (in progress)
+  institution: Universidad Favaloro
+  year: 2025
+user_groups:
+- Alumni
+weight: 10
+email: arianna2003@hotmail.com.ar

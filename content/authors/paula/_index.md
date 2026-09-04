@@ -1,34 +1,6 @@
-+++
-name = "María Paula Magariños"
-# Display name used by Hugo Blox (kept alongside `name`, which the
-# current Academic v4 People widget still reads).
-title = "María Paula Magariños"
-
-# Full name (for SEO / schema.org)
-first_name = "María Paula"
-last_name = "Magariños"
-
-authors = ["paula"]
-email = "mpmagarinos@gmail.com"
-user_groups = ["Past Lab Members"]
-role = "Former Lab Member (2009 -- 2014)"
-bio = "Present address: ChEMBL Group (EMBL-EBI)"
-weight = 10
-
-[[social]]
-  icon = "orcid"
-  icon_pack = "ai"
-  link = "https://orcid.org/0000-0003-2769-4105"
-
-+++
-
-# Previous positions in the lab
-
- * 2009-2014 PhD Student
- * 2014 Postdoc
-
-# Current Position
-
-ChEMBL Group, European Bioinformatics Institute (EBI) -- European Molecular
-Biology Laboratory, Hinxton, Cambridge, UK.
-https://www.ebi.ac.uk/about/people/maria-paula-magarinos
+---
+# Profile data lives in data/authors/paula.yaml
+# This stub exists so the author's term page is generated even when no
+# content references them.
+title: "María Paula Magariños"
+---

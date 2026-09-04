@@ -1,0 +1,42 @@
+schema: hugoblox/author/v1
+slug: leonel
+name:
+  display: Leonel Bracco
+  given: Leonel
+  family: Bracco
+role: Former Lab Member (2016 -- 2023)
+bio: "# Previous positions in the lab\n\n * 2016-2018 Undergraduate Student (Eng. Thesis)\n * 2018-2012\
+  \ (PhD Student)"
+affiliations:
+- name: Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)
+  url: http://www.conicet.gob.ar
+- name: Universidad de San Martín
+  url: http://www.unsam.edu.ar
+links:
+- icon: at-symbol
+  url: mailto:lbracco@iib.unsam.edu.ar
+  label: E-mail
+- icon: brands/twitter
+  url: https://twitter.com/leonelatm44
+- icon: academicons/google-scholar
+  url: https://scholar.google.com/citations?user=Ggl6NBIAAAAJ
+- icon: brands/github
+  url: https://github.com/atm44
+- icon: academicons/orcid
+  url: https://orcid.org/0000-0003-0966-2994
+- icon: brands/linkedin
+  url: https://www.linkedin.com/in/leonel-bracco-14121950/
+interests:
+- Diagnostics
+- Bioinformatics
+- Neglected Diseases
+- Congenital Chagas
+- Trypanosomes
+education:
+- degree: agrobiotechnology engineer
+  institution: Universidad Nacional de San Martín
+  year: 2018
+user_groups:
+- Past Lab Members
+weight: 10
+email: lbracco@iib.unsam.edu.ar

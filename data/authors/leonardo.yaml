@@ -1,0 +1,13 @@
+schema: hugoblox/author/v1
+slug: leonardo
+name:
+  display: Leonardo G Panunzi
+  given: Leonardo
+  family: Panunzi
+role: Former Lab Member (2007 -- 2014)
+bio: "# Previous positions in the lab\n\n * 2007-2013 PhD Student\n * 2014 Postdoc\n\n# Current position\n\
+  \nInstitut Pasteur Paris, France.\nhttps://research.pasteur.fr/en/member/leonardo-gabriel-panunzi/"
+user_groups:
+- Past Lab Members
+weight: 10
+email: leonardopnnz@gmail.com

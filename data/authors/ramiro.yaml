@@ -1,0 +1,30 @@
+schema: hugoblox/author/v1
+slug: ramiro
+name:
+  display: Ramiro Quinteros
+  given: Ramiro
+  family: Quinteros
+role: PhD Student
+bio: "# About me\nI am currently finishing my bachelor’s degree in Biotechnology at the University of\
+  \ San Martín (UNSAM). \nI’m doing a graduate thesis in the “Instituto de Investigaciones Biotecnológicas”\
+  \ (IIB) at the “Universidad de San Martín” (UNSAM), which involves high-throughput analysis of peptide\
+  \ arrays to screen antigenic markers in different treatments of Chagas Disease."
+affiliations:
+- name: Universidad de San Martín
+  url: http://www.unsam.edu.ar
+links:
+- icon: at-symbol
+  url: rquinteros@estudiantes.unsam.edu.ar
+  label: E-mail
+interests:
+- Bioinformatics
+- Chagas Disease
+- Data Analysis
+education:
+- degree: BSc in Biotechnology
+  institution: Universidad Nacional de San Martín (UNSAM)
+  year: 2023
+user_groups:
+- Grad Students
+weight: 10
+email: rquinteros@estudiantes.unsam.edu.ar

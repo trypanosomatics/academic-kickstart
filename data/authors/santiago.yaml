@@ -1,0 +1,23 @@
+schema: hugoblox/author/v1
+slug: santiago
+name:
+  display: Santiago J Carmona
+  given: Santiago
+  family: Carmona
+role: Former Lab Member (2007 -- 2015)
+bio: "# Previous positions in the lab\n\n * 2007-2010 Undergrad Student (BSc Thesis)\n * 2010-2015 PhD\
+  \ Student \n\n# Current Position\n\nLudwig Institute for Cancer Research - University of Lausanne, Switzerland.\
+  \ https://unil.ch/dof/carmona"
+links:
+- icon: academicons/google-scholar
+  url: https://scholar.google.com/citations?user=H7ILPkgAAAAJ
+- icon: academicons/orcid
+  url: https://orcid.org/0000-0002-2495-0671
+- icon: academicons/researcherid
+  url: http://www.researcherid.com/rid/E-9356-2015
+- icon: brands/twitter
+  url: https://twitter.com/carmonation
+user_groups:
+- Past Lab Members
+weight: 10
+email: sjcarmona@gmail.com

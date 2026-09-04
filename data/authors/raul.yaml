@@ -1,0 +1,21 @@
+schema: hugoblox/author/v1
+slug: raul
+name:
+  display: Raúl O Cosentino
+  given: Raúl
+  family: Cosentino
+role: Former Lab Member (2007 -- 2014)
+bio: "# Previous positions in the lab                                               \n\n * 2007-2009 Undergrad\
+  \ Student (BSc Thesis)\n * 2009-2014 PhD Student\n\n# Current Position\n\nSiegel Laboratory, Biomedical\
+  \ Center Munich, Ludwig Maximilians Universität München, Martinsried, Germany.\nhttps://www.molpara.vetmed.uni-muenchen.de/index.html"
+links:
+- icon: academicons/google-scholar
+  url: https://scholar.google.com/citations?user=ICBH60EAAAAJ
+- icon: academicons/orcid
+  url: https://orcid.org/0000-0003-2124-8198
+- icon: brands/twitter
+  url: https://twitter.com/CosentinoRaul
+user_groups:
+- Past Lab Members
+weight: 10
+email: rulicosentino@gmail.com

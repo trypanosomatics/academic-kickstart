@@ -1,0 +1,17 @@
+schema: hugoblox/author/v1
+slug: paula
+name:
+  display: María Paula Magariños
+  given: María Paula
+  family: Magariños
+role: Former Lab Member (2009 -- 2014)
+bio: "# Previous positions in the lab\n\n * 2009-2014 PhD Student\n * 2014 Postdoc\n\n# Current Position\n\
+  \nChEMBL Group, European Bioinformatics Institute (EBI) -- European Molecular\nBiology Laboratory, Hinxton,\
+  \ Cambridge, UK.\nhttps://www.ebi.ac.uk/about/people/maria-paula-magarinos"
+links:
+- icon: academicons/orcid
+  url: https://orcid.org/0000-0003-2769-4105
+user_groups:
+- Past Lab Members
+weight: 10
+email: mpmagarinos@gmail.com

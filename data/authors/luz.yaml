@@ -1,0 +1,33 @@
+schema: hugoblox/author/v1
+slug: luz
+name:
+  display: Luz Sommariva
+  given: Luz
+  family: Sommariva
+role: Undergrad Student (BSc Thesis)
+bio: "# About me \n\nI am currently doing a bachelor's degree in biotechnology at the National University\
+  \ of San Martín (UNSAM).  I am very enthusiastic about computer science as much as biotech, and pursuing\
+  \ a career in Bioinformatics."
+affiliations:
+- name: Universidad de San Martín
+  url: http://www.unsam.edu.ar
+links:
+- icon: at-symbol
+  url: mailto:lsommariva@estudiantes.unsam.edu.ar
+  label: E-mail
+interests:
+- Bioinformatics
+- Drug Discovery
+- Neglected diseases
+- Computer Science
+education:
+- degree: BSc in Biotechnology (in progress)
+  institution: Escuela de Bio y Nanotecnologías, Universidad Nacional de San Martin
+  year: 2027
+- degree: Diplomatura en Ciencia de Datos
+  institution: Universidad Nacional de San Martin
+  year: 2023
+user_groups:
+- Alumni
+weight: 10
+email: lsommariva@estudiantes.unsam.edu.ar

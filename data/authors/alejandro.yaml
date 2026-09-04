@@ -1,0 +1,39 @@
+schema: hugoblox/author/v1
+slug: alejandro
+name:
+  display: Alejandro Ricci
+  given: Alejandro
+  family: Ricci
+role: Former Lab Member (2016 -- 2023)
+bio: "# About me \n\nI specialize in the use of bioinformatics to process data and draw conclusions from\
+  \ biological experiments, specially those resulting in large amounts of data, such as high-throughput\
+  \ microarrays. I also use said data to create predictors that infer new biological knowledge or help\
+  \ designing new experiments.\n\nI'm doing a PhD in Molecular Biology and Biotechnology in the \"Instituto\
+  \ de Investigaciones Biotecnológicas\" (IIB) at the \"Universidad de San Martín\" (UNSAM, Argentina).\n\
+  \nI gave talks about my research at the \"VIII Congreso Argentino de Bioinformática y Biología Computacional\"\
+  \ (Argentina, Misiones, 2017) and at “ASTMH 67th Annual Meeting” (United Stated, New Orleans, 2018),\
+  \ amongst other places.\n\nI have a Bachelor's Degree in Biological Sciences from the University of\
+  \ Buenos Aires (UBA)."
+affiliations:
+- name: Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)
+  url: http://www.conicet.gob.ar
+- name: Universidad de San Martín
+  url: http://www.unsam.edu.ar
+links:
+- icon: at-symbol
+  url: mailto:aricci@iib.unsam.edu.ar
+  label: E-mail
+- icon: academicons/orcid
+  url: https://orcid.org/0000-0002-1814-0568
+interests:
+- Chagas Disease
+- Bioinformatics
+- Neural Networks
+education:
+- degree: BSc in Biology (Licenciatura)
+  institution: Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires
+  year: 2014
+user_groups:
+- Past Lab Members
+weight: 10
+email: aricci@iib.unsam.edu.ar

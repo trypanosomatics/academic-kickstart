@@ -1,0 +1,88 @@
+schema: hugoblox/author/v1
+slug: fernan
+is_owner: true
+name:
+  display: Fernán Agüero
+  given: Fernán
+  family: Agüero
+role: Principal Investigator, Assistant Professor
+bio: 'I began my academic career at the University of Buenos Aires (UBA) with a
+
+  degree in Biology in 1995. Then completed my PhD in 2001 working at the Luis
+
+  F. Leloir Institute – Fundación Campomar (UBA) on biochemistry and molecular
+
+  biology. The focus of his research was the metabolism of Echinococus
+
+  granulosus, a helminth parasite. For my postdoctoral work at the University
+
+  of San Martín, I focused on genomics and bioinformatics, working mainly with
+
+  protozoan and bacterial pathogens (trypanosomes, Brucella, Campylobacter).
+
+  My current interests are the identification and experimental validation of
+
+  drug targets against trypanosomes, and the use of high-throughput genomic
+
+  and proteomic platforms to study human immune responses against Trypanosoma
+
+  cruzi (Chagas Disease) to guide development of much needed diagnostic
+
+  applications. Over time my lab has used different strategic approaches
+
+  (experimental bench work, bioinformatics). I also have an interest in
+
+  teaching and training of human resources, and in the promotion of
+
+  Bioinformatics. I teach a Computational Biology and Bioinformatics course
+
+  and am a founding member of the Argentinian Society for Computational
+
+  Biology and Bioinformatics (A2B2C).'
+affiliations:
+- name: Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)
+  url: http://www.conicet.gob.ar
+- name: Universidad de San Martín
+  url: http://www.unsam.edu.ar
+links:
+- icon: at-symbol
+  url: mailto:fernan@iib.unsam.edu.ar
+  label: E-mail
+- icon: brands/twitter
+  url: https://twitter.com/fernan_aguero
+- icon: academicons/google-scholar
+  url: https://scholar.google.co.uk/citations?user=zycaIZQAAAAJ
+- icon: brands/linkedin
+  url: https://www.linkedin.com/in/fernan-aguero/
+- icon: brands/github
+  url: https://github.com/fernan
+- icon: academicons/orcid
+  url: https://orcid.org/0000-0003-1331-5741
+- icon: academicons/pubmed
+  url: https://www.ncbi.nlm.nih.gov/myncbi/fernan.aguero.1/bibliography/public/
+- icon: academicons/publons
+  url: https://publons.com/researcher/1369842/fernan-aguero/
+- icon: academicons/researchgate
+  url: https://www.researchgate.net/profile/Fernan_Agueero
+- icon: academicons/zotero
+  url: https://www.zotero.org/fernan.aguero
+- icon: academicons/cv
+  url: files/cv-fernan-may-2019.pdf
+interests:
+- Diagnostics
+- Drug Discovery
+- Bioinformatics
+- Genomics
+- Neglected Diseases
+- Trypanosomes
+education:
+- degree: PhD in Chemistry
+  institution: Universidad de Buenos Aires
+  year: 2001
+- degree: BSc in Biology (Licenciatura)
+  institution: Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires
+  year: 1995
+user_groups:
+- Investigators
+weight: 10
+email: fernan@iib.unsam.edu.ar
