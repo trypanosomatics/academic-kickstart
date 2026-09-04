@@ -210,10 +210,12 @@ sections:
       height: 420
       interactive: true
 
-  # OPTION B: Google Maps embed on the contact block instead. Requires an API
-  # key, which must be rotated — the old one was committed in plaintext — and
-  # restricted by HTTP referrer. To use this, delete the `map` block above and
-  # add these two keys to the `contact-info` block's `content:` instead.
+  # OPTION B: Google Maps embed on the contact block instead. Needs a Maps
+  # JavaScript API key. Such a key is public by design — it ships in the page
+  # HTML — so the protection is the key's own restrictions, not secrecy: lock it
+  # to the site's HTTP referrers and to the Maps JavaScript API, and set a
+  # billing budget. To use this, delete the `map` block above and add these two
+  # keys to the `contact-info` block's `content:` instead.
   #
   #     map_embed: 'https://www.google.com/maps/embed/v1/place?key=YOUR_KEY&q=-34.579239,-58.525103&zoom=15'
   #     map_url: 'https://www.google.com/maps/search/?api=1&query=-34.579239,-58.525103'

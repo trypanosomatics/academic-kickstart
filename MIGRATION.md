@@ -221,7 +221,7 @@ Do **not** adopt the upstream `permalinks:` block, which would rewrite
 | 3 | Analytics | Keep `UA-1674362-6`. See §8.3 — **not** a GA4 id. |
 | 4 | Superuser | `fernan`. `trypanosomatics` keeps a profile but is no longer owner. |
 | 5 | Inactive widgets | Parked in `archive/home-widgets/`. See §8.5. |
-| 6 | Map | MapLibre/OpenFreeMap active; Google embed documented alongside. |
+| 6 | Map | MapLibre/OpenFreeMap active; Google embed documented alongside. On the old API key, see §8.11. |
 | 7 | Repo name | `trypanosomatics-website`. See §8.7 for the Netlify procedure. |
 
 ### 8.1 Dark mode — proposed palette
@@ -497,3 +497,35 @@ That avoids copying a 220-line template to change two lines.
 Verified: every header anchor on the home page, a publication page and an author
 page is `/#…`, no bare `#…` href remains anywhere, and all nine target ids exist
 on the landing page.
+
+---
+
+## 8.11 The old Google Maps API key — no rotation needed
+
+Earlier notes in this file said the committed key "must be rotated". That was
+over-cautious, and worth correcting so nobody spends time on it.
+
+**A Maps JavaScript API key is public by design.** It is embedded in client-side
+JavaScript and served in the page to every visitor. It is an identifier for
+billing and quota, not a secret. Its presence in this repo's git history added
+nothing to an exposure the live site already created on every page load, so
+rotating it would not have recovered anything.
+
+What actually protects such a key is its restrictions, and the ones on this key
+are correct:
+
+- **HTTP referrers** — `https://trypanosomatics.org`, `https://www.trypanosomatics.org`
+- **API restriction** — Maps JavaScript API only
+
+That caps the blast radius: the key cannot be used against Geocoding, Places or
+Directions, and casual reuse on another site is rejected. Referrer checks read a
+browser-supplied header, so a determined caller can forge one — Google is
+explicit that restrictions reduce impact rather than prevent misuse — but the
+worst case is quota consumption on one API, not data access. A billing budget
+with alerts closes that off.
+
+**Recommended action: delete the key, don't rotate it.** The site now uses
+MapLibre GL with OpenFreeMap, which needs no key at all, and no key appears
+anywhere in this branch. An unused credential is best removed. Keep it only if
+you may switch back to the Google Maps embed (Option B in `content/_index.md`),
+and if you do keep it, add a billing budget alert.

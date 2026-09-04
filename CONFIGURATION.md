@@ -75,8 +75,11 @@ MapLibre GL + OpenFreeMap: **no API key and no `engine` setting**, which is what
 the old `[map] engine = 1 / api_key` was for. To move the pin or change zoom,
 edit this block.
 
-A Google Maps embed alternative is documented in comments directly below it —
-that route does need a key, restricted by HTTP referrer.
+A Google Maps embed alternative is documented in comments directly below it.
+That route needs a Maps JavaScript API key, which is public by design (it ships
+in the page HTML); protect it with referrer + API restrictions and a billing
+budget rather than treating it as a secret. The lab's old key is unused now —
+see `MIGRATION.md` §8.11.
 
 ### Contact details
 
