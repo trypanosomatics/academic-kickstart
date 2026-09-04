@@ -9,7 +9,8 @@ Static site built with [Hugo](https://gohugo.io/) and
 > and decision record in `MIGRATION.md`.
 >
 > **Restyling the site? Start with `STYLING.md`.** Local template overrides and
-> the rules for upgrading them are in `OVERRIDES.md`.
+> the rules for upgrading them are in `OVERRIDES.md`; the upstream bugs several
+> of them work around are written up in `PULL-REQUESTS.md`.
 
 ---
 

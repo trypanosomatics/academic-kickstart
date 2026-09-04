@@ -1,5 +1,9 @@
 # Local template overrides
 
+> Several of these work around **upstream bugs that are still present in
+> `HugoBlox/kit@main`**. If they are fixed upstream the override can be dropped —
+> see `PULL-REQUESTS.md` for the analysis and proposed patches.
+
 Every file in `layouts/` overrides one from the `blox` module. Record what was
 copied, from which version, and exactly what changed — without this the next
 module upgrade is archaeology.
