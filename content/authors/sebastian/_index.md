@@ -2,6 +2,14 @@
 # Display name
 name = "Sebastián Jinich"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Sebastián Jinich"
+
+# Full name (for SEO / schema.org)
+first_name = "Sebastián"
+last_name = "Jinich"
+
 # Author weight -- for sort purposes
 weight = 10
 

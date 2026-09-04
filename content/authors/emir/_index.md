@@ -2,6 +2,14 @@
 # Display name
 name = "Emir Salas Sarduy"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Emir Salas Sarduy"
+
+# Full name (for SEO / schema.org)
+first_name = "Emir"
+last_name = "Salas Sarduy"
+
 # Author Weight -- for sort purposes
 weight = 20
 

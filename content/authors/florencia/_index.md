@@ -2,6 +2,14 @@
 # Display name
 name = "Florencia Bongiorni"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Florencia Bongiorni"
+
+# Full name (for SEO / schema.org)
+first_name = "Florencia"
+last_name = "Bongiorni"
+
 # Author weight -- for sort purposes
 weight = 10
 

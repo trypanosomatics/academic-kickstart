@@ -2,6 +2,14 @@
 # Display name
 name = "Alejandro Ricci"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Alejandro Ricci"
+
+# Full name (for SEO / schema.org)
+first_name = "Alejandro"
+last_name = "Ricci"
+
 # Author weight -- for sort purposes
 weight = 10
 

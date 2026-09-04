@@ -1,5 +1,13 @@
 +++
 name = "María Paula Magariños"
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "María Paula Magariños"
+
+# Full name (for SEO / schema.org)
+first_name = "María Paula"
+last_name = "Magariños"
+
 authors = ["paula"]
 email = "mpmagarinos@gmail.com"
 user_groups = ["Past Lab Members"]

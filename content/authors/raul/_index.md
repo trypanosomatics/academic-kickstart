@@ -1,5 +1,13 @@
 +++
 name = "Raúl O Cosentino"
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Raúl O Cosentino"
+
+# Full name (for SEO / schema.org)
+first_name = "Raúl"
+last_name = "Cosentino"
+
 authors = ["raul"]
 email = "rulicosentino@gmail.com"
 user_groups = ["Past Lab Members"]

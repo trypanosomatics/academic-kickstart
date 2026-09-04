@@ -2,6 +2,14 @@
 # Display name
 name = "Lionel Urán Landaburu"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Lionel Urán Landaburu"
+
+# Full name (for SEO / schema.org)
+first_name = "Lionel"
+last_name = "Urán Landaburu"
+
 # Author weight -- for sort purposes
 weight = 10
 

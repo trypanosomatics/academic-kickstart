@@ -2,6 +2,14 @@
 # Display name
 name = "Arianna Zuccolo Niño"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Arianna Zuccolo Niño"
+
+# Full name (for SEO / schema.org)
+first_name = "Arianna"
+last_name = "Zuccolo Niño"
+
 # Author weight -- for sort purposes
 weight = 10
 

@@ -2,6 +2,14 @@
 # Display name
 name = "Santiago Sneidermanis"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Santiago Sneidermanis"
+
+# Full name (for SEO / schema.org)
+first_name = "Santiago"
+last_name = "Sneidermanis"
+
 # Author weight -- for sort purposes
 weight = 10
 

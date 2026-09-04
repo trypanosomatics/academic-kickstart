@@ -3,6 +3,14 @@
 # Display name
 name = "Ramiro Quinteros"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Ramiro Quinteros"
+
+# Full name (for SEO / schema.org)
+first_name = "Ramiro"
+last_name = "Quinteros"
+
 # Author weight -- for sort purposes
 weight = 10
 

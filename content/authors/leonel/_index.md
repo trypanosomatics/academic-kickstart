@@ -2,6 +2,14 @@
 # Display name
 name = "Leonel Bracco"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Leonel Bracco"
+
+# Full name (for SEO / schema.org)
+first_name = "Leonel"
+last_name = "Bracco"
+
 # Author weight -- for sort purposes
 weight = 10
 

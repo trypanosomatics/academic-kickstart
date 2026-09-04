@@ -2,6 +2,14 @@
 # Display name
 name = "Armando E. Fernandez"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Armando E. Fernandez"
+
+# Full name (for SEO / schema.org)
+first_name = "Armando"
+last_name = "Fernandez"
+
 # Author weight -- for sort purposes
 weight = 10
 

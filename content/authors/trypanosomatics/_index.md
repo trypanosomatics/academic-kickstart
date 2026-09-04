@@ -2,6 +2,10 @@
 # Display name
 name = "Trypanosomatics"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Trypanosomatics"
+
 # Author weight -- for sort purposes
 weight = 11
 

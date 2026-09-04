@@ -2,6 +2,14 @@
 # Display name
 name = "Mercedes Didier Garnham"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Mercedes Didier Garnham"
+
+# Full name (for SEO / schema.org)
+first_name = "Mercedes"
+last_name = "Didier Garnham"
+
 # Author weight -- for sort purposes
 weight = 10
 

@@ -2,6 +2,14 @@
 # Display name
 name = "Fernán Agüero"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Fernán Agüero"
+
+# Full name (for SEO / schema.org)
+first_name = "Fernán"
+last_name = "Agüero"
+
 # Author Weight -- for sort purposes
 weight = 10
 

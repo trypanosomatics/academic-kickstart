@@ -1,5 +1,13 @@
 +++
 name = "Leonardo G Panunzi"
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Leonardo G Panunzi"
+
+# Full name (for SEO / schema.org)
+first_name = "Leonardo"
+last_name = "Panunzi"
+
 authors = ["leonardo"]
 email = "leonardopnnz@gmail.com"
 user_groups = ["Past Lab Members"]

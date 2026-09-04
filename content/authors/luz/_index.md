@@ -2,6 +2,14 @@
 # Display name
 name = "Luz Sommariva"
 
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Luz Sommariva"
+
+# Full name (for SEO / schema.org)
+first_name = "Luz"
+last_name = "Sommariva"
+
 # Author weight -- for sort purposes
 weight = 10
 

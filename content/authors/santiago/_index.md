@@ -1,5 +1,13 @@
 +++
 name = "Santiago J Carmona"
+# Display name used by Hugo Blox (kept alongside `name`, which the
+# current Academic v4 People widget still reads).
+title = "Santiago J Carmona"
+
+# Full name (for SEO / schema.org)
+first_name = "Santiago"
+last_name = "Carmona"
+
 authors = ["santiago"]
 email = "sjcarmona@gmail.com"
 user_groups = ["Past Lab Members"]
