@@ -11,8 +11,9 @@ featured: false
 categories: ["Genes"]
 publication_short: "PLOS Negl Trop Dis, (4), 10, _pp. e841_, http://doi.org/10.1371/journal.pntd.0000841"
 publication: "PLOS Neglected Tropical Diseases, (4), 10, _pp. e841_, http://doi.org/10.1371/journal.pntd.0000841"
-doi: "10.1371/journal.pntd.0000841"
-
+hugoblox:
+  ids:
+    doi: "10.1371/journal.pntd.0000841"
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;

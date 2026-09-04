@@ -2,189 +2,107 @@
 
 # [Trypanosomatics Lab Web Site](https://trypanosomatics.org/)
 
-Static site built with [Hugo](https://gohugo.io/) and the (now legacy) [Academic
-Kickstart](https://github.com/sourcethemes/academic-kickstart) theme. The theme
-has since been renamed Wowchemy / Hugo Blox and this site is pinned to an old
-version that does **not** upgrade cleanly. A migration is pending; until then,
-keep using the exact Hugo version documented below.
+Static site built with [Hugo](https://gohugo.io/) and
+[Hugo Blox Kit](https://github.com/HugoBlox/kit) (Tailwind).
+
+> Migrated from Academic v4 / Wowchemy. Background in `ANALYSIS.md`, the plan
+> and decision record in `MIGRATION.md`.
 
 ---
 
 ## 1. Requirements
 
-- **Hugo `v0.69.2` extended** — nothing newer. Later versions break the theme.
-  Netlify is also pinned to `0.69.2` in `netlify.toml`.
-- **Git** with submodule support (the theme is a git submodule).
+| Tool | Version | Why |
+|---|---|---|
+| **Hugo extended** | **0.165.0** (min 0.161.1) | `extended` is required — Tailwind and image processing |
+| **Go** | 1.21+ | the theme is a Hugo Module, not a submodule |
+| **Node** | ≥ 22 | Hugo runs the Tailwind CLI through Node |
+| **pnpm** | 10+ | installs `@tailwindcss/cli`, `pagefind` |
 
-### Install Hugo 0.69.2
-
-Download the *extended* build for your platform from the Hugo releases page:
-
-<https://github.com/gohugoio/hugo/releases/tag/v0.69.2>
-
-Examples:
-
-- Linux x86_64: `hugo_extended_0.69.2_Linux-64bit.tar.gz`
-- macOS: `hugo_extended_0.69.2_macOS-64bit.tar.gz`
-- Windows: `hugo_extended_0.69.2_Windows-64bit.zip`
+Get the **`hugo_extended`** build — *not* `hugo_extended_withdeploy`, which only
+adds a `hugo deploy` command for S3/GCS/Azure that this site never uses.
 
 ```bash
-# Linux example — unpack and put it on your PATH under a version-specific name
-tar xzf hugo_extended_0.69.2_Linux-64bit.tar.gz hugo
-sudo install hugo /usr/local/bin/hugo692
-hugo692 version
-# Hugo Static Site Generator v0.69.2-... /extended ...
+curl -LO https://github.com/gohugoio/hugo/releases/download/v0.165.0/hugo_extended_0.165.0_linux-amd64.tar.gz
+tar xzf hugo_extended_0.165.0_linux-amd64.tar.gz hugo
+sudo install hugo /usr/local/bin/hugo
+hugo version   # must say +extended
 ```
 
-Naming the binary `hugo692` keeps it from colliding with any modern `hugo` you
-may have installed. All commands below use `hugo692`; use plain `hugo` only if
-that is the pinned 0.69.2 build.
-
----
-
-## 2. Clone and build
+## 2. Build
 
 ```bash
-git clone --recurse-submodules https://github.com/trypanosomatics/academic-kickstart.git
+git clone https://github.com/trypanosomatics/academic-kickstart.git
 cd academic-kickstart
+pnpm install        # Tailwind CLI + Pagefind
+hugo                # writes to public/
+hugo server         # live reload on http://localhost:1313/
 ```
 
-If you already cloned without `--recurse-submodules`, fetch the theme now:
+No `git submodule` step — the theme resolves through `go.mod`.
 
-```bash
-git submodule update --init --recursive
-```
+## 3. Layout
 
-> The `themes/academic/` directory **must** be populated. An empty theme folder
-> is the usual cause of build errors like
-> `failed to extract shortcode: template for shortcode "alert" not found`.
+| Path | Purpose |
+|---|---|
+| `config/_default/` | `hugo.yaml`, `params.yaml`, `menus.yaml`, `module.yaml`, `languages.yaml` |
+| `content/_index.md` | the landing page — an ordered list of blocks |
+| `content/blog/` `events/` `publications/` `projects/` | content |
+| `content/authors/` | **stubs only** — one per person, so their page exists |
+| `data/authors/` | **the actual profiles** (`hugoblox/author/v1`) |
+| `data/themes/tryps.yaml` | the lab colour palette, light and dark |
+| `assets/media/authors/` | avatars, named `<slug>.<ext>` |
+| `assets/media/` | images referenced by blocks |
+| `static/` | served as-is; `static/_redirects` holds the Netlify redirects |
+| `layouts/` | local overrides — **read `layouts/OVERRIDES.md` before touching** |
+| `hugo-blox/blox/` | blocks written for this site (currently `tag-cloud`) |
+| `archive/` | not built; see below |
 
-Build the static site into `public/`:
+## 4. Common edits
 
-```bash
-hugo692
-```
+**A person's profile** — `data/authors/<slug>.yaml`, avatar at
+`assets/media/authors/<slug>.<ext>`. Their `content/authors/<slug>/_index.md` is
+only a stub that makes the page exist; the content lives in the data file.
 
-Run a live-reloading dev server at <http://localhost:1313/>:
+**Who appears in the People section, and in which group** — `user_groups` in
+their data file. The groups and their order are set on the `team-showcase`
+block in `content/_index.md`.
 
-```bash
-hugo692 server
-# or: ./view.sh   (runs `hugo --i18n-warnings server`; edit it to call hugo692)
-```
+**The home page** — `content/_index.md`. Section order is list order. Each
+section's `id:` must match its anchor in `config/_default/menus.yaml`.
 
----
+**Colours** — `data/themes/tryps.yaml` (light and dark).
 
-## 3. Repository layout
+**A new publication** — a folder under `content/publications/` with an
+`index.md`. Use `publication_types: ["article-journal"]` (CSL names, not the old
+numbers) and put the DOI under `hugoblox.ids.doi` so the Altmetric and
+Dimensions badges pick it up.
 
-| Path                | Purpose                                                              |
-|---------------------|--------------------------------------------------------------------- |
-| `config/_default/`  | Site configuration (`config.toml`, `params.toml`, `menus.toml`, `languages.toml`) |
-| `content/home/`     | Home page widgets (about, people, posts, projects, publications, contact, …) |
-| `content/post/`     | Blog posts / announcements                                           |
-| `content/authors/`  | Lab members (People widget)                                          |
-| `content/project/`  | Research projects                                                    |
-| `content/publication/` | Publications                                                      |
-| `content/talk/`     | Talks / events                                                       |
-| `static/`           | Files served as-is (images, PDFs, `files/`)                          |
-| `assets/`, `layouts/` | Local overrides of theme assets and templates                      |
-| `themes/academic/`  | Theme — **git submodule**, do not edit                               |
-| `public/`           | Generated output (git-ignored)                                       |
+## 5. About `archive/`
 
-Theme docs (still useful for front-matter reference):
-<https://wowchemy.com/docs/> and the archived
-<https://sourcethemes.com/academic/docs/>.
+`archive/home-widgets/` holds the **old Academic v4 page-builder widgets** as
+they were just before the migration. They are history, not features: four of
+them (`demo`, `skills`, `experience`, `accomplishments`) were already
+`active = false` on the live site. They are kept only for reference and for the
+git history attached to them. Nothing in `archive/` is built.
 
----
+If you want that kind of section back, use the Hugo Blox equivalents rather than
+the archived files — `resume-experience`, `resume-skills`, `resume-awards`.
 
-## 4. Editing existing content
-
-1. Find the Markdown file under `content/` (e.g. a post at
-   `content/post/<slug>/index.md`, a person at
-   `content/authors/<username>/_index.md`).
-2. Edit the front matter (the `---` YAML or `+++` TOML block at the top) and/or
-   the body text below it.
-3. Preview with `hugo692 server` and check the page.
-4. Commit and push to `master`. Netlify rebuilds and deploys automatically.
-
-Common edits:
-
-- **Add someone to a People group:** edit `user_groups` in their
-  `content/authors/<username>/_index.md`. Valid groups (defined in
-  `content/home/people.md`): `Investigators`, `Postdocs`, `Grad Students`,
-  `Administration`, `Alumni`, `Past Lab Members`.
-- **Site menus / navbar:** `config/_default/menus.toml`.
-- **Home page sections:** the files in `content/home/` (set `active = false` to
-  hide a widget).
-
----
-
-## 5. Adding new content
-
-### New post
-
-```bash
-hugo692 new --kind post post/my-post-slug
-```
-
-This creates `content/post/my-post-slug/index.md`. Then:
-
-- Set `title`, `summary`, `authors` (list of usernames from `content/authors/`),
-  `tags`, `date`, and `featured: true/false`.
-- Keep `draft: false` to publish.
-- Optional: drop a `featured.png` (or `.jpg`) into the post folder for the
-  header/preview image.
-
-### New author / lab member
-
-1. Create the folder and profile file:
-   `content/authors/<username>/_index.md`
-   (copy an existing one such as `content/authors/mercedes/_index.md` as a
-   template).
-2. In the front matter set at least: `name`, `authors = ["<username>"]`,
-   `<username> = [""]`, `role`, `organizations`, `user_groups`, `email`,
-   `interests`, and the social/`[[social]]` links.
-3. Add a square `avatar.jpg` in the same folder for the profile photo.
-4. Reference the `<username>` in the `authors` list of any post/publication they
-   belong to.
-
-### New project / publication / talk
-
-Use the matching archetype:
-
-```bash
-hugo692 new --kind project     project/my-project
-hugo692 new --kind publication publication/my-publication
-hugo692 new --kind talk        talk/my-talk
-```
-
-Fill in the front matter and add a `featured` image in the page folder if
-wanted. Publications can also be imported from BibTeX with
-[academic-admin](https://github.com/sourcethemes/academic-admin)
-(`academic import --bibtex refs.bib`).
-
----
+Other Hugo Blox blocks available but not yet used here, worth a look:
+`stats`, `testimonials`, `faq`, `gallery`, `steps`, `focus-areas`,
+`tech-stack`, `cta-card`, `comparison-table`, `pricing`.
 
 ## 6. Deployment
 
-Push to `master` on `github.com/trypanosomatics/academic-kickstart`. Netlify
-builds with the settings in `netlify.toml` (`hugo`, `HUGO_VERSION = 0.69.2`,
-publish dir `public/`) and deploys to <https://trypanosomatics.org/>.
+Push to `master`. Netlify builds per `netlify.toml` and deploys to
+<https://trypanosomatics.org/>.
 
-Always confirm `hugo692` builds locally with no errors before pushing.
-
----
-
-## 7. Notes / gotchas
-
-- **Do not upgrade Hugo or the theme.** The theme submodule is intentionally
-  pinned; `update_academic.sh` exists but running it will break the build.
-- The build takes ~40 s (lots of image processing). Processed images are cached
-  in `resources/` (git-ignored).
-- Local template/asset overrides live in `layouts/` and `assets/`; the theme
-  itself in `themes/academic/` should never be modified directly.
+`static/_redirects` maps the pre-migration URLs (`/post/`, `/talk/`,
+`/publication/`, `/project/`) onto the current ones. **Do not delete it** —
+those paths appear in published papers.
 
 ## License
 
-Site content © the Trypanosomatics Lab. The Academic theme is © 2017–present
-[George Cushen](https://georgecushen.com), released under the
-[MIT](LICENSE.md) license.
+Site content © the Trypanosomatics Lab. Hugo Blox is © George Cushen,
+[MIT](LICENSE.md).

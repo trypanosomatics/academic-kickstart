@@ -5,8 +5,9 @@ title: "TDR Targets 6: Driving drug discovery for human pathogens through intens
 subtitle: "The TDR Targets Database"
 authors: ["lionel", "Ariel J Berenstein", "Santiago Videla", "Parag Maru", "Dhanasekaran Shanmugam", "Ariel Chernomoretz", "fernan"]
 date: 2019-10-16
-doi: "10.1093/nar/gkz999"
-
+hugoblox:
+  ids:
+    doi: "10.1093/nar/gkz999"
 # Schedule page publish date (NOT publication's date).
 #publishDate: 2020-01-01T00:00:00-03:00
 

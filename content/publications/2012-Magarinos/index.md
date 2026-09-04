@@ -5,8 +5,7 @@ authors = [ "paula", "santiago", "Gregory J Crowther", "Stuart A Ralph", "David 
 publication_types = ["article-journal"]
 publication = "Nucleic Acids Research, (40), _pp. D1118-27_, https://doi.org/10.1093/nar/gkr1053"
 publication_short = "Nucl Acids Res, (40), _pp. D1118-27_, https://doi.org/10.1093/nar/gkr1053"
-doi = "10.1093/nar/gkr1053"
-
+hugoblox.ids.doi = "10.1093/nar/gkr1053"
 highlight = false
 featured = false
 draft = false

@@ -4,8 +4,9 @@
 title: "Target-based screening of the Chagas box: setting up enzymatic assays to discover specific inhibitors across bioactive compounds."
 authors: ["emir", "Gabriela T Niemirowicz", "Juan J Cazzulo", "Vanina E Alvarez"]
 date: 2019-10-17T19:09:27-03:00
-doi: "10.2174/0929867326666190705160637"
-
+hugoblox:
+  ids:
+    doi: "10.2174/0929867326666190705160637"
 # Schedule page publish date (NOT publication's date).
 publishDate: 2019-10-17T19:09:27-03:00
 

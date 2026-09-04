@@ -1,0 +1,21 @@
+{{/* Override of blox `_partials/page_footer.html` (v0.0.0-20260527025321).
+     Upstream file verbatim, plus the research-metrics line. See OVERRIDES.md. */}}
+<div class="max-w-prose print:hidden">
+  {{/* Moved to TOC sidebar */}}
+  {{/* partial "page_edit" . */}}
+
+  {{/* LOCAL: Altmetric + Dimensions badges. Renders only when the page has a
+       DOI, so it is inert on posts, talks and projects. */}}
+  {{ if partial "functions/get_doi" . }}
+    <div class="grid grid-cols-1 md:grid-cols-[200px_auto] gap-4 my-6">
+      {{ partial "components/research-metrics" (dict "page" . "style" "donut") }}
+    </div>
+  {{ end }}
+
+  {{ partial "tags" . }}
+  {{ partial "components/page_sharer" . }}
+  {{ partial "page_author" . }}
+  {{ partial "components/next-in-series" . }}
+  {{ partial "page_related" . }}
+  {{ partial "comments" . }}
+</div>

@@ -15,14 +15,20 @@ sections:
       text: Working on data integration to discover new drugs and diagnostics for
         human pathogens.
     design:
+      # compact | default | tall | viewport | none.  The banner is a wide, short
+      # image, so `compact` keeps the hero from towering over it.
+      size: compact
       background:
         # The banner behind the hero text. Resolved from assets/media/.
         image:
           filename: bubbles-wide-tryp-binary.jpg
           size: cover
           position: center
-          # Dark image, so force light text over it.
-          text_color_light: true
+        # Sibling of `image`, NOT nested inside it — parse_block_v3 reads
+        # $bg.text_color_light. It puts the `dark` class on the section so the
+        # heading and body text render light over this dark banner in both
+        # colour modes.
+        text_color_light: true
 
   - block: resume-biography
     id: about

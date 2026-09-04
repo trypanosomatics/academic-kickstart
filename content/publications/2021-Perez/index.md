@@ -4,8 +4,9 @@
 title: "Screening and Identification of Metacaspase Inhibitors: Evaluation of Inhibition Mechanism and Trypanocidal Activity"
 authors: ["Brian Perez", "Leon Bouvier", "Juan J Cazzulo", "fernan", "emir", "Vanina E Alvarez"]
 date: 2021-02-17
-doi: "10.1128/AAC.01330-20"
-
+hugoblox:
+  ids:
+    doi: "10.1128/AAC.01330-20"
 # Schedule page publish date (NOT publication's date).
 publishDate: 2021-07-13T16:37:42-03:00
 

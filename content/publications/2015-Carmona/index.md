@@ -4,8 +4,9 @@
 title: "Towards High-throughput Immunomics for Infectious Diseases: Use of Next-generation Peptide Microarrays for Rapid Discovery and Mapping of Antigenic Determinants"
 authors: ["santiago", "Morten Nielsen", "Claus Schafer-Nielsen", "Juan Mucci", "Jaime Altcheh", "Virginia Balouz", "Valeria Tekiel", "Alberto C Frasch", "Oscar Campetella", "Carlos A Buscaglia", "fernan"]
 date: "2015-07-01"
-doi: "10.1074/mcp.M114.045906"
-
+hugoblox:
+  ids:
+    doi: "10.1074/mcp.M114.045906"
 # Schedule page publish date (NOT publication's date).
 #publishDate: 2019-10-16T16:29:27-03:00
 

@@ -4,8 +4,9 @@
 title: "Potent and selective inhibitors for M32 metallocarboxypeptidases identified from high-throughput screening of anti-kinetoplastid chemical boxes"
 authors: ["emir", "lionel", "Adriana K Carmona", "Juan J Cazzulo", "fernan", "Vanina E Alvarez", "Gabriela T Niemirowicz"]
 date: 2019-06-28T10:28:19-03:00
-doi: "10.1371/journal.pntd.0007560"
-
+hugoblox:
+  ids:
+    doi: "10.1371/journal.pntd.0007560"
 # Schedule page publish date (NOT publication's date).
 publishDate: 2019-06-28T10:28:19-03:00
 

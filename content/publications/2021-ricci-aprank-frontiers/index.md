@@ -4,8 +4,9 @@
 title: "APRANK: computational prioritization of antigenic proteins and peptides from complete pathogen proteomes"
 authors: ["alejandro", "Mauricio Brunner", "Diego Ramoa", "santiago", "Morten Nielsen", "fernan"]
 date: 2021-07-12T17:01:07-03:00
-doi: "10.3389/fimmu.2021.702552"
-
+hugoblox:
+  ids:
+    doi: "10.3389/fimmu.2021.702552"
 # Schedule page publish date (NOT publication's date).
 publishDate: 2021-07-12T17:01:07-03:00
 

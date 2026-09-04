@@ -6,8 +6,7 @@ authors = ["Leandro G Roser", "fernan", "Daniel O Sánchez"]
 publication = "BMC Bioinformatics 20: 361"
 publication_short = "BMC Bioinformatics 20: 361"
 publication_types = ["article-journal"]
-doi = "10.1186/s12859-019-2961-8"
-
+hugoblox.ids.doi = "10.1186/s12859-019-2961-8"
 # Tags and categories
 # For example, use `tags = []` for no tags, or the form `tags = ["A Tag", "Another Tag"]` for one or more tags.
 tags = ["genomics", "R", "bioconductor", "FastQ", ]
