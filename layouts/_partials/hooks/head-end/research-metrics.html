@@ -32,3 +32,29 @@
   <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
   <script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
 {{ end }}
+
+{{ if and $enabled $needs }}
+  {{/* Altmetric and Dimensions are separate vendors that inject their own
+       markup at runtime, each with its own intrinsic height and baseline, so
+       side by side they sit at different heights. Normalising here rather than
+       with utility classes because the elements being aligned do not exist
+       until their scripts run — nothing Hugo emits can carry a class. */}}
+  <style>
+    .hb-metrics{display:inline-flex;align-items:center;flex-wrap:wrap;
+                column-gap:1rem;row-gap:.25rem;vertical-align:middle;line-height:0}
+    /* The placeholder spans, and whatever each vendor injects into them. */
+    .hb-metrics > span,
+    .hb-metrics a{display:inline-flex;align-items:center;line-height:0;
+                  vertical-align:middle;text-decoration:none}
+    /* One common height, whichever element type the vendor uses. */
+    .hb-metrics img,
+    .hb-metrics svg,
+    .hb-metrics iframe{display:block;height:20px;width:auto;max-width:none;border:0;
+                       vertical-align:middle}
+    /* Donut variant on single pages is larger and sits on its own row. */
+    .hb-metrics--donut{column-gap:2rem}
+    .hb-metrics--donut img,
+    .hb-metrics--donut svg,
+    .hb-metrics--donut iframe{height:64px}
+  </style>
+{{ end }}

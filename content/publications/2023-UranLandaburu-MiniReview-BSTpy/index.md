@@ -6,7 +6,7 @@ authors: ["lionel", "mercedes", "fernan"]
 date: 2023-01-06T17:01:07-03:00
 hugoblox:
   ids:
-    doi: "https://doi.org/10.1042/BST20220618"
+    doi: "10.1042/BST20220618"
 # Schedule page publish date (NOT publication's date).
 publishDate: 2023-01-06T17:01:07-03:00
 

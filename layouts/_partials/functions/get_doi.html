@@ -1,8 +1,20 @@
-{{/* Return a page's DOI, or "".
+{{/* Return a page's bare DOI, or "".
+
      Hugo Blox namespaces publication identifiers under `hugoblox.ids`; older
-     content used a top-level `doi`. Accept both so this keeps working if any
-     file is missed. */}}
+     content used a top-level `doi`. Accept both.
+
+     Always returns the bare form (10.xxxx/yyyy). Altmetric and Dimensions both
+     want a bare DOI in data-doi; handed a full https://doi.org/... URL they
+     fail to resolve a badge, so strip any resolver prefix here rather than
+     relying on every front-matter file being written correctly. */}}
+
 {{ $doi := "" }}
 {{ with .Params.hugoblox }}{{ with .ids }}{{ with .doi }}{{ $doi = . }}{{ end }}{{ end }}{{ end }}
 {{ if not $doi }}{{ with .Params.doi }}{{ $doi = . }}{{ end }}{{ end }}
+
+{{ $doi = printf "%v" $doi | strings.TrimSpace }}
+{{ range $p := slice "https://doi.org/" "http://doi.org/" "https://dx.doi.org/" "http://dx.doi.org/" "doi:" }}
+  {{ $doi = strings.TrimPrefix $p $doi }}
+{{ end }}
+
 {{ return $doi }}

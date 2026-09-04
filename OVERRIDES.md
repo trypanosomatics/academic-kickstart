@@ -33,6 +33,31 @@ template.
 | `_partials/page_footer.html` | **override** | 11-line upstream file, verbatim plus one `if`. Chosen over overriding `single.html`, which is 352 lines and would have to be re-merged on every module upgrade. |
 | `_partials/views/citation.html` | **override** | 51-line upstream file, verbatim plus one partial call in each of the two citation-style branches. |
 
+### Alignment
+
+Altmetric and Dimensions are separate vendors that inject their own markup at
+runtime, each with its own intrinsic height and baseline, so side by side they
+sit at different heights. Utility classes cannot fix that: the elements being
+aligned do not exist until the vendor scripts run, so nothing Hugo emits can
+carry a class on them.
+
+The head-end hook therefore ships a small `.hb-metrics` stylesheet that flexes
+the row, kills baseline gaps (`line-height: 0`, `vertical-align: middle`) and
+forces one common height on whatever element type each vendor uses —
+`img`, `svg` or `iframe`. Compact list badges are 20px; the `--donut` variant on
+single pages is 64px.
+
+If a vendor changes its markup to some other element, add it to that rule rather
+than reintroducing per-item utility classes.
+
+### DOIs are normalised to the bare form
+
+`functions/get_doi.html` strips `https://doi.org/`, `http://dx.doi.org/`, `doi:`
+and friends. Both badge services need a bare `10.xxxx/yyyy` in `data-doi` and
+render nothing when handed a resolver URL. One publication
+(`2023-UranLandaburu-MiniReview-BSTpy`) had the URL form in its front matter;
+that is fixed at source too, but the helper no longer depends on it.
+
 ### Trade-offs to know
 
 - **These are third-party scripts and cannot be vendored.** Both badges are live
