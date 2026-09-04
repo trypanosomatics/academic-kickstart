@@ -1,13 +1,15 @@
 {
-  "name": "hugo-blox-academic-cv-starter",
+  "name": "trypanosomatics-website",
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@10.14.0",
-  "description": "Academic CV starter template for Hugo Blox with Tailwind CSS v4",
+  "description": "Trypanosomatics Lab website - Hugo + Hugo Blox Kit",
   "scripts": {
     "dev": "hugo server --disableFastRender",
-    "build": "hugo --minify && pnpm run pagefind",
-    "pagefind": "pagefind --site public"
+    "dev:search": "hugo --gc && pagefind --site public --output-path static/pagefind && hugo server --disableFastRender",
+    "build": "hugo --gc --minify && pnpm run pagefind",
+    "pagefind": "pagefind --site public",
+    "clean:search": "rm -rf static/pagefind"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.12",

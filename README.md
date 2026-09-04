@@ -34,12 +34,30 @@ hugo version   # must say +extended
 ```bash
 git clone https://github.com/trypanosomatics/academic-kickstart.git
 cd academic-kickstart
-pnpm install        # Tailwind CLI + Pagefind
-hugo                # writes to public/
-hugo server         # live reload on http://localhost:1313/
+pnpm install         # Tailwind CLI + Pagefind
+pnpm dev             # live reload on http://localhost:1313/
+pnpm build           # production build: hugo --minify, then the search index
 ```
 
 No `git submodule` step — the theme resolves through `go.mod`.
+
+### Search in development
+
+Search is powered by [Pagefind](https://pagefind.app/), which indexes the
+**built HTML** after Hugo runs. `hugo server` renders from memory and never
+produces that index, so under plain `pnpm dev` the site requests
+`/pagefind/pagefind.js`, gets a 404, and the search box reports
+*"Failed to initialize Pagefind"*. **This is expected, and does not affect the
+deployed site** — `netlify.toml` runs the indexer after every build.
+
+To exercise search locally:
+
+```bash
+pnpm dev:search      # build, index into static/pagefind/, then serve
+```
+
+That index is a snapshot: re-run the command after editing content. It is
+git-ignored and never deployed. `pnpm clean:search` removes it.
 
 ## 3. Layout
 
