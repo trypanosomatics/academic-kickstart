@@ -132,7 +132,34 @@ Long-lived. Everything below is on this branch only.
    - `content/authors/` unchanged
    Verify `git log --follow` on one file per section.
 4. **Content rewrite** — `publication_types` → CSL strings (31 files); drop
-   `name:` from author profiles; port `image`/`links`/`social` shapes.
+   `name:` from author profiles; port `image`/`links`/`social` shapes;
+   **strip the `@` from every author handle** (see §5.2).
+
+#### 5.2 The `@handle` convention breaks on modern Hugo — must-fix
+
+Content references lab members as `authors: ["@emir", "Morten Nielsen"]`.
+On Hugo 0.69.2 the `@` is stripped when the taxonomy term is urlized, so
+`@emir` resolves to the profile at `content/authors/emir/`. **Modern Hugo no
+longer strips it.** Verified with a minimal site on 0.165.0:
+
+```
+out165/authors/@emir/index.html     <- new, empty term page
+out165/authors/emir/index.html      <- the profile, now unlinked
+```
+
+The current build produces **zero** URLs containing `@`; on 0.165 every handle
+would generate a dead term page and the publication → author-profile links —
+the single most important feature of this site — would silently break.
+
+Scope: **121 occurrences across 49 files**, 12 distinct handles:
+`@aleacker @alejandro @emir @fernan @leonardo @leonel @lionel @mercedes @paula
+@ramiro @raul @santiago`.
+
+Fix: strip the `@` prefix throughout during the Phase 2 content rewrite, then
+verify against `baseline-authorlinks.txt` (262 targets). Do **not** attempt this
+in Phase 1 — `anchorize` on 0.69.2 maps `@emir` and `emir` to the same term, so
+it is safe either way on the old stack, but it belongs with the rest of the
+content rewrite.
 5. **Landing page** — `content/home/*.md` → `content/_index.md` with
    `sections:`, preserving the 11 sections and their anchor IDs.
 6. **Blocks** — map widgets to Tailwind blocks; write the missing `tag-cloud`
