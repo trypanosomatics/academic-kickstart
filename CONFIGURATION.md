@@ -55,31 +55,35 @@ Alternatives already stubbed alongside it: `google_tag_manager.container_id`,
 
 ### The map
 
-**Not in config.** It is a block in `content/_index.md`:
+**Not in config.** It is part of `content/_index.md`.
+
+Currently a **Google Maps embed** on the `contact-info` block:
 
 ```yaml
-  - block: map
-    id: map
-    content:
-      location:
-        lat: -34.579239
-        lng: -58.525103
-        address: |-
-          Instituto de Investigaciones Biotecnológicas (IIB)
-          25 de Mayo 1401, 1st Floor
-          B1650HMP San Martín, Buenos Aires, Argentina
-      zoom: 15
+      map_embed: |-
+        <iframe src="https://www.google.com/maps/embed/v1/place?key=…&q=LAT,LNG&zoom=15" …></iframe>
+      map_url: 'https://www.google.com/maps/search/?api=1&query=LAT,LNG'
 ```
 
-MapLibre GL + OpenFreeMap: **no API key and no `engine` setting**, which is what
-the old `[map] engine = 1 / api_key` was for. To move the pin or change zoom,
-edit this block.
+`map_embed` is **raw HTML**, not a URL — the block renders it through
+`safeHTML`, so it must be a complete `<iframe>`.
 
-A Google Maps embed alternative is documented in comments directly below it.
-That route needs a Maps JavaScript API key, which is public by design (it ships
-in the page HTML); protect it with referrer + API restrictions and a billing
-budget rather than treating it as a secret. The lab's old key is unused now —
-see `MIGRATION.md` §8.11.
+Two Google Cloud console settings this depends on:
+
+1. The key's API restrictions must include **Maps Embed API**. The iframe does
+   not use the Maps JavaScript API, so a key restricted to that alone is
+   rejected.
+2. Referrer restrictions cover the production domains, so the map is **blank on
+   `localhost:1313`**. Add `http://localhost:*` to the key's referrer list if
+   you want it during local development.
+
+Keep the `referrerpolicy="no-referrer-when-downgrade"` attribute — Google
+matches the referrer restriction on the header the iframe sends, and a stricter
+policy sends none, which fails the check.
+
+**Commented alternative:** the Hugo Blox `map` block (MapLibre GL +
+OpenFreeMap), directly below in the same file. No API key, no Google tracking,
+works on localhost. To switch back, uncomment it and drop `map_embed`/`map_url`.
 
 ### Contact details
 
@@ -129,7 +133,7 @@ old `[projects] post_view / publication_view / talk_view` numbers.
 | Old key | Now |
 |---|---|
 | `[marketing] google_analytics` | `params.yaml` → `analytics.google.measurement_id` |
-| `[map] engine`, `api_key`, `zoom` | `content/_index.md` → `map` block (no key needed) |
+| `[map] engine`, `api_key`, `zoom` | `content/_index.md` → `map_embed` on the `contact-info` block (Google), or the commented `map` block (MapLibre, keyless) |
 | `email`, `phone`, `address`, `coordinates`, `directions`, `office_hours`, `appointment_url`, `contact_links` | `content/_index.md` → `contact-info` and `map` blocks |
 | `[projects] post_view`, `publication_view`, `talk_view` | per block `design.view`, or `view` in the section `_index.md` |
 | `theme = "tryps"` | `theme.pack` + `data/themes/tryps.yaml` |

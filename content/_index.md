@@ -183,40 +183,60 @@ sections:
           label: Our code
       show_form: false
 
-  # ── Map ──────────────────────────────────────────────────────────────────
-  # Two options. Exactly one should be active; swap the comments to compare.
-  #
-  # OPTION A (active): Hugo Blox `map` block — MapLibre GL + OpenFreeMap.
-  # Open source, no API key, no Google tracking. Renders an address card
-  # beside the map.
-  - block: map
-    id: map
-    content:
-      title: Find us
-      location:
-        lat: -34.579239
-        lng: -58.525103
-        address: |-
-          Instituto de Investigaciones Biotecnológicas (IIB)
-          25 de Mayo 1401, 1st Floor
-          B1650HMP San Martín, Buenos Aires, Argentina
-      zoom: 15
-      cta:
-        phone: '+54 11 4006-1500'
-        email: info@trypanosomatics.org
-        directions:
-          text: Get directions
-    design:
-      height: 420
-      interactive: true
+      # Google Maps embed. NOTE: this is raw HTML, not a URL — the block
+      # renders it through `safeHTML`.
+      #
+      # Two things must be true in the Google Cloud console for this to render,
+      # neither of which was needed by the MapLibre block:
+      #
+      #  1. The key's API restrictions must include **Maps Embed API**. The key
+      #     was restricted to Maps JavaScript API only, which this iframe does
+      #     not use — the request is rejected otherwise.
+      #  2. The key's HTTP referrer restrictions cover trypanosomatics.org and
+      #     www.trypanosomatics.org, so the map is blank on
+      #     http://localhost:1313 during local development. Add
+      #     `http://localhost:*` to the referrer list if you want it locally.
+      #
+      # `referrerpolicy` must stay: Google matches the referrer restriction on
+      # the header the iframe sends, and a stricter policy sends none.
+      map_embed: |-
+        <iframe
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCA3WRcrUWprPLefbiLa0FiS5AJymB8DOU&q=-34.579239,-58.525103&zoom=15"
+          width="100%" height="100%" style="border:0"
+          loading="lazy" allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Trypanosomatics Lab — IIB, 25 de Mayo 1401, San Martín"></iframe>
+      map_url: 'https://www.google.com/maps/search/?api=1&query=-34.579239,-58.525103'
 
-  # OPTION B: Google Maps embed on the contact block instead. Needs a Maps
-  # JavaScript API key. Such a key is public by design — it ships in the page
-  # HTML — so the protection is the key's own restrictions, not secrecy: lock it
-  # to the site's HTTP referrers and to the Maps JavaScript API, and set a
-  # billing budget. To use this, delete the `map` block above and add these two
-  # keys to the `contact-info` block's `content:` instead.
+  # ── Map ──────────────────────────────────────────────────────────────────
+  # ACTIVE: Google Maps, embedded on the contact block below.
   #
-  #     map_embed: 'https://www.google.com/maps/embed/v1/place?key=YOUR_KEY&q=-34.579239,-58.525103&zoom=15'
-  #     map_url: 'https://www.google.com/maps/search/?api=1&query=-34.579239,-58.525103'
+  # Two console settings are required for this to work — see the notes on
+  # `map_embed` in the contact-info block above.
+  #
+  # INACTIVE ALTERNATIVE: the Hugo Blox `map` block (MapLibre GL +
+  # OpenFreeMap). Open source, no API key, no Google tracking, and it works on
+  # localhost. Uncomment this and remove `map_embed`/`map_url` above to switch
+  # back.
+  #
+  # - block: map
+  #   id: map
+  #   content:
+  #     title: Find us
+  #     location:
+  #       lat: -34.579239
+  #       lng: -58.525103
+  #       address: |-
+  #         Instituto de Investigaciones Biotecnológicas (IIB)
+  #         25 de Mayo 1401, 1st Floor
+  #         B1650HMP San Martín, Buenos Aires, Argentina
+  #     zoom: 15
+  #     cta:
+  #       phone: '+54 11 4006-1500'
+  #       email: info@trypanosomatics.org
+  #       directions:
+  #         text: Get directions
+  #   design:
+  #     height: 420
+  #     interactive: true
 ---
