@@ -53,3 +53,17 @@ h1[data-pagefind-meta="title"] {
   margin-top: 1.5rem;
 }
 */
+
+/* ── Dark-mode navbar (alternative) ─────────────────────────────────────────
+   The header is green in both modes, matching the Academic v4 site, which
+   also keeps the dark trypanosome logo legible.
+
+   To use a dark header instead, set dark.surfaces.header in
+   data/themes/tryps.yaml (e.g. #1e2029 / #CFF462) AND uncomment the rule
+   below — otherwise the logo is a dark silhouette on a dark bar and all but
+   disappears. Hugo Blox's get_logo auto-detects only assets/media/logo.{svg,png}
+   with no dark variant, so recolouring in CSS is the available route.
+   `brightness(0) invert(1)` forces every opaque pixel to white and leaves the
+   alpha channel alone, so it works whatever the source colours are.
+.dark .navbar-brand img { filter: brightness(0) invert(1); }
+*/

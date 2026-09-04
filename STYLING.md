@@ -220,6 +220,7 @@ currently overridden, to add the research-metrics badges.
 | Page-title weight | same file → `h1[data-pagefind-meta="title"]` (Hugo Blox applies `font-bold`; old site used 500 → Play 400) |
 | Hide "N min read" | `cascade.reading_time = false` in the section's `_index.md` — it is a **page** param, not a site setting |
 | Navbar logo | `assets/media/logo.png` (or `logo.svg`, preferred). Auto-detected; `hugoblox.header.show_logo` defaults to true |
+| Logo invisible in dark mode | Hugo Blox has **no dark logo variant**. Either keep the header light in both modes (what this site does) or recolour the logo in CSS — see the commented rule in `site/style.css` |
 | Favicon | `assets/media/icon.png` |
 | Author card one-liner | `short_bio:` in `data/authors/<slug>.yaml` (`bio:` is the long profile-page biography) |
 | Badge size/alignment | CSS in `layouts/_partials/hooks/head-end/research-metrics.html` (`.hb-metrics`) |

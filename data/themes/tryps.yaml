@@ -48,9 +48,18 @@ hugoblox:
     surfaces:
       background: "#272935"
       foreground: "#e9f1e4"
+      # The header stays green in dark mode, as on the Academic v4 site: its
+      # stylesheet set `.navbar{background:#7da211}` unconditionally and the old
+      # `tryps` theme defined only `menu_primary`, with no dark variant.
+      #
+      # This also keeps the logo legible. assets/media/logo.png is a dark
+      # trypanosome on transparency, and Hugo Blox's get_logo has no
+      # dark-variant support, so on a dark header it all but disappears. See
+      # hugo-blox/blox/site/style.css for the alternative if you would rather
+      # have a dark header.
       header:
-        background: "#1e2029"
-        foreground: "#CFF462"
+        background: "#7DA211"
+        foreground: "#024452"
       footer:
         background: "#1e2029"
         foreground: "#cfe0d6"
