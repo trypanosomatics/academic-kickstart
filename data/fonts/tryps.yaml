@@ -21,7 +21,12 @@ hugoblox:
     body: "Open Sans"
     code: "PT Mono"
 
-  # Play ships 400/700 only; Open Sans is variable; PT Mono is 400 only.
+  # Play ships 400/700 only; PT Mono is 400 only.
+  # Open Sans IS a variable font, but it is declared static here on purpose:
+  # typography.html hardcodes the range "100..900" for anything marked
+  # variable, and Open Sans's wght axis is 300..800. Google Fonts rejects the
+  # out-of-range request and drops the family, so body text silently falls back
+  # to system sans. Requesting discrete weights sidesteps that.
   weights:
     heading: [400, 700]
     body: [400, 600, 700]
@@ -38,5 +43,5 @@ hugoblox:
 
   variable:
     heading: false
-    body: true
+    body: false   # see the note on `weights` above
     code: false

@@ -54,3 +54,43 @@ template.
 - **Not on author or tag pages.** Those list publications with the `card` view,
   which has no badge. Adding one means also overriding
   `_partials/views/card.html` (228 lines) — deliberately not done.
+
+---
+
+## Typography — Google Fonts URL
+
+`_partials/functions/typography.html` is an **override** of the upstream file
+(v0.0.0-20260527025321), verbatim except for one delimiter.
+
+Upstream joins discrete font weights with a comma:
+
+```gotemplate
+{{ $weight_spec = delimit $role_weights "," }}   {{/* Play:wght@400,700 */}}
+```
+
+The Google Fonts CSS2 API separates weights with `;`. A comma is rejected with
+**HTTP 400**, and because all families share a single request, one bad entry
+drops **every** font on the page — the site silently falls back to system sans
+with nothing in the console but a failed stylesheet. The local patch changes the
+delimiter to `;`.
+
+This only bites families declared non-variable with more than one weight, which
+is why the stock packs never hit it: they set `variable: true` and take the
+`100..900` branch.
+
+### A related trap, handled in the font pack rather than here
+
+Upstream hardcodes `100..900` for anything marked `variable: true`. Real axes
+are often narrower — Open Sans is `300..800` — and Google rejects the
+out-of-range request and drops that family. `data/fonts/tryps.yaml` therefore
+declares Open Sans **static** with explicit weights. If a future font pack marks
+a role variable, check the family's real axis range first.
+
+**Regression test** — after any change to fonts or to this file:
+
+```bash
+hugo --gc
+URL=$(grep -oE 'https://fonts.googleapis.com/css2[^"]+' public/index.html | head -1 | sed 's/&amp;/\&/g')
+curl -s -o /dev/null -w '%{http_code}\n' "$URL"                  # must be 200
+curl -s "$URL" | grep -oE "font-family: *'[^']*'" | sort -u      # must list every family
+```

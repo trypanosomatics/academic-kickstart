@@ -320,6 +320,7 @@ Sources: [Netlify docs — repo permissions and linking](https://docs.netlify.co
 |---|---|---|
 | 2026-09-04 | Baseline | ✅ 256 URLs / 262 author links / 359 pages captured |
 | 2026-09-04 | Phase 1 | ✅ complete on `content/normalise-front-matter` — 4 commits, all gates green |
+| 2026-09-04 | Phase 4 | 🚧 fonts and palette. Two upstream font bugs fixed (§8.8); theme picker disabled. |
 | 2026-09-04 | Phase 2 | 🚧 open questions 1-6 resolved; **builds on Hugo 0.165.0** — 466 pages, no errors; 256/256 baseline URLs resolve. Remaining work in §5.5. |
 
 #### 5.3 Hugo Blox needs `tailwindcss` on `security.exec.allow`
@@ -400,3 +401,45 @@ file changes its `article:modified_time` and JSON-LD `dateModified`, and shifts
 the date-based tie-break in the related-content lists. Byte-comparisons against a
 baseline must expect this. It settles once changes are committed, since Netlify
 builds from git history.
+
+---
+
+## 8.8 Why the fonts and navbar colour did not render
+
+Both reported symptoms had causes in different places, and neither was the
+palette itself — `:root` carried `--hb-color-header-bg: #7DA211` and
+`--hb-font-heading: 'Play'` correctly the whole time.
+
+### Fonts: two bugs in one Google Fonts request
+
+The page requested every family in a single stylesheet URL, and it was invalid,
+so **no** font loaded and everything fell back to system sans.
+
+1. **Comma vs semicolon.** `typography.html` joined discrete weights with `,`
+   (`Play:wght@400,700`). The CSS2 API requires `;`. Response: HTTP 400.
+   Fixed by overriding the partial — see `layouts/OVERRIDES.md`.
+2. **Wrong variable range.** Upstream hardcodes `100..900` for any family
+   marked `variable: true`. Open Sans's `wght` axis is `300..800`, so Google
+   dropped it even after fix 1. Fixed by declaring Open Sans static with
+   explicit weights in `data/fonts/tryps.yaml`.
+
+Both fail silently: one bad request, no console error beyond a failed
+stylesheet, and a page that looks merely "unstyled". `layouts/OVERRIDES.md`
+carries a two-line regression test.
+
+### Navbar: the theme picker
+
+`hugoblox.header.theme_picker` was on (template default). It ships **all twelve**
+theme packs' CSS into every page — ~95 KB — and, once a visitor uses the
+dropdown, writes `localStorage['hb-theme-pack']` and stamps `data-theme-pack`
+on `<html>`. Those rules come after `:root`, so they override the site's own
+colours **for that visitor only**, until the key is cleared. The white navbar
+was the `default` pack's `#f1f5f9` winning that way.
+
+Now disabled: the packs are gone from the page (95 KB → 6 KB) and nothing can
+override `:root`. The light/dark toggle is separate and still on.
+
+> **If the navbar still looks wrong in a browser used before this change**, that
+> browser still has the stale key. Clear it once:
+> DevTools → Application → Local Storage → delete `hb-theme-pack`, then hard
+> reload. Or from the console: `localStorage.removeItem('hb-theme-pack')`.

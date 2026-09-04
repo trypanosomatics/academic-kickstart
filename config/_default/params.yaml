@@ -89,8 +89,16 @@ hugoblox:
     # Feature toggles
     search: true
     theme_toggle: true
-    theme_picker: true
-    language_switcher: true
+    # Visitor-facing theme-pack switcher. OFF deliberately:
+    #  - it inlines all 12 packs' CSS into every page (~95 KB) purely so the
+    #    dropdown can work, and
+    #  - once a visitor picks one, it writes localStorage['hb-theme-pack'] and
+    #    stamps data-theme-pack on <html>, whose rules come after :root and so
+    #    override the site's own `tryps` colours until that key is cleared.
+    # The light/dark toggle above is unaffected.
+    theme_picker: false
+    # Single-language site.
+    language_switcher: false
     # Call-to-action button
     cta:
       enable: false
