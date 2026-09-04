@@ -17,8 +17,11 @@ publishDate: 2019-10-17T19:09:27-03:00
 publication_types: ["article-journal"]
 
 # Publication name and optional abbreviated publication name.
-publication: "Current Medicinal Chemistry, 26 (36)"
-publication_short: "Curr Med Chem 26 (36)"
+publication:
+  name: "Current Medicinal Chemistry"
+  short_name: "Curr Med Chem"
+  volume: "26"
+  issue: "36"
 
 abstract: "Chagas disease is a neglected tropical illness caused by the protozoan parasite Trypanosoma cruzi. The disease is endemic in Latin America with about 6 million people infected and many more being at risk. Only two drugs are available for treatment, Nifurtimox and Benznidazole, but they have a number of side effects and are not effective in all cases. This makes urgently necessary the development of new drugs, more efficient, less toxic and affordable to the poor people, who are most of the infected population. In this review we will summarize the current strategies used for drug discovery considering drug repositioning, phenotyping screenings and target-based approaches. In addition, we will describe in detail the considerations for setting up robust enzymatic assays aimed to identify and validate small molecule inhibitors in high throughput screenings."
 

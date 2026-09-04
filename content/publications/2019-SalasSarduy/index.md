@@ -17,8 +17,12 @@ publishDate: 2019-06-28T10:28:19-03:00
 publication_types: ["article-journal"]
 
 # Publication name and optional abbreviated publication name.
-publication: "PLOS Neglected Tropical Diseases, 13 (7), e0007560"
-publication_short: "PLOS Negl Trop Dis, 13 (7), e0007560"
+publication:
+  name: "PLOS Neglected Tropical Diseases"
+  short_name: "PLOS Negl Trop Dis"
+  volume: "13"
+  issue: "7"
+  pages: "e0007560"
 
 abstract: "In recent years, the pharmaceutical company GlaxoSmithKline
 announced the disclosure of small collections of antiparasitic compounds to

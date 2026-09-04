@@ -18,8 +18,11 @@ hugoblox:
 publication_types: ["article-journal"]
 
 # Publication name and optional abbreviated publication name.
-publication: "Nucleic Acids Research, 48 (in production), https://doi.org/10.1093/nar/gkz999"
-publication_short: "Nucleic Acids Res, 48 (in production), https://doi.org/10.1093/nar/gkz999"
+publication:
+  name: "Nucleic Acids Research"
+  short_name: "Nucleic Acids Res"
+  volume: "48"
+  issue: "in production"
 
 abstract: "The volume of biological, chemical and functional data deposited
 in the public domain is growing rapidly, thanks to next generation

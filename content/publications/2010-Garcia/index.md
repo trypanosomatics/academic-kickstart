@@ -9,8 +9,12 @@ tags: ["trypomastigotes", "genomics", "TcTASV", "tcruzi"]
 subtitle: 
 featured: false
 categories: ["Genes"]
-publication_short: "PLOS Negl Trop Dis, (4), 10, _pp. e841_, http://doi.org/10.1371/journal.pntd.0000841"
-publication: "PLOS Neglected Tropical Diseases, (4), 10, _pp. e841_, http://doi.org/10.1371/journal.pntd.0000841"
+publication:
+  name: "PLOS Neglected Tropical Diseases"
+  short_name: "PLOS Negl Trop Dis"
+  volume: "4"
+  issue: "10"
+  pages: "e841"
 hugoblox:
   ids:
     doi: "10.1371/journal.pntd.0000841"

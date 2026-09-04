@@ -17,8 +17,9 @@ publishDate: 2023-01-06T17:01:07-03:00
 publication_types: ["article-journal"]
 
 # Publication name and optional abbreviated publication name.
-publication: "Biochemical Society Transactions"
-publication_short: "Biochem Soc Trans"
+publication:
+  name: "Biochemical Society Transactions"
+  short_name: "Biochem Soc Trans"
 
 abstract: "Trypanosomatids are protozoan parasites that cause human and animal neglected diseases. Despite global efforts, effective treatments are still much needed. Phenotypic screens have provided several chemical leads for drug discovery, but the mechanism of action for many of these chemicals is currently unknown. Recently, chemogenomic screens assessing the susceptibility or resistance of parasites carrying genome-wide modifications started to define the mechanism of action of drugs at large scale. In this review, we discuss how genomics is being used for drug discovery in trypanosomatids, how integration of chemical and genomics data from these and other organisms has guided prioritisations of candidate therapeutic targets and additional chemical starting points, and how these data can fuel the expansion of drug discovery pipelines into the era of artificial intelligence."
 

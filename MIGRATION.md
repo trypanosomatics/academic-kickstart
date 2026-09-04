@@ -350,26 +350,10 @@ the defaults already permit it. They do for the Node *permission* sandbox
    `$item.Params.doi`; Kit deprecates top-level `doi` in favour of
    `hugoblox.ids.doi`, so do the front-matter move first, then write the
    override against `_partials/views/citation.html` and `single.html`.
-2. **The flat `publication` string — 32 warnings, deliberately left alone.**
-   `doi` and the `url_*` keys are migrated; this one is not, because converting
-   it *changes what the citations say*. Current front matter holds one free-text
-   string:
+2. ~~The flat `publication` string~~ — **done 2026-09-04.** All 32 migrated to
+   `publication: {name, short_name, volume, issue, pages, publisher}`; the build
+   is now warning-free (was 79 warnings at the start of Phase 2). Details in §8.9.
 
-   > `Nucleic Acids Research, (37), Database issue, _pp. D544-9_, http://doi.org/10.1093/nar/gkn874`
-
-   `resolve_publication` renders the structured shape as `*Name*, volume(issue), pages`:
-
-   > *Nucleic Acids Research*, 37, D544-9
-
-   Cleaner, but it drops detail ("Database issue", the inline DOI URL), and five
-   of the 32 do not fit the pattern at all — a book chapter
-   (`Chapter 3, _pp. 43-59_, In 'Parasitic Helminths…', Edited by…, Wiley…`) and
-   entries like `BMC Bioinformatics 20: 361`. Machine-parsing bibliographic data
-   into a lossy shape is how citations quietly become wrong.
-
-   Options: run upstream's `hugoblox migrate publications` and proof-read all 32;
-   convert by hand; or leave it — the flat string still renders, and the only
-   cost is a build warning. **A decision for the lab, not a default to apply.**
 3. **Design → Phase 4.** The `tryps` palette and dark mode are done; fonts
    (Play / Open Sans / PT Mono) and overall styling are not. Kit font packs live
    in the module's `data/fonts/`; a `tryps` pack would be authored the same way
@@ -443,3 +427,41 @@ override `:root`. The light/dark toggle is separate and still on.
 > browser still has the stale key. Clear it once:
 > DevTools → Application → Local Storage → delete `hb-theme-pack`, then hard
 > reload. Or from the console: `localStorage.removeItem('hb-theme-pack')`.
+
+---
+
+## 8.9 Publication front matter migration
+
+All 32 publications moved from the flat string to the structured shape. 31 were
+parsed mechanically against five recognised patterns; two needed hand treatment.
+
+**What the display gains and loses.** `resolve_publication` renders
+`*Name*, volume(issue), pages`, so:
+
+- The DOI URL that used to be pasted into the string is gone from the citation
+  text. Nothing is lost — all 32 carry `hugoblox.ids.doi`, which already renders
+  a proper DOI link and drives the Altmetric/Dimensions badges. Checked before
+  migrating: no publication had its only DOI inside the string.
+- `_pp. 304--12_` becomes `304–12`. The `pp.` label and markdown emphasis are
+  now supplied by the template, and the `--` was a BibTeX artifact that rendered
+  literally.
+- `publication_short` is removed; its value becomes `publication.short_name`,
+  dropped where it merely repeated the full name.
+
+**Hand-mapped cases.**
+
+| Page | Why | Treatment |
+|---|---|---|
+| `2012-Shanmugam` | A book chapter, not a journal article: *Chapter 3, pp. 43-59, In 'Parasitic Helminths…', Edited by Conor R Caffrey, Wiley, Weinheim, Germany* | `name` = the book, `pages` = 43–59, and the chapter number and editor ride in `publisher`, which the template appends after the citation. The schema has no field for either. |
+| `2021-Ricci-aprank-biorxiv` | `publication_short` was `2021.04.27.441630` — the preprint id, not a journal abbreviation. As `short_name` it would have rendered *\*2021.04.27.441630\** in list views. | Dropped; falls back to `bioRxiv`. |
+| `2019b-SalasSarduy` | `publication_short` was `Curr Med Chem 26 (36)`, with volume and issue baked into the abbreviation, so the citation rendered them twice: *Curr Med Chem 26 (36), 26(36)*. | Corrected to `Curr Med Chem`. |
+
+**TOML note.** Structured values are written as dotted keys
+(`publication.name = "…"`), never a `[publication]` table header — a header
+absorbs every following top-level key into the table. This bit the earlier
+`doi` migration and corrupted four files before it was caught.
+
+**Verification.** Front matter re-parsed for all 32 (title, authors, date, DOI
+all intact, `publication` a map, no `publication_short` left); build clean with
+**0 warnings and 0 errors**; every rendered citation string read back and
+eyeballed.

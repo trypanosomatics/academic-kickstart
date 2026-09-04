@@ -1,8 +1,11 @@
 +++
 title = "Genomic-scale prioritization of drug targets: the TDR Targets database"
 authors = ["fernan", "Bissan Al-Lazikani", "Martin Aslett", "Matthew Berriman", "Frederick S Buckner", "Robert K Campbell", "santiago", "Ian M Carruthers", "Chan AW", "Fen Chen", "Gregory J Crowther", "Maria A Doyle", "Christiane Hertz-Fowler", "Andrew L Hopkins", "McAllister G", "Solomon Nwaka", "John P Overington", "Arnab Pain", "Gaia V Paolini", "Ursula Pieper", "Stuart A Ralph", "Aaron Riechers", "David S Roos", "Andrej Sali", "Dhanasekaran Shanmugam", "Takashi Suzuki", "Wesley C Van Voorhis", "Christophe L Verlinde"]
-publication = "Nature Reviews Drug Discovery, (7), 11, _pp. 900-7_, http://doi.org/10.1038/nrd2684"
-publication_short = "Nat Rev Drug Dis, (7), 11, _pp. 900-7_, http://doi.org/10.1038/nrd2684" 
+publication.name = "Nature Reviews Drug Discovery"
+publication.short_name = "Nat Rev Drug Dis"
+publication.volume = "7"
+publication.issue = "11"
+publication.pages = "900-7"
 hugoblox.ids.doi = "10.1038/nrd2684"
 date = "2008-11-07"
 highlight = true

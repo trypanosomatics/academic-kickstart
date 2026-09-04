@@ -4,8 +4,11 @@ date = 2019-03-14
 draft = false
 authors = ["Maite Lobo", "Virginia Balouz", "Luciano Melli", "Gianina Carlevaro", "María E Cortina", "María de los Milagros Cámara", "Gaspar E Cánepa", "santiago", "Jaime Altcheh", "Oscar Campetella", "Andrés E Ciocchini", "fernan", "Juan Mucci", "Carlos A Buscaglia"]
 publication_types = ["article-journal"]
-publication = "PLOS Neglected Tropical Diseases, (13), 3, _pp. e0007245_, https://doi.org/10.1371/journal.pntd.0007245"
-publication_short = "PLOS Negl Trop Dis, (13), 3, _pp. e0007245_, https://doi.org/10.1371/journal.pntd.0007245"
+publication.name = "PLOS Neglected Tropical Diseases"
+publication.short_name = "PLOS Negl Trop Dis"
+publication.volume = "13"
+publication.issue = "3"
+publication.pages = "e0007245"
 hugoblox.ids.doi = "10.1371/journal.pntd.0007245"
 projects = ["immunomics"]
 

@@ -3,8 +3,9 @@ title = "FastqCleaner: an Interactive Bioconductor application for quality-contr
 date = 2018-06-28
 draft = false
 authors = ["Leandro G Roser", "fernan", "Daniel O Sánchez"]
-publication = "BMC Bioinformatics 20: 361"
-publication_short = "BMC Bioinformatics 20: 361"
+publication.name = "BMC Bioinformatics"
+publication.volume = "20"
+publication.pages = "361"
 publication_types = ["article-journal"]
 hugoblox.ids.doi = "10.1186/s12859-019-2961-8"
 # Tags and categories

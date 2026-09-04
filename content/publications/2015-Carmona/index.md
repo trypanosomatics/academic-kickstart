@@ -17,8 +17,12 @@ hugoblox:
 publication_types: ["article-journal"]
 
 # Publication name and optional abbreviated publication name.
-publication: "Molecular & Cellular Proteomics, (14), 7, _pp. 1871--84_, https://doi.org/10.1074/mcp.M114.045906"
-publication_short: "Mol. Cell Proteomics, (14), 7, _pp. 1871--84_, https://doi.org/10.1074/mcp.M114.045906"
+publication:
+  name: "Molecular & Cellular Proteomics"
+  short_name: "Mol. Cell Proteomics"
+  volume: "14"
+  issue: "7"
+  pages: "1871–84"
 
 abstract: "Complete characterization of antibody specificities associated
 to natural infections is expected to provide a rich source of serologic
