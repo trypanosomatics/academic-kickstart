@@ -34,7 +34,7 @@ hugoblox:
     # Mode: 'light', 'dark', or 'system' (follows OS preference)
     mode: system
     # Theme pack: name from data/themes/ or { light: "x", dark: "y" } for mix-and-match
-    pack: "default"
+    pack: "tryps"
     # Optional: Override theme pack colors
     colors:
       primary: "#69870E" # carried over from the old `tryps` theme
@@ -198,7 +198,12 @@ hugoblox:
   # ────────────────────────────────────────────────────────────────────────────
   analytics:
     google:
-      measurement_id: "" # Google Analytics 4: G-XXXXXXXXXX
+      # The live site serves gtag.js with the Universal Analytics id below;
+      # there is no G- measurement id anywhere in the current HTML. Keeping the
+      # same id preserves whatever GA4 property is receiving this traffic via
+      # Google's connected-tag bridge. See MIGRATION.md §8.3 — replacing this
+      # with the property's real G- id is the more durable fix.
+      measurement_id: "UA-1674362-6" # Google Analytics 4: G-XXXXXXXXXX
     google_tag_manager:
       container_id: "" # GTM-XXXXXXX
     plausible:

@@ -1,6 +1,8 @@
 schema: hugoblox/author/v1
 slug: trypanosomatics
-is_owner: true
+# Not the site owner - see data/authors/fernan.yaml. This profile exists only
+# to give the About section an organisation-level biography; site identity now
+# lives in config/_default/params.yaml under hugoblox.identity.
 name:
   display: Trypanosomatics
 role: A Trypanosome in the Shell

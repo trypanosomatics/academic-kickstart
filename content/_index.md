@@ -12,7 +12,17 @@ sections:
     id: hero
     content:
       title: The Trypanosomatics Laboratory
-      text: Using and generating data to guide discovery of new drugs and diagnostics.
+      text: Working on data integration to discover new drugs and diagnostics for
+        human pathogens.
+    design:
+      background:
+        # The banner behind the hero text. Resolved from assets/media/.
+        image:
+          filename: bubbles-wide-tryp-binary.jpg
+          size: cover
+          position: center
+          # Dark image, so force light text over it.
+          text_color_light: true
 
   - block: resume-biography
     id: about
@@ -166,4 +176,39 @@ sections:
           url: https://github.com/trypanosomatics
           label: Our code
       show_form: false
+
+  # ── Map ──────────────────────────────────────────────────────────────────
+  # Two options. Exactly one should be active; swap the comments to compare.
+  #
+  # OPTION A (active): Hugo Blox `map` block — MapLibre GL + OpenFreeMap.
+  # Open source, no API key, no Google tracking. Renders an address card
+  # beside the map.
+  - block: map
+    id: map
+    content:
+      title: Find us
+      location:
+        lat: -34.579239
+        lng: -58.525103
+        address: |-
+          Instituto de Investigaciones Biotecnológicas (IIB)
+          25 de Mayo 1401, 1st Floor
+          B1650HMP San Martín, Buenos Aires, Argentina
+      zoom: 15
+      cta:
+        phone: '+54 11 4006-1500'
+        email: info@trypanosomatics.org
+        directions:
+          text: Get directions
+    design:
+      height: 420
+      interactive: true
+
+  # OPTION B: Google Maps embed on the contact block instead. Requires an API
+  # key, which must be rotated — the old one was committed in plaintext — and
+  # restricted by HTTP referrer. To use this, delete the `map` block above and
+  # add these two keys to the `contact-info` block's `content:` instead.
+  #
+  #     map_embed: 'https://www.google.com/maps/embed/v1/place?key=YOUR_KEY&q=-34.579239,-58.525103&zoom=15'
+  #     map_url: 'https://www.google.com/maps/search/?api=1&query=-34.579239,-58.525103'
 ---

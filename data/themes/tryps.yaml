@@ -1,0 +1,56 @@
+# HugoBlox Theme Pack — Trypanosomatics
+#
+# Carried over from the Academic v4 `data/themes/tryps.toml`. The light values
+# are the lab's existing colours, unchanged. The dark values are new: the old
+# theme was light-only (`light = true`), so there was nothing to port.
+#
+# Light (unchanged from the old palette):
+#   primary          #69870E   olive green
+#   menu_primary     #7DA211   navbar background
+#   menu_text        #024452   dark teal
+#   home_section_even#f7f7f7
+#   alert accent     #CFF462 / #54914D   (from the old assets/scss/custom.scss)
+#
+# Dark (proposed — see MIGRATION.md §8.1):
+#   #69870E on a dark ground fails contrast, so primary is lifted to the
+#   lighter lime the palette already contains (#CFF462) with a mid-tone
+#   secondary. The background is derived from the palette's own dark teal
+#   (#024452) rather than a neutral grey, so the two modes read as one brand.
+
+hugoblox:
+  meta:
+    format: "hugoblox-theme@1"
+    name: "Trypanosomatics"
+    vendor: "trypanosomatics"
+    version: "1.0.0"
+    license: "MIT"
+
+  type: "dual"
+
+  light:
+    colors:
+      primary: "#69870E"
+      secondary: "#54914D"
+    surfaces:
+      background: "#ffffff"
+      foreground: "#1b2a2e"
+      header:
+        background: "#7DA211"
+        foreground: "#024452"
+      footer:
+        background: "#f7f7f7"
+        foreground: "#024452"
+
+  dark:
+    colors:
+      primary: "#CFF462"
+      secondary: "#7DA211"
+    surfaces:
+      background: "#0b1f24"
+      foreground: "#e9f1e4"
+      header:
+        background: "#04333c"
+        foreground: "#CFF462"
+      footer:
+        background: "#04333c"
+        foreground: "#cfe0d6"
