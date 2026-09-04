@@ -3,7 +3,7 @@
 
 title: "TDR Targets 6: Driving drug discovery for human pathogens through intensive chemogenomic data integration"
 subtitle: "The TDR Targets Database"
-authors: [ "@lionel", "Ariel J Berenstein", "Santiago Videla", "Parag Maru", "Dhanasekaran Shanmugam", "Ariel Chernomoretz", "@fernan"]
+authors: ["@lionel", "Ariel J Berenstein", "Santiago Videla", "Parag Maru", "Dhanasekaran Shanmugam", "Ariel Chernomoretz", "@fernan"]
 date: 2019-10-16
 doi: "10.1093/nar/gkz999"
 

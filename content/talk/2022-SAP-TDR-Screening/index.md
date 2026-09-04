@@ -23,7 +23,7 @@ all_day: false
 # Schedule page publish date (NOT talk date).
 publishDate: 2022-03-09T20:06:57-03:00
 
-authors: ["@lionel", Valeria Tekiel, "@fernan"]
+authors: ["@lionel", "Valeria Tekiel", "@fernan"]
 tags: ["Chemogenomics","drug-discovery","drug-repositioning"]
 
 # Is this a featured talk? (true/false)

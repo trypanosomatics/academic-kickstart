@@ -24,9 +24,7 @@ all_day: false
 # Schedule page publish date (NOT talk date).
 publishDate: 2019-10-18T14:30:35-03:00
 
-authors: ["@leonel", "Juan Mucci", "Guillermo Moscatelli", "Samantha
-Moroni", "Griselda Ballering", "Carlos A Buscaglia", "Oscar Campetella", "Morten Nielsen",
-"Valeria Tekiel", "Jaime Altcheh", "@fernan"]
+authors: ["@leonel", "Juan Mucci", "Guillermo Moscatelli", "Samantha Moroni", "Griselda Ballering", "Carlos A Buscaglia", "Oscar Campetella", "Morten Nielsen", "Valeria Tekiel", "Jaime Altcheh", "@fernan"]
 tags: ["immunomics", "Chagas Disease", "congenital-chagas", "antigens", "epitopes"]
 
 # Is this a featured talk? (true/false)
