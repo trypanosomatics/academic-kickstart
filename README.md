@@ -7,6 +7,9 @@ Static site built with [Hugo](https://gohugo.io/) and
 
 > Migrated from Academic v4 / Wowchemy. Background in `ANALYSIS.md`, the plan
 > and decision record in `MIGRATION.md`.
+>
+> **Restyling the site? Start with `STYLING.md`.** Local template overrides and
+> the rules for upgrading them are in `OVERRIDES.md`.
 
 ---
 
@@ -73,6 +76,7 @@ git-ignored and never deployed. `pnpm clean:search` removes it.
 | `assets/media/` | images referenced by blocks |
 | `static/` | served as-is; `static/_redirects` holds the Netlify redirects |
 | `layouts/` | local overrides — **read `OVERRIDES.md` before touching** |
+| `hugo-blox/blox/site/style.css` | site CSS overrides (see `STYLING.md`) |
 | `hugo-blox/blox/` | blocks written for this site (currently `tag-cloud`) |
 | `archive/` | not built; see below |
 

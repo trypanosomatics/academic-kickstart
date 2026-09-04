@@ -1,0 +1,7 @@
+/* Site-wide CSS overrides.
+   Concatenated into the Tailwind entry by the module's css.html, so Tailwind
+   directives (@apply, theme(), variants) work here. See STYLING.md. */
+
+/* Example — widen the reading column used by article bodies and page footers:
+.max-w-prose { max-width: 78ch; }
+*/

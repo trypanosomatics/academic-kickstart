@@ -13,6 +13,12 @@ mounts:
     target: layouts/_partials/hbx/blocks
     files:
       - '**/block.html'
+  # Site CSS. css.html concatenates everything here into the Tailwind entry,
+  # so these files are processed by Tailwind (@apply and friends work).
+  - source: hugo-blox/blox
+    target: assets/dist/community/blox
+    files:
+      - '**/*.css'
   - source: layouts
     target: layouts
   - source: assets
