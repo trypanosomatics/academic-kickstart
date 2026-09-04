@@ -1,0 +1,42 @@
+# HugoBlox Font Pack — Trypanosomatics
+#
+# The typefaces the Academic v4 site used, carried over from the old
+# data/fonts/tryps.toml:
+#   heading_font = "Play"        body_font = "Open Sans"      mono_font = "PT Mono"
+#
+# The old pack also loaded Cookie, which no rule ever referenced; it is dropped.
+
+hugoblox:
+  meta:
+    format: "hugoblox-font@1"
+    name: "Trypanosomatics"
+    vendor: "trypanosomatics"
+    version: "1.0.0"
+    license: "MIT"
+    style: "sans"
+    description: "Play headings over Open Sans body text, as used by the lab site since 2018"
+
+  families:
+    heading: "Play"
+    body: "Open Sans"
+    code: "PT Mono"
+
+  # Play ships 400/700 only; Open Sans is variable; PT Mono is 400 only.
+  weights:
+    heading: [400, 700]
+    body: [400, 600, 700]
+    code: [400]
+
+  leading:
+    heading: 1.2
+    body: 1.6
+    code: 1.5
+
+  tracking:
+    heading: "0"
+    body: "0"
+
+  variable:
+    heading: false
+    body: true
+    code: false

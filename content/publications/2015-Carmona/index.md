@@ -56,15 +56,6 @@ highlight: true
 #   icon_pack: fab
 #   icon: twitter
 
-url_pdf: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4587317/pdf/zjw1871.pdf"
-url_preprint: ""
-url_code: ""
-url_dataset: "https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-3008"
-url_project: ""
-url_slides: ""
-url_video: ""
-url_poster: ""
-url_source: ""
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder. 
@@ -88,6 +79,12 @@ projects: ["immunomics"]
 #   Otherwise, set `slides: ""`.
 slides: ""
 
+# Custom links. Replaces the deprecated url_* keys.
+links:
+  - type: pdf
+    url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4587317/pdf/zjw1871.pdf"
+  - type: dataset
+    url: "https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-3008"
 ---
 
 

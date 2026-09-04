@@ -46,11 +46,11 @@ hugoblox:
       primary: "#CFF462"
       secondary: "#7DA211"
     surfaces:
-      background: "#0b1f24"
+      background: "#272935"
       foreground: "#e9f1e4"
       header:
-        background: "#04333c"
+        background: "#1e2029"
         foreground: "#CFF462"
       footer:
-        background: "#04333c"
+        background: "#1e2029"
         foreground: "#cfe0d6"

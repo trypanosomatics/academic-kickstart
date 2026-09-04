@@ -280,17 +280,36 @@ Netlify rather than relying on the redirect.
 - GitHub redirects the old path, and Netlify builds generally keep working
   through it — but the documented failure mode is builds failing at
   *"preparing repo"*, and Netlify's UI keeps showing the old name either way.
-- The supported fix is **Project configuration → Build & deploy → Continuous
-  deployment → Repository → Manage repository → Link to a different repository**.
-  This relinks in place: it does **not** create a new site, so the site ID,
-  custom domain, DNS, environment variables, Forms submissions, and deploy
-  history are all preserved.
-- Order of operations: land this migration and confirm a green production
-  build first, then rename, then relink, then push a trivial commit to prove
-  the hook fires. Renaming mid-migration adds a variable to an already large
-  change.
-- Also update afterwards: the Netlify badge URL in `README.md`, and
-  `hugoblox.repository.url` in `config/_default/params.yaml`.
+#### What "relinking" means
+
+Netlify stores two things about the repo: its path (`trypanosomatics/academic-kickstart`)
+and a GitHub webhook that fires on push. Renaming the repo makes the stored path
+stale. Relinking just refreshes it. It points the **existing** site at the new
+path — it does **not** create a new site — so all of this is preserved:
+
+- the site ID and the `*.netlify.app` subdomain
+- the `trypanosomatics.org` custom domain and its DNS records
+- environment variables and build settings
+- Netlify Forms submissions already collected
+- the full deploy history, including rollback targets
+
+#### Steps
+
+1. Land this migration on `master` and confirm a **green production build**.
+   Do not rename before this; it adds a variable to an already large change.
+2. GitHub → the repo → **Settings** → rename to `trypanosomatics-website`.
+3. Netlify → the site → **Project configuration → Build & deploy → Continuous
+   deployment → Repository → Manage repository → Link to a different repository**.
+4. Choose `trypanosomatics/trypanosomatics-website`. Keep branch `master`,
+   build command `hugo`, publish directory `public`.
+5. Push a trivial commit and confirm a deploy starts. This is the real test —
+   it proves the **webhook** fires, not merely that GitHub's redirect works.
+6. Update the Netlify badge URL at the top of `README.md` and
+   `hugoblox.repository.url` in `config/_default/params.yaml`.
+
+If step 5 produces nothing, the webhook did not transfer: unlink and relink
+once more, or add the webhook by hand from the GitHub repo's
+**Settings → Webhooks**.
 
 Sources: [Netlify docs — repo permissions and linking](https://docs.netlify.com/build/git-workflows/repo-permissions-linking/),
 [Netlify forum — renaming a git repository](https://answers.netlify.com/t/renaming-a-git-repository/37168)
@@ -330,9 +349,26 @@ the defaults already permit it. They do for the Node *permission* sandbox
    `$item.Params.doi`; Kit deprecates top-level `doi` in favour of
    `hugoblox.ids.doi`, so do the front-matter move first, then write the
    override against `_partials/views/citation.html` and `single.html`.
-2. **Publication front matter deprecations** — 79 warnings, two classes:
-   top-level `doi` → `hugoblox.ids.doi`, and the flat `publication` string →
-   `publication: {name, short_name, volume, issue, pages, publisher}`.
+2. **The flat `publication` string — 32 warnings, deliberately left alone.**
+   `doi` and the `url_*` keys are migrated; this one is not, because converting
+   it *changes what the citations say*. Current front matter holds one free-text
+   string:
+
+   > `Nucleic Acids Research, (37), Database issue, _pp. D544-9_, http://doi.org/10.1093/nar/gkn874`
+
+   `resolve_publication` renders the structured shape as `*Name*, volume(issue), pages`:
+
+   > *Nucleic Acids Research*, 37, D544-9
+
+   Cleaner, but it drops detail ("Database issue", the inline DOI URL), and five
+   of the 32 do not fit the pattern at all — a book chapter
+   (`Chapter 3, _pp. 43-59_, In 'Parasitic Helminths…', Edited by…, Wiley…`) and
+   entries like `BMC Bioinformatics 20: 361`. Machine-parsing bibliographic data
+   into a lossy shape is how citations quietly become wrong.
+
+   Options: run upstream's `hugoblox migrate publications` and proof-read all 32;
+   convert by hand; or leave it — the flat string still renders, and the only
+   cost is a build warning. **A decision for the lab, not a default to apply.**
 3. **Design → Phase 4.** The `tryps` palette and dark mode are done; fonts
    (Play / Open Sans / PT Mono) and overall styling are not. Kit font packs live
    in the module's `data/fonts/`; a `tryps` pack would be authored the same way

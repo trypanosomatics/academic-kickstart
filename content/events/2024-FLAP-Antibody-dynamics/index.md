@@ -41,11 +41,6 @@ image:
 #   icon: twitter
 
 # Optional filename of your slides within your talk's folder or a URL.
-url_slides:
-url_poster: "https://www.dropbox.com/scl/fi/27z8rijys81oj2touf37g/poster_flap_2024_ramiro_quinteros_final.pdf?rlkey=5zriiamdaoeymkhyzqc3nni3n&st=jzq4vyey&dl=0"
-url_code:
-url_pdf:
-url_video:
 
 # Markdown Slides (optional).
 #   Associate this talk with Markdown slides.
@@ -60,6 +55,10 @@ slides: ""
 #   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
 #   Otherwise, set `projects = []`.
 projects: ["immunomics"]
+# Custom links. Replaces the deprecated url_* keys.
+links:
+  - type: poster
+    url: "https://www.dropbox.com/scl/fi/27z8rijys81oj2touf37g/poster_flap_2024_ramiro_quinteros_final.pdf?rlkey=5zriiamdaoeymkhyzqc3nni3n&st=jzq4vyey&dl=0"
 ---
 
 

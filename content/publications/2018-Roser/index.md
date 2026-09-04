@@ -13,13 +13,10 @@ tags = ["genomics", "R", "bioconductor", "FastQ", ]
 categories = []
 
 # Preprint
-url_preprint = "https://doi.org/10.1101/393140"
 
 # Code
-url_code = "https://github.com/leandroroser/FastqCleaner"
 
 # PDF
-url_pdf = "https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-019-2961-8"
 
 # abstract
 
@@ -56,6 +53,12 @@ url_pdf = "https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-
   # Focal point (optional)
   # Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
   focal_point = "BottomRight"
+# Custom links. Replaces the deprecated url_* keys.
+links = [
+  {type = "preprint", url = "https://doi.org/10.1101/393140"},
+  {type = "code", url = "https://github.com/leandroroser/FastqCleaner"},
+  {type = "pdf", url = "https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-019-2961-8"},
+]
 +++
 
 Preprint was available at BioRxiv, https://doi.org/10.1101/393140 

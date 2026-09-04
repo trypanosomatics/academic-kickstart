@@ -37,14 +37,6 @@ featured: false
 #   icon_pack: fab
 #   icon: twitter
 
-url_pdf: https://www.biorxiv.org/content/10.1101/2021.04.27.441630v1
-url_code: https://github.com/trypanosomatics/aprank
-url_dataset: https://doi.org/10.5061/dryad.zcrjdfnb1
-url_poster:
-url_project:
-url_slides:
-url_source:
-url_video:
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder. 
@@ -67,4 +59,12 @@ projects: ["immunomics"]
 #   E.g. `slides: "example"` references `content/slides/example/index.md`.
 #   Otherwise, set `slides: ""`.
 slides: ""
+# Custom links. Replaces the deprecated url_* keys.
+links:
+  - type: pdf
+    url: "https://www.biorxiv.org/content/10.1101/2021.04.27.441630v1"
+  - type: code
+    url: "https://github.com/trypanosomatics/aprank"
+  - type: dataset
+    url: "https://doi.org/10.5061/dryad.zcrjdfnb1"
 ---
