@@ -1,8 +1,8 @@
 +++
 title = "Genome-wide analysis of 3'-untranslated regions supports the existence of post-transcriptional regulons controlling gene expression in trypanosomes"
 date = "2013-01-01"
-authors = ["Javier G De Gaudenzi", "@santiago", "@fernan", "Alberto C Frasch"]
-publication_types = ["2"]
+authors = ["Javier G De Gaudenzi", "santiago", "fernan", "Alberto C Frasch"]
+publication_types = ["article-journal"]
 publication = "PeerJ, (1), _pp. e118_, https://doi.org/10.7717/peerj.118"
 publication_short = "PeerJ, (1), _pp. e118_, https://doi.org/10.7717/peerj.118"
 doi = "10.7717/peerj.118"

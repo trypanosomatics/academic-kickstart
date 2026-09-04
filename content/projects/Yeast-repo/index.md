@@ -12,7 +12,7 @@ summary = "Exploiting conserved druggable modules between yeasts and trypanosome
 tags = ["Chemogenomics", "networks", "drug-repositioning", "drug-discovery"]
 
 # People in this project
-authors = ["@lionel", "@mercedes", "@emir", "@fernan"]
+authors = ["lionel", "mercedes", "emir", "fernan"]
 
 # Optional external URL for project (replaces project detail page).
 external_link = ""

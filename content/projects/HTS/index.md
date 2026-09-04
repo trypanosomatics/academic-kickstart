@@ -12,7 +12,7 @@ summary = "Identification and repurposing of bioactive compounds for Chagas dise
 tags = ["chemogenomics", "networks", "drug-repositioning", "drug-discovery"]
 
 # People in this project
-authors = ["@lionel", "@emir", "@fernan"]
+authors = ["lionel", "emir", "fernan"]
 
 # Optional external URL for project (replaces project detail page).
 external_link = ""

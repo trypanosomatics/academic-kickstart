@@ -2,7 +2,7 @@
 # Documentation: https://sourcethemes.com/academic/docs/managing-content/
 
 title: "Towards High-throughput Immunomics for Infectious Diseases: Use of Next-generation Peptide Microarrays for Rapid Discovery and Mapping of Antigenic Determinants"
-authors: ["@santiago", "Morten Nielsen", "Claus Schafer-Nielsen", "Juan Mucci", "Jaime Altcheh", "Virginia Balouz", "Valeria Tekiel", "Alberto C Frasch", "Oscar Campetella", "Carlos A Buscaglia", "@fernan"]
+authors: ["santiago", "Morten Nielsen", "Claus Schafer-Nielsen", "Juan Mucci", "Jaime Altcheh", "Virginia Balouz", "Valeria Tekiel", "Alberto C Frasch", "Oscar Campetella", "Carlos A Buscaglia", "fernan"]
 date: "2015-07-01"
 doi: "10.1074/mcp.M114.045906"
 
@@ -13,7 +13,7 @@ doi: "10.1074/mcp.M114.045906"
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ["2"]
+publication_types: ["article-journal"]
 
 # Publication name and optional abbreviated publication name.
 publication: "Molecular & Cellular Proteomics, (14), 7, _pp. 1871--84_, https://doi.org/10.1074/mcp.M114.045906"

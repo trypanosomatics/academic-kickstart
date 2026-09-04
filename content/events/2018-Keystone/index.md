@@ -23,7 +23,7 @@ all_day: false
 # Schedule page publish date (NOT talk date).
 publishDate: 2018-10-18T16:04:21-03:00
 
-authors: ["@lionel","@fernan"]
+authors: ["lionel","fernan"]
 tags: ["Drug Discovery","Chemogenomics"]
 
 # Is this a featured talk? (true/false)

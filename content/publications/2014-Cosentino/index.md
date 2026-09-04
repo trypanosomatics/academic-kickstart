@@ -1,8 +1,8 @@
 +++
 title = "Genetic profiling of the isoprenoid and sterol biosynthesis pathway genes of Trypanosoma cruzi"
 date = "2014-01-01"
-authors = ["@raul", "@fernan"]
-publication_types = ["2"]
+authors = ["raul", "fernan"]
+publication_types = ["article-journal"]
 publication = "PLOS One, (9), 5, _pp. e96762_, https://doi.org/10.1371/journal.pone.0096762"
 publication_short = "PLOS One, (9), 5, _pp. e96762_, https://doi.org/10.1371/journal.pone.0096762"
 doi = "10.1371/journal.pone.0096762"

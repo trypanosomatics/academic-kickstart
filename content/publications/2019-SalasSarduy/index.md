@@ -2,7 +2,7 @@
 # Documentation: https://sourcethemes.com/academic/docs/managing-content/
 
 title: "Potent and selective inhibitors for M32 metallocarboxypeptidases identified from high-throughput screening of anti-kinetoplastid chemical boxes"
-authors: ["@emir", "@lionel", "Adriana K Carmona", "Juan J Cazzulo", "@fernan", "Vanina E Alvarez", "Gabriela T Niemirowicz"]
+authors: ["emir", "lionel", "Adriana K Carmona", "Juan J Cazzulo", "fernan", "Vanina E Alvarez", "Gabriela T Niemirowicz"]
 date: 2019-06-28T10:28:19-03:00
 doi: "10.1371/journal.pntd.0007560"
 
@@ -13,7 +13,7 @@ publishDate: 2019-06-28T10:28:19-03:00
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ["2"]
+publication_types: ["article-journal"]
 
 # Publication name and optional abbreviated publication name.
 publication: "PLOS Neglected Tropical Diseases, 13 (7), e0007560"

@@ -4,7 +4,7 @@
 title: "Diagnostics"
 subtitle: "Development of new diagnostic tools for infectious diseases"
 summary: "Development of new diagnostic tools for infectious diseases"
-authors: ["@fernan", "@emir", "@leonel", "@alejandro"]
+authors: ["fernan", "emir", "leonel", "alejandro"]
 tags: ["antigens", "biomarkers", "diagnostics"]
 categories: []
 date: 2021-10-13T17:44:46-03:00

@@ -13,7 +13,7 @@ summary = "Antigens discovery for congenital Chagas disease, mapping and validat
 tags = ["immunomics","congenital chagas"]
 
 # People in this project
-authors = ["@leonel","@emir","@alejandro", "@fernan"]
+authors = ["leonel","emir","alejandro", "fernan"]
 
 
 # Optional external URL for project (replaces project detail page).

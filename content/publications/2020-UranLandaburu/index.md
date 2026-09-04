@@ -3,7 +3,7 @@
 
 title: "TDR Targets 6: Driving drug discovery for human pathogens through intensive chemogenomic data integration"
 subtitle: "The TDR Targets Database"
-authors: ["@lionel", "Ariel J Berenstein", "Santiago Videla", "Parag Maru", "Dhanasekaran Shanmugam", "Ariel Chernomoretz", "@fernan"]
+authors: ["lionel", "Ariel J Berenstein", "Santiago Videla", "Parag Maru", "Dhanasekaran Shanmugam", "Ariel Chernomoretz", "fernan"]
 date: 2019-10-16
 doi: "10.1093/nar/gkz999"
 
@@ -14,7 +14,7 @@ doi: "10.1093/nar/gkz999"
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ["2"]
+publication_types: ["article-journal"]
 
 # Publication name and optional abbreviated publication name.
 publication: "Nucleic Acids Research, 48 (in production), https://doi.org/10.1093/nar/gkz999"

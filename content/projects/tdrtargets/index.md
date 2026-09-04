@@ -12,7 +12,7 @@ summary = "Data integration for target prioritization and drug discovery or repu
 tags = ["chemogenomics", "networks", "drug-repositioning", "drug-discovery"]
 
 # People in this project
-authors = ["@lionel", "@paula", "@fernan"]
+authors = ["lionel", "paula", "fernan"]
 
 # Optional external URL for project (replaces project detail page).
 external_link = ""
@@ -23,7 +23,7 @@ external_link = ""
 #   E.g. `slides = "example-slides"` references 
 #   `content/slides/example-slides.md`.
 #   Otherwise, set `slides = ""`.
-slides = "example-slides"
+slides = ""
 
 # Links (optional).
 url_pdf = ""

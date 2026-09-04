@@ -1,8 +1,8 @@
 +++
 title = "Diagnostic peptide discovery: prioritization of pathogen diagnostic markers using multiple features"
 date = "2012-01-01"
-authors = ["@santiago", "Paula A Sartor", "Maria S Leguizamon", "Oscar E Campetella", "@fernan"]
-publication_types = ["2"]
+authors = ["santiago", "Paula A Sartor", "Maria S Leguizamon", "Oscar E Campetella", "fernan"]
+publication_types = ["article-journal"]
 publication = "PLOS One, (7), 12, _pp. e50748_, https://doi.org/10.1371/journal.pone.0050748"
 publication_short = "PLOS One, (7), 12, _pp. e50748_, https://doi.org/10.1371/journal.pone.0050748"
 doi = "10.1371/journal.pone.0050748"

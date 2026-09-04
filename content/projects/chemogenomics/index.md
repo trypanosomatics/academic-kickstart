@@ -12,7 +12,7 @@ summary = "Data integration for target prioritization and drug discovery or repu
 tags = ["chemogenomics", "networks", "drug-repositioning", "drug-discovery"]
 
 # People in this project
-authors = ["@lionel", "@mercedes", "@emir", "@paula", "@fernan"]
+authors = ["lionel", "mercedes", "emir", "paula", "fernan"]
 
 # Optional external URL for project (replaces project detail page).
 external_link = ""

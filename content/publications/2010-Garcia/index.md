@@ -4,7 +4,7 @@
 title: "TcTASV: a novel protein family in trypanosoma cruzi identified from a subtractive trypomastigote cDNA library"
 summary: "Discovery of a new family of differentially expressed genes in T. cruzi."
 date: "2010-10-05"
-authors: ["Elizabeth A García", "María Ziliani", "@fernan", "Guillermo Bernabó", "Daniel O Sánchez", "Valeria Tekiel"]
+authors: ["Elizabeth A García", "María Ziliani", "fernan", "Guillermo Bernabó", "Daniel O Sánchez", "Valeria Tekiel"]
 tags: ["trypomastigotes", "genomics", "TcTASV", "tcruzi"]
 subtitle: 
 featured: false
@@ -17,7 +17,7 @@ doi: "10.1371/journal.pntd.0000841"
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ["2"]
+publication_types: ["article-journal"]
 
 abstract: "Differentially expressed genes are the hallmark of the specialized biology of each life cycle stage. The aim of this work was to identify genes expressed in the trypomastigote stage (a blood-circulating stage that invades new cells and spreads the infection in different organs of the mammalian host) that could be used to develop new vaccines or diagnostics. An initial screening of trypomastigote transcripts was performed by sequencing of an epimastigote-subtracted trypomastigote cDNA library. Besides identifying a large proportion of differentially expressed mRNAs, we discovered a novel protein family, which we denominated TcTASV."
 

@@ -23,7 +23,7 @@ all_day: false
 # Schedule page publish date (NOT talk date).
 publishDate: 2022-03-09T20:06:57-03:00
 
-authors: ["@alejandro", "@leonel", "Janine Ramsey", "Melissa Nolan", "Faustino Torrico", "Jaime Altcheh", "Norival Kesper Jr", "Juan Carlos Villar", "Jorge Diego Marco", "@fernan"]
+authors: ["alejandro", "leonel", "Janine Ramsey", "Melissa Nolan", "Faustino Torrico", "Jaime Altcheh", "Norival Kesper Jr", "Juan Carlos Villar", "Jorge Diego Marco", "fernan"]
 tags: ["immunomics", "Chagas Disease", "antigens", "epitopes", "peptide-arrays"]
 
 # Is this a featured talk? (true/false)

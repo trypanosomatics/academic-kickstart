@@ -1,8 +1,8 @@
 +++
 title = "A genomic scale map of genetic diversity in Trypanosoma cruzi."
 date = "2012-01-01"
-authors = ["@aleacker", "@leonardo", "@raul", "Daniel O Sánchez", "@fernan"]
-publication_types = ["2"]
+authors = ["aleacker", "leonardo", "raul", "Daniel O Sánchez", "fernan"]
+publication_types = ["article-journal"]
 publication = "BMC Genomics, (13), _pp. 736_, https://doi.org/10.1186/1471-2164-13-736"
 publication_short = "BMC Genomics, (13), _pp. 736_, https://doi.org/10.1186/1471-2164-13-736"
 doi = "10.1186/1471-2164-13-736"

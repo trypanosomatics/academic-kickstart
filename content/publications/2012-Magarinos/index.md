@@ -1,8 +1,8 @@
 +++
 title = "TDR Targets: A Chemogenomics Resource for Neglected Diseases"
 date = "2012-01-01"
-authors = [ "@paula", "@santiago", "Gregory J Crowther", "Stuart A Ralph", "David S Roos", "Dhanasekaran Shanmugam", "Wesley C Van Voorhis", "@fernan"]
-publication_types = ["2"]
+authors = [ "paula", "santiago", "Gregory J Crowther", "Stuart A Ralph", "David S Roos", "Dhanasekaran Shanmugam", "Wesley C Van Voorhis", "fernan"]
+publication_types = ["article-journal"]
 publication = "Nucleic Acids Research, (40), _pp. D1118-27_, https://doi.org/10.1093/nar/gkr1053"
 publication_short = "Nucl Acids Res, (40), _pp. D1118-27_, https://doi.org/10.1093/nar/gkr1053"
 doi = "10.1093/nar/gkr1053"

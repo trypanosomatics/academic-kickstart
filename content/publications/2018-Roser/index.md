@@ -2,10 +2,10 @@
 title = "FastqCleaner: an Interactive Bioconductor application for quality-control, filtering and trimming of FASTQ files"
 date = 2018-06-28
 draft = false
-authors = ["Leandro G Roser", "@fernan", "Daniel O Sánchez"]
+authors = ["Leandro G Roser", "fernan", "Daniel O Sánchez"]
 publication = "BMC Bioinformatics 20: 361"
 publication_short = "BMC Bioinformatics 20: 361"
-publication_types = ["2"]
+publication_types = ["article-journal"]
 doi = "10.1186/s12859-019-2961-8"
 
 # Tags and categories
