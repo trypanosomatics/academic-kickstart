@@ -1,0 +1,2 @@
+# Keep Markdown content in LF so editors on Windows do not reintroduce CRLF.
+*.md text eol=lf
