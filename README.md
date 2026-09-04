@@ -8,9 +8,11 @@ Static site built with [Hugo](https://gohugo.io/) and
 > Migrated from Academic v4 / Wowchemy. Background in `ANALYSIS.md`, the plan
 > and decision record in `MIGRATION.md`.
 >
-> **Restyling the site? Start with `STYLING.md`.** Local template overrides and
-> the rules for upgrading them are in `OVERRIDES.md`; the upstream bugs several
-> of them work around are written up in `PULL-REQUESTS.md`.
+> **Changing a setting? See `CONFIGURATION.md`** — it maps every old
+> `params.toml` key to where it lives now.
+> **Restyling? Start with `STYLING.md`.** Local template overrides and the rules
+> for upgrading them are in `OVERRIDES.md`; the upstream bugs several of them
+> work around are written up in `PULL-REQUESTS.md`.
 
 ---
 
@@ -67,7 +69,7 @@ git-ignored and never deployed. `pnpm clean:search` removes it.
 
 | Path | Purpose |
 |---|---|
-| `config/_default/` | `hugo.yaml`, `params.yaml`, `menus.yaml`, `module.yaml`, `languages.yaml` |
+| `config/_default/` | `hugo.yaml`, `params.yaml`, `menus.yaml`, `module.yaml`, `languages.yaml` — see `CONFIGURATION.md` |
 | `content/_index.md` | the landing page — an ordered list of blocks |
 | `content/blog/` `events/` `publications/` `projects/` | content |
 | `content/authors/` | **stubs only** — one per person, so their page exists |
