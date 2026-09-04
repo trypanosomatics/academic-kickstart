@@ -417,14 +417,14 @@ so **no** font loaded and everything fell back to system sans.
 
 1. **Comma vs semicolon.** `typography.html` joined discrete weights with `,`
    (`Play:wght@400,700`). The CSS2 API requires `;`. Response: HTTP 400.
-   Fixed by overriding the partial — see `layouts/OVERRIDES.md`.
+   Fixed by overriding the partial — see `OVERRIDES.md`.
 2. **Wrong variable range.** Upstream hardcodes `100..900` for any family
    marked `variable: true`. Open Sans's `wght` axis is `300..800`, so Google
    dropped it even after fix 1. Fixed by declaring Open Sans static with
    explicit weights in `data/fonts/tryps.yaml`.
 
 Both fail silently: one bad request, no console error beyond a failed
-stylesheet, and a page that looks merely "unstyled". `layouts/OVERRIDES.md`
+stylesheet, and a page that looks merely "unstyled". `OVERRIDES.md`
 carries a two-line regression test.
 
 ### Navbar: the theme picker

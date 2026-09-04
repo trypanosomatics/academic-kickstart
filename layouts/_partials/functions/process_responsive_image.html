@@ -144,7 +144,7 @@ Returns: Map with processed images and srcset string
      "can't evaluate field RelPermalink in type interface {}".
 
      Fall back to the original image, and give it a srcset entry so the
-     picture still renders. See layouts/OVERRIDES.md. */}}
+     picture still renders. See OVERRIDES.md. */}}
 {{- if not $fallback_image -}}
   {{- $fallback_image = $image -}}
   {{- if not $srcset_parts -}}

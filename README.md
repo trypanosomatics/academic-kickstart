@@ -54,7 +54,7 @@ No `git submodule` step — the theme resolves through `go.mod`.
 | `assets/media/authors/` | avatars, named `<slug>.<ext>` |
 | `assets/media/` | images referenced by blocks |
 | `static/` | served as-is; `static/_redirects` holds the Netlify redirects |
-| `layouts/` | local overrides — **read `layouts/OVERRIDES.md` before touching** |
+| `layouts/` | local overrides — **read `OVERRIDES.md` before touching** |
 | `hugo-blox/blox/` | blocks written for this site (currently `tag-cloud`) |
 | `archive/` | not built; see below |
 
