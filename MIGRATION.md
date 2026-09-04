@@ -96,11 +96,24 @@ location) before Phase 2 begins — a session scratchpad is not durable storage.
 ### Phase 1 — Stack-neutral content normalisation · branch `content/normalise-front-matter`
 Merges to `master` and deploys on the **old** stack. Small, reviewable, low risk.
 
-1. Fix the 7 malformed author lists.
-2. Add `title` / `first_name` / `last_name` to the 20 author profiles (keep `name`).
-3. Convert TOML front matter to YAML (53 files), section by section, one commit each.
+1. ✅ Fix the 7 malformed author lists.
+2. ✅ Normalise `ramiro/_index.md` to LF; add `.gitattributes`.
+3. ✅ Add `title` / `first_name` / `last_name` to the 20 author profiles (keep `name`).
+4. ⏭️ **TOML → YAML front matter — deferred to Phase 2.** See §5.1.
 
 **Gate:** `hugo692 --gc` builds clean; URL / author-link / page-count parity vs §4.
+
+#### 5.1 Why TOML → YAML was deferred
+
+Mechanical conversion parses the front matter and re-emits it, which **destroys
+every explanatory comment** — `# Display name`, `# Organizations/Affiliations`,
+`# Set this to [] if you are not using People widget`, and so on. Those comments
+are the only documentation the ~12 people who edit these files have.
+
+The cost is real and the benefit is cosmetic: Hugo has parsed both formats since
+long before 0.69. In Phase 2 the author and publication files are rewritten
+anyway, so the conversion should happen **there**, modelled on the kit template's
+own commented YAML archetypes rather than transliterated from TOML.
 
 ### Phase 2 — Framework migration · branch `migrate/hugoblox-kit`
 Long-lived. Everything below is on this branch only.
@@ -191,4 +204,23 @@ Not blocking Phase 1. Needed during Phase 2.
 | Date | Phase | Status |
 |---|---|---|
 | 2026-09-04 | Baseline | ✅ 256 URLs / 262 author links / 359 pages captured |
-| 2026-09-04 | Phase 1 | 🚧 in progress on `content/normalise-front-matter` |
+| 2026-09-04 | Phase 1 | ✅ complete on `content/normalise-front-matter` — 4 commits, all gates green |
+
+### Findings from Phase 1
+
+**The People widget has no sort at all.** `themes/academic/layouts/partials/widgets/people.html:24`
+is a bare `where` with no `sort`, so members within a group come back in Hugo's
+default page order. Every lab member currently carries `weight = 10`, so the
+ordering has always been decided by an arbitrary tie-break. Adding `title`
+changed that tie-break and swapped two Alumni (`sebastian` ↔ `ssneider`) and two
+entries in the authors index (`mercedes` ↔ `paula`).
+
+*Action for Phase 2:* set an explicit `sort_by` on the `team-showcase` block, and
+give members distinct weights within each group. **Who is listed first inside a
+group is a decision for the lab, not a default to be invented.**
+
+**`enableGitInfo` makes rendered output depend on the working tree.** Editing a
+file changes its `article:modified_time` and JSON-LD `dateModified`, and shifts
+the date-based tie-break in the related-content lists. Byte-comparisons against a
+baseline must expect this. It settles once changes are committed, since Netlify
+builds from git history.
