@@ -1,0 +1,30 @@
+# Navigation. Anchors (#id) target sections on the landing page and must match
+# the `id:` of the corresponding block in content/_index.md.
+main:
+  - name: Home
+    url: '#about'
+    weight: 10
+  - name: Posts
+    url: '#posts'
+    weight: 20
+  - name: Featured
+    url: '#featured'
+    weight: 25
+  - name: Talks
+    url: '#talks'
+    weight: 30
+  - name: Projects
+    url: '#projects'
+    weight: 40
+  - name: Publications
+    url: '#publications'
+    weight: 50
+  - name: Popular Topics
+    url: '#tags'
+    weight: 55
+  - name: People
+    url: '#people'
+    weight: 60
+  - name: Contact
+    url: '#contact'
+    weight: 70

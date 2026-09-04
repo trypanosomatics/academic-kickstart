@@ -1,0 +1,75 @@
+# Configuration of Hugo
+# Docs: https://gohugo.io/getting-started/configuration/
+
+# Site name lives in params.yaml under hugoblox.identity.name
+title: ''
+baseURL: 'https://trypanosomatics.org/'
+
+############################
+## LANGUAGE
+############################
+
+defaultContentLanguage: en
+hasCJKLanguage: false
+defaultContentLanguageInSubdir: false
+removePathAccents: true
+
+############################
+## ADVANCED
+############################
+
+build:
+  writeStats: true
+enableGitInfo: true
+summaryLength: 30
+pagination:
+  pagerSize: 10
+enableEmoji: true
+enableRobotsTXT: true
+footnotereturnlinkcontents: <sup>^</sup>
+ignoreFiles: ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+disableAliases: true
+outputs:
+  home: [HTML, RSS, headers, redirects, backlinks]
+  section: [HTML, RSS]
+imaging:
+  resampleFilter: lanczos
+  quality: 90
+  anchor: smart
+  hint: picture
+timeout: 600000
+
+# Taxonomies. `categories` is kept in addition to the Hugo Blox defaults
+# because existing publications use it.
+taxonomies:
+  author: authors
+  tag: tags
+  category: categories
+  publication_type: publication_types
+
+# NOTE: deliberately no `permalinks:` block. The upstream starters rewrite
+# /authors/ -> /author/ and /tags/ -> /tag/, which would break every taxonomy
+# URL in the baseline. See MIGRATION.md section 6.
+
+markup:
+  _merge: deep
+  highlight:
+    lineNos: false
+
+security:
+  _merge: deep
+  exec:
+    # Hugo's built-in allowlist is sass/go/git/node/postcss. The Tailwind v4
+    # pipeline in the blox module shells out to `tailwindcss`, which is not on
+    # it, so the build fails with "not whitelisted in policy security.exec.allow"
+    # unless it is added here. See MIGRATION.md section 5.3.
+    allow:
+      - ^(dart-)?sass$
+      - ^go$
+      - ^git$
+      - ^node$
+      - ^postcss$
+      - ^tailwindcss$
+
+sitemap:
+  _merge: deep
