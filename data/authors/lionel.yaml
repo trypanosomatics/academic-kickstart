@@ -5,6 +5,9 @@ name:
   given: Lionel
   family: Urán Landaburu
 role: Former Lab Member (2015 -- 2023)
+# One-line summary shown on the author cards at the foot of a page.
+# `bio` below is the full biography, used on the author's own profile page.
+short_bio: "PhD Fellow, teacher and science divulgation enthusiast."
 bio: "# Previous positions in the lab\n\n * PhD Student (2015-2023)"
 links:
 - icon: at-symbol

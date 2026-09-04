@@ -5,6 +5,9 @@ name:
   given: Leonardo
   family: Panunzi
 role: Former Lab Member (2007 -- 2014)
+# One-line summary shown on the author cards at the foot of a page.
+# `bio` below is the full biography, used on the author's own profile page.
+short_bio: "Present address: Institut Pasteur Paris, France"
 bio: "# Previous positions in the lab\n\n * 2007-2013 PhD Student\n * 2014 Postdoc\n\n# Current position\n\
   \nInstitut Pasteur Paris, France.\nhttps://research.pasteur.fr/en/member/leonardo-gabriel-panunzi/"
 user_groups:

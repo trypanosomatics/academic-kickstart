@@ -6,6 +6,9 @@ slug: trypanosomatics
 name:
   display: Trypanosomatics
 role: A Trypanosome in the Shell
+# One-line summary shown on the author cards at the foot of a page.
+# `bio` below is the full biography, used on the author's own profile page.
+short_bio: "Using and generating data to guide discovery of new drugs and diagnostics."
 bio: "Our laboratory is interested in the study of human pathogens, particularly\ntrypanosomes and also\
   \ others that cause so-called *Neglected Tropical Diseases*. \n\nWe develop computational tools and\
   \ produce (and re-use) large data sets to\nformulate and guide our research hypotheses in the quest\

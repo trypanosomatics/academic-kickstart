@@ -5,6 +5,9 @@ name:
   given: Emir
   family: Salas Sarduy
 role: Associate Investigator
+# One-line summary shown on the author cards at the foot of a page.
+# `bio` below is the full biography, used on the author's own profile page.
+short_bio: "Passionate about enzymes and drug discovery."
 bio: "# About me \n\nI began my academic career at the University of Habana (UH), Cuba, with a degree\
   \ in Biochemistry in 2001. In 2006, I obtained a MSc degree in Protein Chemistry and Enzymology from\
   \ UH and began my PhD work at this institution, focused on the identification, isolation and characterization\

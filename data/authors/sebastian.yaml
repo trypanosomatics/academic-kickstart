@@ -5,6 +5,9 @@ name:
   given: Sebastián
   family: Jinich
 role: Undergrad Student (BSc Thesis)
+# One-line summary shown on the author cards at the foot of a page.
+# `bio` below is the full biography, used on the author's own profile page.
+short_bio: "Undergrad student pursuing a bachelor's degree thesis"
 bio: "# About me \n\nI am currently doing a bachelor's degree in biotechnology at the National University\
   \ of San Martín (UNSAM).  I am very enthusiastic about computer science as much as biotech, and pursuing\
   \ a career in Bioinformatics. \n\nMy collaborations in the lab are related to software development,\

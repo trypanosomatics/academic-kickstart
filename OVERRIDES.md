@@ -86,6 +86,28 @@ that is fixed at source too, but the helper no longer depends on it.
 
 ---
 
+## Author cards — short bio
+
+`_partials/page_author_card.html` is an **override** (78-line upstream file,
+verbatim except the bio block).
+
+Upstream renders `$profile.bio`. In this site's data `bio` is the author's
+**full biography** — several paragraphs and headings — because that is what
+`layouts/authors/term.html` renders on their profile page, and Hugo Blox has
+only the one field. On a card at the foot of an article that is far too much.
+
+The override reads `short_bio` from `data/authors/<slug>.yaml` instead, which
+carries the one-liner the Academic v4 site used. `get_author_profile` returns a
+fixed dict that does not include `short_bio`, so the override reads the raw
+author data via `functions/get_authors_data`.
+
+**There is deliberately no fallback to `bio`.** An author with no `short_bio`
+shows name and role only — what the old site did, since its card used the short
+`bio` front-matter field, which was empty for some people. Currently `aleacker`
+and `mercedes`; add `short_bio:` to their data file to give them a line.
+
+---
+
 ## Typography — Google Fonts URL
 
 `_partials/functions/typography.html` is an **override** of the upstream file

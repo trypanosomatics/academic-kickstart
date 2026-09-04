@@ -5,6 +5,9 @@ name:
   given: Armando
   family: Fernandez
 role: PhD Student
+# One-line summary shown on the author cards at the foot of a page.
+# `bio` below is the full biography, used on the author's own profile page.
+short_bio: "PhD Fellow"
 bio: "# About me \n\nI have a Bachelor´s degree in Biotechnology. I graduated from the School of Biochemical\
   \ and Pharmaceutical Sciences of The National University of Rosario-Argentina in 2017. My thesis was\
   \ about the possible biorheological alterations in the microcirculation produced by newborn larvae of\

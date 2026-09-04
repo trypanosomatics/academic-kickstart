@@ -5,6 +5,9 @@ name:
   given: María Paula
   family: Magariños
 role: Former Lab Member (2009 -- 2014)
+# One-line summary shown on the author cards at the foot of a page.
+# `bio` below is the full biography, used on the author's own profile page.
+short_bio: "Present address: ChEMBL Group (EMBL-EBI)"
 bio: "# Previous positions in the lab\n\n * 2009-2014 PhD Student\n * 2014 Postdoc\n\n# Current Position\n\
   \nChEMBL Group, European Bioinformatics Institute (EBI) -- European Molecular\nBiology Laboratory, Hinxton,\
   \ Cambridge, UK.\nhttps://www.ebi.ac.uk/about/people/maria-paula-magarinos"
