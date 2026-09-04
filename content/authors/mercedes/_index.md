@@ -22,14 +22,14 @@ organizations = [ { name = "Universidad Nacional de Hurlingham", url = "http://w
 bio = ""
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email = "mercedesdidiergarnham@gmail.com"
+email = "mdidiergarnham@iib.unsam.edu.ar"
 
 # List (academic) interests or hobbies
 interests = ["Chemogenomics","Neglected Diseases","Drug Discovery"]
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
-user_groups = ["Grad Students"]
+user_groups = ["Postdocs"]
 
 # List qualifications (such as academic degrees)
 #[[education.courses]]
