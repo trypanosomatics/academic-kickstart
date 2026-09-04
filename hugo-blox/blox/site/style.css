@@ -2,6 +2,54 @@
    Concatenated into the Tailwind entry by the module's css.html, so Tailwind
    directives (@apply, theme(), variants) work here. See STYLING.md. */
 
-/* Example — widen the reading column used by article bodies and page footers:
-.max-w-prose { max-width: 78ch; }
+/* ── Type scale ─────────────────────────────────────────────────────────────
+   The Academic v4 site set the root to 18px on desktop:
+       html{font-size:13.86px}
+       @media screen and (min-width:58em){html{font-size:18px}}
+   Hugo Blox leaves it at the browser default of 16px, which is why every
+   heading, paragraph and rem-based gap reads ~12% smaller than the old site.
+
+   Tailwind's whole scale is rem-based, so setting the root reproduces the old
+   proportions everywhere in one line — the same lever the old theme pulled.
+
+   `--hb-font-size-base` in the font pack does NOT do this: the module declares
+   the variable but no rule consumes it (checked in blox
+   v0.0.0-20260527025321). Set the root here instead.
+
+   Mobile deliberately stays at the browser default rather than the old
+   13.86px, which was cramped. For an exact match use 13.86px below.        */
+@media screen and (min-width: 58em) {
+  html { font-size: 18px; }
+}
+
+/* ── Heading weight ─────────────────────────────────────────────────────────
+   Old headings were `font-weight:500`, and Play ships only 400/700, so they
+   rendered at 400 — the light look in the old design. Hugo Blox puts Tailwind's
+   `font-bold` (700) on page titles, which is the heavier look.
+
+   `data-pagefind-meta="title"` is a stable attribute the module puts on the
+   page title, so this beats the single-class utility without !important.     */
+h1[data-pagefind-meta="title"] {
+  font-weight: var(--hb-font-weight-heading, 400);
+}
+
+/* ── Reading column ─────────────────────────────────────────────────────────
+   Old `.article-container` was max-width:760px. At an 18px root `max-w-prose`
+   (65ch) lands close to that, so no override is needed. Uncomment to pin it:
+.max-w-prose { max-width: 760px; }
+*/
+
+/* ── Abstract layout ────────────────────────────────────────────────────────
+   Hugo Blox lays publication metadata out as a two-column grid — a 200px label
+   column beside the value — so the abstract text sits in a narrow measure. The
+   old site stacked a heading above full-width text.
+
+   Uncomment to stack them instead. Affects every metadata row on publication
+   and event pages (Abstract, Publication, Type, …), not just the abstract.
+[class*="grid-cols-[200px_auto]"] {
+  display: block;
+}
+[class*="grid-cols-[200px_auto]"] > div:nth-child(odd) {
+  margin-top: 1.5rem;
+}
 */

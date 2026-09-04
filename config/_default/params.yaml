@@ -167,9 +167,11 @@ hugoblox:
     # Table of contents
     toc:
       enable: true
-    # Reading time estimates
+    # Reading time estimates. Off: most content here is publications and
+    # events, whose pages are metadata with no body, so this rendered
+    # "0 min read" under the title.
     reading_time:
-      enable: true
+      enable: false
     # Academic citations
     citations:
       style: apa # apa | mla | chicago | ieee

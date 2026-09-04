@@ -157,6 +157,16 @@ columns site-wide:
 .max-w-prose { max-width: 78ch; }
 ```
 
+**Base font size is set here, not in the font pack.** The module declares
+`--hb-font-size-base` but **no rule consumes it** (checked in blox
+`v0.0.0-20260527025321`), so `typography.sizes.base` has no effect. Tailwind's
+whole scale is rem-based, so set the root instead — the same lever Academic v4
+pulled (`html{font-size:18px}` above 58em):
+
+```css
+@media screen and (min-width: 58em) { html { font-size: 18px; } }
+```
+
 **Useful `--hb-*` variables** to override on `:root` (or `.dark`):
 
 ```
@@ -206,6 +216,9 @@ currently overridden, to add the research-metrics badges.
 | Hero height | `#hero` → `design.size`: `compact` `default` `tall` `viewport` `none` |
 | Hero banner image | `#hero` → `design.background.image.filename` (file in `assets/media/`) |
 | People grouping and order | `#people` → `content.user_groups`, `content.sort_by` |
+| Overall text size | `hugo-blox/blox/site/style.css` → root `font-size` (see above); 18px matches the old site |
+| Page-title weight | same file → `h1[data-pagefind-meta="title"]` (Hugo Blox applies `font-bold`; old site used 500 → Play 400) |
+| Hide "N min read" | `cascade.reading_time = false` in the section's `_index.md` — it is a **page** param, not a site setting |
 | Badge size/alignment | CSS in `layouts/_partials/hooks/head-end/research-metrics.html` (`.hb-metrics`) |
 
 ## Gotchas
