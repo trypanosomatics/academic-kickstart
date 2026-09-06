@@ -319,9 +319,96 @@ Sources: [Netlify docs — repo permissions and linking](https://docs.netlify.co
 | Date | Phase | Status |
 |---|---|---|
 | 2026-09-04 | Baseline | ✅ 256 URLs / 262 author links / 359 pages captured |
-| 2026-09-04 | Phase 1 | ✅ complete on `content/normalise-front-matter` — 4 commits, all gates green |
-| 2026-09-04 | Phase 4 | 🚧 fonts and palette. Two upstream font bugs fixed (§8.8); theme picker disabled. |
-| 2026-09-04 | Phase 2 | 🚧 open questions 1-6 resolved; **builds on Hugo 0.165.0** — 466 pages, no errors; 256/256 baseline URLs resolve. Remaining work in §5.5. |
+| 2026-09-04 | Phase 1 | ✅ complete — 4 commits on `content/normalise-front-matter`, all gates green |
+| 2026-09-04 | Phase 2 | 🚧 substantially done in one sprint (32 commits). See breakdown below. |
+| 2026-09-04 | Phase 4 | 🚧 palette + dark mode done; fonts and overall styling not. |
+| 2026-09-06 | — | Work resumed on `migrate/hugoblox-kit`. Phase 1 branch left unmerged, to be deleted (fully contained in this branch, no unique commits). This log reconciled against git history. |
+
+### 9.1 State as of 2026-09-06 — branch `migrate/hugoblox-kit` (HEAD `12bd4eb`)
+
+All work below is committed on this branch. Not merged to `master`; `master`
+still deploys the pinned-0.69.2 v4 stack.
+
+**Done — Phase 2**
+
+- ✅ Teardown of the v4 stack (`714f32d`): submodule, `.gitmodules`,
+  `update_academic.sh`, `page_author.html.patch`, `config/_default/*.toml`,
+  `data/themes`, `data/fonts`, `assets/scss`, old `layouts/` all removed.
+- ✅ Scaffold (`f08e805`): HugoBlox Kit template imported as one commit — `go.mod`,
+  `package.json`, `pnpm-lock.yaml`, `config/_default/*.yaml`, `netlify.toml`,
+  `.npmrc`, `.gitattributes`. No upstream git history.
+- ✅ Section renames via `git mv` only (`bd15bd4`): `post→blog`, `talk→events`,
+  `publication→publications`, `project→projects`; `authors/` unchanged.
+- ✅ Author profiles moved to the Kit data model — `data/authors/*.yaml`
+  (`f3f309b`, `7505b2a`).
+- ✅ `@handle` prefix stripped throughout (`82d6e77`) — the §5.2 must-fix; 121
+  occurrences / 49 files.
+- ✅ All 32 publications migrated to the structured `publication:` map
+  (`826c37a`, §8.9). Build warnings 79 → 0.
+- ✅ `publication_types` numeric → CSL view names (`7d8e45a`).
+- ✅ Landing page `content/home/*.md` → `content/_index.md` with 11 blocks and
+  their anchor IDs (`5f9acc1`). Inactive v4 widgets parked in
+  `archive/home-widgets/` (§8.5).
+- ✅ `tag-cloud` block written from scratch — `hugo-blox/blox/all-access/tag-cloud/`
+  (`5f9acc1`). Full widget→block mapping in §5.4.
+- ✅ Redirects: `static/_redirects` created (`5f9acc1`). Re-verify against §6
+  before cutover.
+- ✅ Builds on Hugo 0.165.0 (`23c3773`): 466 pages, 0 errors; 256/256 baseline
+  URLs resolve.
+- ✅ Navbar anchor bug worked around without an override — `/#id` menu URLs
+  (`8c3f76e`, §8.10).
+- ✅ Research-metrics overrides written for single + citation views
+  (`a23ee89`, `316ba5e`): `layouts/_partials/{functions/get_doi,
+  components/research-metrics, hooks/head-end/research-metrics, views/citation}.html`.
+  `doi` moved to `hugoblox.ids.doi` in all 32 files; DOIs normalised to bare form.
+- ✅ Pagefind wired for local dev (`970d780`).
+- ✅ Author-card short bio + navbar logo restored (`7505b2a`).
+- ✅ Docs added: `CONFIGURATION.md` (every old `params.toml` key mapped),
+  `STYLING.md`, `OVERRIDES.md`, `PULL-REQUESTS.md` (5 upstream bugs assessed).
+
+**Done — Phase 4 (styling), partial**
+
+- ✅ `tryps` palette + dark mode — `data/themes/tryps.yaml` (§8.1); dark-mode
+  navbar kept green for logo legibility (`15d4bcb`).
+- ✅ Two upstream Google Fonts bugs fixed; theme picker disabled (`d66b987`, §8.8).
+- ✅ Type scale / title weight matched to the old site (`a270401`).
+- ⬜ `tryps` font pack (Play / Open Sans / PT Mono) and overall visual polish —
+  not done.
+
+**Open questions** — 1–7 all resolved (§8). Note two later reversals:
+analytics moved to the real GA4 id `G-WDE728FHFE` (`a23ee89`), superseding §8.3;
+map switched to the Google Maps embed with MapLibre commented out (`12bd4eb`),
+superseding §8.11's "MapLibre active".
+
+**Remaining before the Phase 2 gate (§7) — see §5.5**
+
+- ⬜ Research-metrics badges on **list** views (compact / card / featured), not
+  just single + citation. §7 requires both.
+- ⬜ Full §7 verification on a Netlify **deploy preview**: contact form →
+  Netlify Forms, RSS validity, `sitemap.xml`, Pagefind on the deployed site,
+  no `jsdelivr` / `unpkg` references.
+- ⬜ External co-authors are no longer hyperlinked (Kit links only resolvable
+  profiles) — decide keep vs. restore (§5.5.4).
+- ⬜ Pin exact module versions — `hugo mod get ./...` drifted to
+  `kit v4.8.0+incompatible` once (§5.5.6).
+- ⬜ `README.md` still documents the 0.69.2 workflow in places — final rewrite
+  belongs to Phase 3.
+- ⬜ `team-showcase` explicit `sort_by` + distinct per-group member weights
+  (Phase 1 finding: adding `title` changed an arbitrary tie-break).
+
+**Phase 3 (cutover) — not started**
+
+Tag `academic-v4-final`; merge (**not** squash); delete `origin/main` and
+`origin/migrate-wowchemy`; rewrite `README.md`; rename repo → `trypanosomatics-website`
+and relink Netlify (§8.7).
+
+### 9.2 Local toolchain note
+
+This branch needs **Go** (for Hugo module resolution), Node ≥20, and pnpm. Hugo
+0.165 does **not** require a specific Go version — `go.mod` declares `go 1.19`
+and any modern Go works. `netlify.toml`'s `GO_VERSION = "1.21.5"` is only the
+build-image pin; Go is used here solely to fetch/resolve modules, not to compile
+anything that affects output, so the local Go version is not build-sensitive.
 
 #### 5.3 Hugo Blox needs `tailwindcss` on `security.exec.allow`
 

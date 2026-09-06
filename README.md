@@ -21,7 +21,7 @@ Static site built with [Hugo](https://gohugo.io/) and
 | Tool | Version | Why |
 |---|---|---|
 | **Hugo extended** | **0.165.0** (min 0.161.1) | `extended` is required — Tailwind and image processing |
-| **Go** | 1.21+ | the theme is a Hugo Module, not a submodule |
+| **Go** | any modern (1.21+) | resolves the theme Hugo Module, not a submodule; not build-sensitive — `netlify.toml`'s `GO_VERSION` is only the build-image pin |
 | **Node** | ≥ 22 | Hugo runs the Tailwind CLI through Node |
 | **pnpm** | 10+ | installs `@tailwindcss/cli`, `pagefind` |
 
