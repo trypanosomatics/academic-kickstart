@@ -244,5 +244,5 @@ Released under the [MIT License](./LICENSE.md).
 </p>
 
 <!--START_SECTION:news-->
-<!--Updated at 2026-08-30T02:17:36.974Z-->
+<!--Updated at 2026-09-06T01:51:32.682Z-->
 <!--END_SECTION:news-->
