@@ -10,47 +10,34 @@ role: Principal Investigator, Assistant Professor
 # `bio` below is the full biography, used on the author's own profile page.
 short_bio: "Using and generating data to guide discovery of new drugs and diagnostics."
 bio: 'I began my academic career at the University of Buenos Aires (UBA) with a
-
   degree in Biology in 1995. Then completed my PhD in 2001 working at the Luis
-
   F. Leloir Institute – Fundación Campomar (UBA) on biochemistry and molecular
-
   biology. The focus of his research was the metabolism of Echinococus
-
   granulosus, a helminth parasite. For my postdoctoral work at the University
-
   of San Martín, I focused on genomics and bioinformatics, working mainly with
-
   protozoan and bacterial pathogens (trypanosomes, Brucella, Campylobacter).
-
   My current interests are the identification and experimental validation of
-
   drug targets against trypanosomes, and the use of high-throughput genomic
-
   and proteomic platforms to study human immune responses against Trypanosoma
-
   cruzi (Chagas Disease) to guide development of much needed diagnostic
-
   applications. Over time my lab has used different strategic approaches
-
   (experimental bench work, bioinformatics). I also have an interest in
-
   teaching and training of human resources, and in the promotion of
-
   Bioinformatics. I teach a Computational Biology and Bioinformatics course
-
   and am a founding member of the Argentinian Society for Computational
-
   Biology and Bioinformatics (A2B2C).'
 affiliations:
 - name: Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)
-  url: http://www.conicet.gob.ar
+  url: https://www.conicet.gov.ar
 - name: Universidad de San Martín
-  url: http://www.unsam.edu.ar
+  url: https://www.unsam.edu.ar
 links:
 - icon: at-symbol
   url: mailto:fernan@iib.unsam.edu.ar
   label: E-mail
+- icon: brands/bluesky
+  url: https://bsky.app/profile/ferag.bsky.social
+  label: Bluesky
 - icon: brands/twitter
   url: https://twitter.com/fernan_aguero
 - icon: academicons/google-scholar
@@ -63,8 +50,9 @@ links:
   url: https://orcid.org/0000-0003-1331-5741
 - icon: academicons/pubmed
   url: https://www.ncbi.nlm.nih.gov/myncbi/fernan.aguero.1/bibliography/public/
-- icon: academicons/publons
-  url: https://publons.com/researcher/1369842/fernan-aguero/
+- icon: academicons/clarivate
+  url: https://www.webofscience.com/wos/author/record/F-5606-2013
+  label: Web of Science
 - icon: academicons/researchgate
   url: https://www.researchgate.net/profile/Fernan_Agueero
 - icon: academicons/zotero
