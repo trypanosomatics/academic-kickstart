@@ -85,6 +85,89 @@ policy sends none, which fails the check.
 OpenFreeMap), directly below in the same file. No API key, no Google tracking,
 works on localhost. To switch back, uncomment it and drop `map_embed`/`map_url`.
 
+### The hero banner — height and background image
+
+**Not in config.** It is the `hero` block at the top of `content/_index.md`.
+
+The old Academic site had a short image strip (~260 px). The Hugo Blox hero is
+taller because **two independent stacks of vertical space add up**:
+
+1. **The section band.** Every landing block's `<section>` gets top and bottom
+   padding of `--hb-spacing-section`, set globally by `style.spacing` in
+   `params.yaml`:
+
+   | `hugoblox.style.spacing` | band padding, top & bottom |
+   |---|---|
+   | `compact` | 2.5rem |
+   | `comfortable` | 4rem |
+   | `spacious` *(current)* | 6rem |
+
+   Changing it shifts **every** section, not just the hero.
+
+2. **The hero's own inner padding**, from `design.size` on the block:
+
+   | `design.size` | inner padding, mobile → desktop |
+   |---|---|
+   | `no_padding: true` | 0 (see note) |
+   | `compact` *(current)* | 4rem → 6rem |
+   | `default` | 6rem → 10rem |
+   | `tall` | 8rem → 14rem |
+   | `viewport` | fills the screen |
+
+   > Note: set `design.no_padding: true` to zero the inner padding.
+   > `design.size: none` looks like it should do the same but is a no-op in the
+   > current `blox` module — it falls through to `default` (the tallest preset).
+
+So today's banner ≈ 6 + 6 rem (band) + ~6 + ~6 rem (size) + the text ≈ 590 px.
+
+#### Making it a short strip without shrinking every other section
+
+Override the band padding **on the hero block alone**. `design.spacing.padding`
+is emitted as an inline `padding:` on the `<section>`, which beats the global
+`--hb-spacing-section` rule:
+
+```yaml
+- block: hero
+  id: hero
+  content:
+    title: The Trypanosomatics Laboratory
+    text: Working on data integration to discover new drugs and diagnostics for human pathogens.
+  design:
+    no_padding: true                            # remove the hero's inner padding
+    spacing:
+      padding: ["2.5rem", "0", "2.5rem", "0"]   # top right bottom left — the band height above/below the text
+    background:
+      image:
+        filename: bubbles-wide-tryp-binary.jpg
+        size: cover
+        position: center
+      text_color_light: true
+```
+
+**The two `2.5rem` values are the height knob.** Drop to `1.5rem` for a tight
+strip, raise to `4rem` for more presence. Tune them live under `pnpm dev` — the
+hero renders client-side (Preact), so it does not appear in `curl`'d HTML.
+
+A two-value list also works: `padding: ["2.5rem", "0"]` → `2.5rem` vertical,
+`0` horizontal.
+
+#### Cropping and treating the image
+
+Same `design.background.image` map:
+
+| Key | Effect |
+|---|---|
+| `size` | `cover` (fill + crop, default) · `contain` (fit, letterbox) · a length like `1600px` |
+| `position` | which part stays in frame when `cover` crops — `center` (default), `top`, `50% 30%`, … **Adjust this, not the height,** when a short band hides the interesting part of the image |
+| `parallax` | `true` by default — adds `background-attachment: fixed` plus a zoom transform. Set `false` for plain, predictable scaling, lighter on mobile |
+| `filters` | `{brightness: 0.6, blur: "2px", contrast: 1.1, saturate: 1.2, grayscale: 0.3}` — darken / soften for text legibility instead of leaning only on `text_color_light` |
+
+#### Last-resort knobs
+
+On any block's `design`: `css_style: "min-height: 18rem;"` (raw inline CSS on the
+`<section>`) and `css_class: "…"` (extra classes). Prefer `spacing.padding` above
+— these bypass the module's own layout logic.
+
 ### Contact details
 
 Also **not in config** — the `contact-info` block in `content/_index.md` carries

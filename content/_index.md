@@ -15,9 +15,17 @@ sections:
       text: Working on data integration to discover new drugs and diagnostics for
         human pathogens.
     design:
-      # compact | default | tall | viewport | none.  The banner is a wide, short
-      # image, so `compact` keeps the hero from towering over it.
-      size: compact
+      # The old Academic site had a short image strip. Two padding stacks make
+      # the Hugo Blox hero tall: the global section band (--hb-spacing-section,
+      # 6rem from style.spacing: spacious) and the hero's own `size` preset.
+      # Kill the inner padding here and set the band height on this block alone
+      # via spacing.padding (inline `padding:`, beats the global rule). The two
+      # rem values are the knob — tune them under `pnpm dev`. See CONFIGURATION.md
+      # → "The hero banner — height and background image".
+      # (`size: none` looks equivalent but is a no-op in the current blox module.)
+      no_padding: true
+      spacing:
+        padding: ["2.5rem", "0", "2.5rem", "0"]  # top right bottom left
       background:
         # The banner behind the hero text. Resolved from assets/media/.
         image:
