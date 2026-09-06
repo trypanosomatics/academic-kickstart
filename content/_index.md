@@ -32,6 +32,12 @@ sections:
           filename: bubbles-wide-tryp-binary.jpg
           size: cover
           position: center
+          # Darken the banner so the light heading reads cleanly, matching the
+          # old Academic site. Emitted as `filter: brightness(...)` on the bg
+          # layer. 1 = untouched; lower = darker. Also takes blur / contrast /
+          # saturate / grayscale.
+          filters:
+            brightness: 0.7
         # Sibling of `image`, NOT nested inside it — parse_block_v3 reads
         # $bg.text_color_light. It puts the `dark` class on the section so the
         # heading and body text render light over this dark banner in both

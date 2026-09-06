@@ -141,6 +141,8 @@ is emitted as an inline `padding:` on the `<section>`, which beats the global
         filename: bubbles-wide-tryp-binary.jpg
         size: cover
         position: center
+        filters:
+          brightness: 0.7      # < 1 darkens the banner so light text reads
       text_color_light: true
 ```
 
