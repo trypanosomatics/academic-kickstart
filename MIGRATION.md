@@ -323,6 +323,7 @@ Sources: [Netlify docs — repo permissions and linking](https://docs.netlify.co
 | 2026-09-04 | Phase 2 | 🚧 substantially done in one sprint (32 commits). See breakdown below. |
 | 2026-09-04 | Phase 4 | 🚧 palette + dark mode done; fonts and overall styling not. |
 | 2026-09-06 | — | Work resumed on `migrate/hugoblox-kit`. Phase 1 branch left unmerged, to be deleted (fully contained in this branch, no unique commits). This log reconciled against git history. |
+| 2026-09-07 | Phase 4 | 🚧 hero banner: shortened + darkened; documented in `CONFIGURATION.md`. Toolchain brought up on a second machine (Go 1.27, pnpm pinned to 10.14). `pnpm build` clean: 466 pages / 0 warnings / 256 sitemap URLs. See §9.3. |
 
 ### 9.1 State as of 2026-09-06 — branch `migrate/hugoblox-kit` (HEAD `12bd4eb`)
 
@@ -391,10 +392,13 @@ superseding §8.11's "MapLibre active".
   profiles) — decide keep vs. restore (§5.5.4).
 - ⬜ Pin exact module versions — `hugo mod get ./...` drifted to
   `kit v4.8.0+incompatible` once (§5.5.6).
-- ⬜ `README.md` still documents the 0.69.2 workflow in places — final rewrite
-  belongs to Phase 3.
-- ⬜ `team-showcase` explicit `sort_by` + distinct per-group member weights
-  (Phase 1 finding: adding `title` changed an arbitrary tie-break).
+- ✅ `README.md` rewritten for the Hugo Blox stack (setup, build, layout,
+  `archive/`). Netlify badge + `repository.url` still to update at repo rename
+  (§8.7 step 6).
+- 🚧 `team-showcase` — `sort_by: weight` / `sort_ascending: true` now set on the
+  block (`content/_index.md`), but members still need distinct per-group weights;
+  today they mostly share one value so order inside a group is still a tie-break
+  (Phase 1 finding).
 
 **Phase 3 (cutover) — not started**
 
@@ -404,11 +408,61 @@ and relink Netlify (§8.7).
 
 ### 9.2 Local toolchain note
 
-This branch needs **Go** (for Hugo module resolution), Node ≥20, and pnpm. Hugo
-0.165 does **not** require a specific Go version — `go.mod` declares `go 1.19`
-and any modern Go works. `netlify.toml`'s `GO_VERSION = "1.21.5"` is only the
-build-image pin; Go is used here solely to fetch/resolve modules, not to compile
-anything that affects output, so the local Go version is not build-sensitive.
+This branch needs **Go** (for Hugo module resolution), Node ≥20, and pnpm.
+
+- **Go** — Hugo 0.165 does **not** require a specific version. `go.mod` declares
+  `go 1.19` and any modern Go works (verified with 1.27). `netlify.toml`'s
+  `GO_VERSION = "1.21.5"` is only the build-image pin; Go is used here solely to
+  fetch/resolve modules, not to compile anything that affects output, so the
+  local Go version is not build-sensitive. Put `/usr/local/go/bin` on `PATH`.
+- **pnpm — use the pinned 10.14.0, not a newer major.** `package.json` has
+  `packageManager: "pnpm@10.14.0"`; enable Corepack (`corepack enable`) and let
+  it honour that pin. A newer global pnpm (a v12 was tried) silently rewrites
+  `packageManager`, prepends a self-pinning block to `pnpm-lock.yaml`, and
+  creates a `pnpm-workspace.yaml` — a lockfile format change that would need its
+  own deliberate commit and a deploy-preview test. If it happens:
+  `git checkout -- package.json pnpm-lock.yaml && rm -f pnpm-workspace.yaml`,
+  then `npx --yes pnpm@10.14.0 install`.
+- **`@parcel/watcher` "Ignored build scripts" warning** on `pnpm install` is
+  benign — a transitive native dep of the Tailwind CLI and Pagefind that ships
+  prebuilt binaries; the skipped `node-gyp` step is a source-compile fallback
+  that linux-x64 does not need. Install exits 0. Silence it if desired with
+  `pnpm.ignoredBuiltDependencies: ["@parcel/watcher"]` in `package.json` (its
+  own small commit).
+
+### 9.3 Session 2026-09-07 — hero banner + second-machine toolchain
+
+Branch HEAD after this session: **4 commits ahead of `origin/migrate/hugoblox-kit`**
+(`26a7cfb` CLAUDE.md + log reconcile · `c151769` hero shorten + doc ·
+`663bbdc` fernan profile · `0d30a43` hero darken). **Push before resuming
+elsewhere** — none of it is on the remote yet.
+
+- **`CLAUDE.md`** added at repo root — orientation for future sessions (two
+  stacks, this branch is active, build/content/override pointers).
+- **Hero banner** (`content/_index.md` hero block; full write-up in
+  `CONFIGURATION.md` → "The hero banner — height and background image"):
+  - Was ~590 px tall vs the old site's ~260 px strip. Cause: two padding stacks
+    — the global section band (`--hb-spacing-section`, 6 rem from
+    `style.spacing: spacious`) plus the hero's own `design.size` preset.
+  - Now `no_padding: true` + `design.spacing.padding: ["2.5rem","0","2.5rem","0"]`
+    (emits inline `padding:` on the `<section>`, overriding the global rule).
+    `design.size: none` is a **no-op** in blox `v0.0.0-20260527025321` — its
+    empty class string is falsy in the Preact component and falls through to
+    `default`. Use `no_padding`.
+  - Darkened with `design.background.image.filters.brightness` (→
+    `filter: brightness(...)` on `.home-section-bg`). Currently `0.8`; the value
+    is a live tuning knob. Caveat: any `filter` on that layer cancels the
+    `background-attachment: fixed` parallax — use a `background.gradient` scrim
+    instead if parallax must stay.
+- **Build verified on the second machine**: `pnpm build` → 466 pages, 0
+  warnings / 0 errors, Pagefind 52 pages; `sitemap.xml` 256 URLs (baseline
+  parity); 0 `jsdelivr` / `unpkg` references.
+- **Not done / unchanged**: everything in §9.1 "Remaining before the Phase 2
+  gate" except the README and `team-showcase sort_by` items, which are updated
+  there. The list-view research-metrics badges are still the first substantive
+  task.
+- **Uncommitted at session end**: `content/_index.md` (hero `brightness` being
+  tuned — `0.8` on disk).
 
 #### 5.3 Hugo Blox needs `tailwindcss` on `security.exec.allow`
 
@@ -450,7 +504,9 @@ the defaults already permit it. They do for the Node *permission* sandbox
    external co-authors render as plain text. Their taxonomy pages still exist
    and are still in the sitemap; nothing links to them. Arguably an improvement
    — needs a decision, not a silent change.
-5. **README** — still describes the pinned 0.69.2 workflow.
+5. ~~**README** — still describes the pinned 0.69.2 workflow.~~ **Done** — the
+   branch `README.md` is the Hugo Blox version. Only the Netlify badge and
+   `repository.url` remain, at repo rename (§8.7 step 6).
 6. **`hugo mod get ./...` drifts.** It upgraded the netlify integration and
    pulled `HugoBlox/kit v4.8.0+incompatible`. Pin exact versions before merge.
 
