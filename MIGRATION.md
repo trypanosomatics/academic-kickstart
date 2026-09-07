@@ -324,6 +324,7 @@ Sources: [Netlify docs — repo permissions and linking](https://docs.netlify.co
 | 2026-09-04 | Phase 4 | 🚧 palette + dark mode done; fonts and overall styling not. |
 | 2026-09-06 | — | Work resumed on `migrate/hugoblox-kit`. Phase 1 branch left unmerged, to be deleted (fully contained in this branch, no unique commits). This log reconciled against git history. |
 | 2026-09-07 | Phase 4 | 🚧 hero banner: shortened + darkened; documented in `CONFIGURATION.md`. Toolchain brought up on a second machine (Go 1.27, pnpm pinned to 10.14). `pnpm build` clean: 466 pages / 0 warnings / 256 sitemap URLs. See §9.3. |
+| 2026-09-07 | Phase 4 | ✅ reported narrow-viewport hero regression investigated — **not a bug**, the screenshot was a pre-`c151769` build. No code change. Headless-browser verification recipe added as §8.12. See §9.4. |
 
 ### 9.1 State as of 2026-09-06 — branch `migrate/hugoblox-kit` (HEAD `12bd4eb`)
 
@@ -432,10 +433,9 @@ This branch needs **Go** (for Hugo module resolution), Node ≥20, and pnpm.
 
 ### 9.3 Session 2026-09-07 — hero banner + second-machine toolchain
 
-Branch HEAD after this session: **4 commits ahead of `origin/migrate/hugoblox-kit`**
-(`26a7cfb` CLAUDE.md + log reconcile · `c151769` hero shorten + doc ·
-`663bbdc` fernan profile · `0d30a43` hero darken). **Push before resuming
-elsewhere** — none of it is on the remote yet.
+Commits from this session: `26a7cfb` CLAUDE.md + log reconcile · `c151769`
+hero shorten + doc · `663bbdc` fernan profile · `0d30a43` hero darken.
+**All pushed** — `origin/migrate/hugoblox-kit` is level with local `HEAD`.
 
 - **`CLAUDE.md`** added at repo root — orientation for future sessions (two
   stacks, this branch is active, build/content/override pointers).
@@ -450,10 +450,10 @@ elsewhere** — none of it is on the remote yet.
     empty class string is falsy in the Preact component and falls through to
     `default`. Use `no_padding`.
   - Darkened with `design.background.image.filters.brightness` (→
-    `filter: brightness(...)` on `.home-section-bg`). Currently `0.8`; the value
-    is a live tuning knob. Caveat: any `filter` on that layer cancels the
-    `background-attachment: fixed` parallax — use a `background.gradient` scrim
-    instead if parallax must stay.
+    `filter: brightness(...)` on `.home-section-bg`). Committed at `0.7`; the
+    value is a live tuning knob. Caveat: any `filter` on that layer cancels the
+    `background-attachment: fixed` parallax — **measured and confirmed in
+    §9.4** — use a `background.gradient` scrim instead if parallax must stay.
 - **Build verified on the second machine**: `pnpm build` → 466 pages, 0
   warnings / 0 errors, Pagefind 52 pages; `sitemap.xml` 256 URLs (baseline
   parity); 0 `jsdelivr` / `unpkg` references.
@@ -461,8 +461,8 @@ elsewhere** — none of it is on the remote yet.
   gate" except the README and `team-showcase sort_by` items, which are updated
   there. The list-view research-metrics badges are still the first substantive
   task.
-- **Uncommitted at session end**: `content/_index.md` (hero `brightness` being
-  tuned — `0.8` on disk).
+- **Clean at session end** — hero `brightness` settled at `0.7` and committed
+  in `0d30a43`.
 
 #### 5.3 Hugo Blox needs `tailwindcss` on `security.exec.allow`
 
@@ -672,3 +672,160 @@ MapLibre GL with OpenFreeMap, which needs no key at all, and no key appears
 anywhere in this branch. An unused credential is best removed. Keep it only if
 you may switch back to the Google Maps embed (Option B in `content/_index.md`),
 and if you do keep it, add a billing budget alert.
+
+## 8.12 Visual regression checks — driving a real browser from WSL
+
+Phase 4 is styling work, and screenshots passed back and forth are a slow and
+lossy way to verify it. There is no Linux browser in this WSL box and no
+`node_modules` (the toolchain is Hugo + pnpm scripts only, see §9.2), but
+**Windows Chrome is reachable through WSL interop** and can screenshot any
+viewport size headlessly. Two gotchas make it work; both cost an hour to find.
+
+### Recipe
+
+```bash
+CHROME="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+
+# Serve something. Either the dev server:
+export PATH="$HOME/.local/share/fnm/aliases/default/bin:$PATH"   # see below
+hugo server --disableFastRender --port 1314 &
+# …or the production build, which is what actually ships:
+pnpm build && (cd public && python3 -m http.server 8899 &)
+
+# Screenshot. The output path must be a WINDOWS path — Chrome is a Windows
+# process and cannot write to a WSL path it was given in POSIX form.
+OUT=$(wslpath -w "$PWD")
+"$CHROME" --headless=new --hide-scrollbars --window-size=951,480 \
+  --screenshot="$OUT\\shot.png" --virtual-time-budget=6000 \
+  http://localhost:1314/
+```
+
+- **`wslpath -w`** converts the scratch directory to `\\wsl.localhost\...`.
+  Passing a POSIX path writes nothing and reports no error.
+- **Windows→WSL localhost works** (Chrome reaches a server bound in WSL).
+  **WSL→Windows does not** on this box, so `--remote-debugging-port` is
+  unreachable from here — CDP scripting is out; stick to `--screenshot`.
+- Add `--disable-gpu` to force software compositing. Rendering was identical
+  with and without it, so GPU-vs-software is not a variable worth chasing here.
+
+### Windows clamps the window to ~500 px wide
+
+`--window-size=380,700` silently renders at ~500 px and crops the PNG to 380.
+The result *looks* like a horizontal-overflow bug and is not one. To test true
+mobile widths, put the site in a sized iframe and screenshot the host page:
+
+```html
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0}iframe{border:0;display:block;width:375px;height:760px}</style>
+<iframe src="http://localhost:1314/"></iframe>
+```
+
+An iframe has its own viewport, so this also reproduces a **live viewport
+resize without a reload** — shrink `iframe.style.width` from a `setTimeout` and
+screenshot after. That is the only way to exercise resize-invalidation bugs
+here, since CDP is unavailable.
+
+### Measure, don't eyeball
+
+Comparing screenshots by eye at different window widths is how earlier sessions
+got the type scale wrong. Reduce a render to numbers instead:
+
+- **Flat vs textured** — per-band `ImageStat.Stat(...).stddev` over a horizontal
+  strip. A background image scores sd ≈ 25–60; a solid fill scores **0.0**.
+  This is what proved the hero banner was not painting at all rather than
+  painting darkly.
+- **Layout fingerprint** — rows containing light text
+  (`(pixels.min(axis=2) > 200).sum(axis=1) > 3`), grouped into runs. The run
+  boundaries are a scroll- and scale-invariant signature of a layout, precise
+  enough to identify *which commit* a screenshot came from (§9.4).
+- **Scale** — if the text is proportionally smaller than your render at the same
+  pixel width, the source viewport was **wider** and the image was downscaled,
+  or browser zoom was below 100%. Ratio of body-line pitch gives the factor;
+  divide the screenshot width by it to recover the real CSS viewport.
+
+### `node` is not on PATH in a non-login shell
+
+`pnpm build` fails with:
+
+```
+TAILWINDCSS: failed to transform "/css/_entry.css" … binary with name "node" not found in PATH
+```
+
+`~/.bashrc` initialises **fnm**, which non-interactive shells skip. Prefix any
+build command with:
+
+```bash
+export PATH="$HOME/.local/share/fnm/aliases/default/bin:$PATH"
+```
+
+## 9.4 Session 2026-09-07 (second) — the narrow-viewport "regression" was stale HTML
+
+**Report:** at a reduced window width the hero banner image was missing —
+flat dark band where the old v4 site shows the image.
+
+**Verdict: not a bug in this branch. No code change was made.** The screenshot
+was of a page built **before `c151769`** ("hero: document and shrink the landing
+hero banner"). Recorded here so nobody re-investigates it.
+
+### What was tested
+
+The banner rendered **correctly in every case**: widths 320 / 375 / 500 / 610 /
+760 / 820 / 880 / 928 / 951 / 1000 / 1080 / 1400 px, heights 250–900 px, on both
+`hugo server` and a `pnpm build` production build, with GPU and with software
+compositing, and after a live viewport resize with no reload. Method in §8.12.
+
+### How the screenshot was identified
+
+Two measurements settled it:
+
+1. The hero band was `#272935` at **stddev 0.0** — perfectly flat. The
+   `.home-section-bg` layer painted nothing; it was not a too-dark image.
+2. The text was proportionally smaller than a 761 px-wide render, so the real
+   CSS viewport was ~951 px (browser zoom ≈ 80 %). Re-rendering at 951×480 and
+   comparing light-text row runs:
+
+   | | title rows | body line 1 | body line 2 |
+   |---|---|---|---|
+   | Screenshot | 217–319 | 349–361 | 378–386 |
+   | Current `HEAD` | 95–196 | 225–239 | 257–264 |
+   | Hero as of `26a7cfb` (pre-`c151769`) | **217–319** | **348–362** | **380–383** |
+
+The title sits 122 px lower than current `HEAD` renders it — exactly the `6rem`
+section band plus the hero's own `sm:py-20`, which is what `c151769` removed.
+The stale document's baked-in processed-image URL no longer resolved, hence the
+flat band.
+
+**If it recurs on a freshly restarted `pnpm dev` with a hard reload
+(Ctrl+Shift+R), it is a new bug** — the above no longer explains it.
+
+### `design.background.image.parallax` — confirmed inert here
+
+§9.3 asserted that a `filter` on `.home-section-bg` cancels the
+`background-attachment: fixed` parallax. **Now measured, and true.** Blox
+defaults `parallax` to `true`; with `filters.brightness` set, toggling it
+changes nothing — a full-band pixel diff of parallax on vs off gave a max
+per-channel delta of 10/255 at 951 px (build noise) and exactly **0** at
+1400×500.
+
+So `parallax: false` was tried and **reverted**: no measurable effect, and it
+was not the cause of the report. It remains a reasonable hardening if the
+`brightness` filter is ever dropped — `fixed` buys nothing on a ~300 px band and
+is unreliable on iOS Safari (untested here). Two-line change if wanted.
+
+### Open Phase 4 item found on the way
+
+**At ≤375 px the navbar wraps to two rows** — logo + site title on the first,
+the hamburger alone on the second, making the green band ~85 px tall. Functional
+but untidy, and it differs from the v4 site, which centres the logo and keeps
+one row. Reproduce with the iframe harness in §8.12.
+
+### Also this session
+
+The Google Maps embed key was verified live after **Maps Embed API** was added
+to its API restrictions (it had been restricted to Maps *JavaScript* API, a
+different product). Spoofed-`Referer` `curl`:
+`https://trypanosomatics.org/` → **200**, no key error; `http://localhost:1313/`
+→ **403**. Production will render; the map is blank under `pnpm dev` unless
+`http://localhost:*` is added to the key's referrer list. Leaving it off is the
+tighter setting. This supersedes §8.11's "delete the key" recommendation — the
+key is in use again, with a billing alert in place.
