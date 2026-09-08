@@ -131,6 +131,38 @@ that is fixed at source too, but the helper no longer depends on it.
   clean. Set `hugoblox.research_metrics.enable: false` in `params.yaml` to drop
   them entirely.
 
+### Badge appearance is per context, and configurable
+
+`components/research-metrics.html` takes a **preset name** — `single`,
+`citation` or `card` — not a hardcoded style. Each preset says how both vendors
+draw their badge there, and `hugoblox.research_metrics.styles.<preset>` in
+`params.yaml` overrides any key of it, so re-styling a context is a config edit.
+
+| Context | Preset | Dimensions | Altmetric | Height |
+|---|---|---|---|---|
+| A publication's own page | `single` | `medium_circle` | `medium-donut` | 64px (`lg`) |
+| Citation rows — `/publications/` and the landing list block | `citation` | `small_rectangle` | `4` (bar) | 20px (`sm`) |
+| Featured Publications cards | `card` | `small_circle` | `donut` | 40px (`md`) |
+
+Accepted values, from the vendors' own docs (checked 2026-09-08):
+
+- **Dimensions** `data-style`: `small_circle`, `medium_circle`, `large_circle`,
+  `small_rectangle`, `large_rectangle`. `data-legend`: `never`, `always`,
+  `hover-top`, `hover-right`, `hover-bottom`, `hover-left`.
+- **Altmetric** `data-badge-type`: `donut`, `medium-donut`, `large-donut`,
+  `bar`, `medium-bar`, `large-bar`, `1`, `4`. `data-badge-popover`: `left`,
+  `right`, `top`, `bottom`.
+
+`size` is ours, not a vendor value: the common height both badges are forced to
+so two vendors with different intrinsic heights share a baseline. Adding a
+fourth size means adding a `.hb-metrics--<name>` rule to the head-end hook.
+
+> **Dimensions `medium_circle` paints an opaque white disc.** At 64px on the
+> dark theme that is a bright spot next to Altmetric's transparent donut — it is
+> the vendor's own artwork, not something CSS here can recolour. `small_circle`
+> (used on the cards) draws a ring instead and sits far more quietly. Worth
+> knowing before picking sizes for a dark background.
+
 ### How the vendor scripts actually behave — measured 2026-09-08
 
 Three things were tested directly, with minimal pages driven through headless

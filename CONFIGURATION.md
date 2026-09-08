@@ -170,6 +170,28 @@ On any block's `design`: `css_style: "min-height: 18rem;"` (raw inline CSS on th
 `<section>`) and `css_class: "…"` (extra classes). Prefer `spacing.padding` above
 — these bypass the module's own layout logic.
 
+### Research metric badges
+
+Not an old v4 key — v4 hardcoded the badges in four template files. Now in
+`params.yaml` under `hugoblox.research_metrics`:
+
+```yaml
+research_metrics:
+  enable: true          # false drops both vendors' scripts site-wide
+  styles:
+    single:   {dimensions: medium_circle,   altmetric: medium-donut, size: lg}
+    citation: {dimensions: small_rectangle, altmetric: "4",          size: sm}
+    card:     {dimensions: small_circle,    altmetric: donut,        size: md}
+```
+
+`single` is a publication's own page, `citation` the publication lists, `card`
+the Featured Publications cards. Accepted vendor values, the `size` scale, and
+the dark-theme caveat about `medium_circle` are in `OVERRIDES.md`.
+
+*Where* the badges appear is a separate question, decided by
+`layouts/_partials/functions/metrics_scope.html` — not config, because it has to
+stay in step with the pages that load the vendor scripts.
+
 ### Contact details
 
 Also **not in config** — the `contact-info` block in `content/_index.md` carries
