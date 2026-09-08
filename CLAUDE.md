@@ -42,10 +42,12 @@ polluted history. Do not build on them; they are deleted at cutover.
 - `pnpm build` → production build + Pagefind index
 - **Search** needs built HTML, so it 404s under plain `pnpm dev` — expected, not
   a bug. Use `pnpm dev:search` to exercise it locally.
-- On WSL, a non-login shell has no `node` (fnm is set up in `~/.bashrc`, which
-  such shells skip) and `pnpm build` dies with `binary with name "node" not
-  found in PATH`. Prefix with
-  `export PATH="$HOME/.local/share/fnm/aliases/default/bin:$PATH"`.
+- **`binary with name "node" not found in PATH`** kills any Hugo build. On WSL,
+  `fnm env` fails when systemd-logind has not created `/run/user/$UID`, leaving
+  node off PATH even in interactive shells. Fix once with
+  `sudo loginctl enable-linger "$USER"`; unblock a single shell with
+  `export PATH="$HOME/.local/share/fnm/aliases/default/bin:$PATH"`. Full
+  diagnosis in `MIGRATION.md` §8.12.
 - **Verify styling by screenshot, not by eye.** Windows Chrome drives headlessly
   from WSL at any viewport size — recipe, the ~500 px window-width clamp and its
   iframe workaround, and how to reduce a render to numbers: `MIGRATION.md` §8.12.

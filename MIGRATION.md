@@ -743,16 +743,47 @@ got the type scale wrong. Reduce a render to numbers instead:
   or browser zoom was below 100%. Ratio of body-line pitch gives the factor;
   divide the screenshot width by it to recover the real CSS viewport.
 
-### `node` is not on PATH in a non-login shell
+### `node` is not on PATH — `fnm env` fails when `/run/user/$UID` is missing
 
-`pnpm build` fails with:
+Any Hugo build (`pnpm build`, `pnpm dev`, plain `hugo`) dies with:
 
 ```
 TAILWINDCSS: failed to transform "/css/_entry.css" … binary with name "node" not found in PATH
 ```
 
-`~/.bashrc` initialises **fnm**, which non-interactive shells skip. Prefix any
-build command with:
+**Root cause (diagnosed 2026-09-08).** Node is managed by **fnm**, which stores
+a per-shell symlink under `XDG_RUNTIME_DIR`. That variable is set to
+`/run/user/1000`, but the directory is created by systemd-logind at login — and
+WSL usually spawns the shell *outside* a PAM login session, so it is never
+created. `fnm env` then fails:
+
+```
+error: Can't create the symlink for multishells at "/run/user/1000/fnm_multishells/…":
+No such file or directory (os error 2)
+```
+
+`~/.bashrc` runs `eval "$(fnm env)"`, so a failed `fnm env` evaluates to nothing
+and **node is silently absent from PATH**. Confirm with
+`loginctl show-user "$USER" -p Linger` — `User ID 1000 is not logged in or
+lingering` is the tell, and `ls /run/user/` will be empty.
+
+This hits **interactive shells too**, not just non-login ones. An earlier note
+here blamed non-interactive shells skipping `~/.bashrc`; that was wrong.
+
+**Durable fix — run once, survives WSL restarts:**
+
+```bash
+sudo loginctl enable-linger "$USER"
+```
+
+That starts `user@1000.service` at boot, which creates `/run/user/1000`.
+
+**Fallback, already applied to `~/.bashrc`** (untracked by yadm, so it does not
+propagate to other machines — reapply it there): the fnm block now points
+`XDG_RUNTIME_DIR` at `~/.cache/xdg-runtime` when `/run/user/$UID` is absent,
+before calling `fnm env`.
+
+**One-off unblock in any shell**, no root and no config change:
 
 ```bash
 export PATH="$HOME/.local/share/fnm/aliases/default/bin:$PATH"
