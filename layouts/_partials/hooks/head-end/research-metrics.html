@@ -45,15 +45,20 @@
     .hb-metrics > span,
     .hb-metrics a{display:inline-flex;align-items:center;line-height:0;
                   vertical-align:middle;text-decoration:none}
-    /* One common height, whichever element type the vendor uses. */
+    /* One common height, whichever element type the vendor uses. The three
+       sizes are the `size` key of a preset in components/research-metrics.html:
+       sm for citation rows, md for cards, lg for a publication's own page. */
     .hb-metrics img,
     .hb-metrics svg,
     .hb-metrics iframe{display:block;height:20px;width:auto;max-width:none;border:0;
                        vertical-align:middle}
-    /* Donut variant on single pages is larger and sits on its own row. */
-    .hb-metrics--donut{column-gap:2rem}
-    .hb-metrics--donut img,
-    .hb-metrics--donut svg,
-    .hb-metrics--donut iframe{height:64px}
+    .hb-metrics--md{column-gap:1.5rem}
+    .hb-metrics--md img,
+    .hb-metrics--md svg,
+    .hb-metrics--md iframe{height:40px}
+    .hb-metrics--lg{column-gap:2rem}
+    .hb-metrics--lg img,
+    .hb-metrics--lg svg,
+    .hb-metrics--lg iframe{height:64px}
   </style>
 {{ end }}

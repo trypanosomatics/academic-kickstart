@@ -1,15 +1,55 @@
 {{/* Altmetric + Dimensions badges for a DOI.
 
-     Params: .page (required), .style — "donut" (single pages) or "compact"
-     (list items).
+     Params:
+       .page   (required) the item the badges are about
+       .style  a preset name — "single", "citation" or "card"
 
-     Both vendors render their badge by finding these elements in the DOM and
-     calling home, so the placeholder markup here is all that is needed; the
-     scripts are loaded once per page by
-     layouts/_partials/hooks/head-end/research-metrics.html. */}}
+     A preset says how each vendor draws its badge in that context. The table
+     below is the default; anything under
+     `hugoblox.research_metrics.styles.<preset>` in `params.yaml` overrides it
+     key by key, so re-styling the featured cards is a config edit rather than a
+     template change.
+
+     Vendor value sets, from their own docs (checked 2026-09-08):
+
+       dimensions      small_circle | medium_circle | large_circle |
+                       small_rectangle | large_rectangle
+       altmetric       donut | medium-donut | large-donut |
+                       bar | medium-bar | large-bar | 1 | 4
+       legend          never | always | hover-top | hover-right |
+                       hover-bottom | hover-left        (Dimensions)
+       popover         left | right | top | bottom      (Altmetric)
+
+     `size` is not a vendor value: it is the common height both badges are
+     forced to (sm 20px / md 40px / lg 64px), which is what keeps two vendors
+     with different intrinsic heights on one baseline. The rule lives in
+     hooks/head-end/research-metrics.html.
+
+     Both vendors render by finding these elements in the DOM and calling home,
+     so this placeholder markup is all that is needed — but the scripts must be
+     on the same page, which is what `functions/metrics_scope` decides. */}}
+
+{{ $presets := dict
+     "single"   (dict "dimensions" "medium_circle"   "altmetric" "medium-donut"
+                      "size" "lg" "legend" "hover-right" "popover" "right"
+                      "heading" true "altmetric_first" true)
+     "citation" (dict "dimensions" "small_rectangle" "altmetric" "4"
+                      "size" "sm" "legend" "hover-right" "popover" "right")
+     "card"     (dict "dimensions" "small_circle"    "altmetric" "donut"
+                      "size" "md" "legend" "hover-right" "popover" "right")
+}}
+
+{{ $name := .style | default "single" }}
+{{ $cfg := index $presets $name | default (index $presets "single") }}
+
+{{/* Per-site overrides, key by key. */}}
+{{ with site.Params.hugoblox.research_metrics }}
+  {{ with .styles }}
+    {{ with index . $name }}{{ $cfg = merge $cfg . }}{{ end }}
+  {{ end }}
+{{ end }}
 
 {{ $doi := partial "functions/get_doi" .page }}
-{{ $style := .style | default "donut" }}
 
 {{/* `page` is the page being rendered, not the item: a card for publication X
      shown on an author profile is out of scope, the same card on the landing
@@ -19,24 +59,19 @@
 {{ $in_scope := partial "functions/metrics_scope" page }}
 
 {{ if and $doi $in_scope (site.Params.hugoblox.research_metrics.enable | default true) }}
-  {{ if eq $style "compact" }}
-    <span class="hb-metrics">
-      <span class="__dimensions_badge_embed__" data-doi="{{ $doi }}"
-            data-hide-zero-citations="true" data-legend="hover-right"
-            data-style="small_rectangle"></span>
-      <span class="altmetric-embed" data-doi="{{ $doi }}"
-            data-badge-type="4" data-badge-popover="right"
-            data-hide-no-mentions="true"></span>
-    </span>
-  {{ else }}
+  {{ $dimensions := printf `<span class="__dimensions_badge_embed__" data-doi=%q data-style=%q data-legend=%q data-hide-zero-citations="true"></span>`
+       $doi (printf "%v" $cfg.dimensions) (printf "%v" $cfg.legend) | safeHTML }}
+  {{ $altmetric := printf `<span class="altmetric-embed" data-doi=%q data-badge-type=%q data-badge-popover=%q data-hide-no-mentions="true"></span>`
+       $doi (printf "%v" $cfg.altmetric) (printf "%v" $cfg.popover) | safeHTML }}
+
+  {{ with $cfg.heading }}
     <div class="font-bold text-2xl">{{ i18n "research_metrics" | default "Metrics" }}</div>
-    <div class="hb-metrics hb-metrics--donut">
-      <span class="altmetric-embed" data-doi="{{ $doi }}"
-            data-badge-type="donut" data-badge-popover="right"
-            data-hide-no-mentions="true"></span>
-      <span class="__dimensions_badge_embed__" data-doi="{{ $doi }}"
-            data-style="small_circle" data-hide-zero-citations="true"
-            data-legend="hover-right"></span>
-    </div>
   {{ end }}
+  <span class="hb-metrics hb-metrics--{{ $cfg.size }}">
+    {{- if $cfg.altmetric_first -}}
+      {{ $altmetric }}{{ $dimensions }}
+    {{- else -}}
+      {{ $dimensions }}{{ $altmetric }}
+    {{- end -}}
+  </span>
 {{ end }}
