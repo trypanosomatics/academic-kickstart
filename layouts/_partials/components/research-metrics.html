@@ -11,7 +11,14 @@
 {{ $doi := partial "functions/get_doi" .page }}
 {{ $style := .style | default "donut" }}
 
-{{ if and $doi (site.Params.hugoblox.research_metrics.enable | default true) }}
+{{/* `page` is the page being rendered, not the item: a card for publication X
+     shown on an author profile is out of scope, the same card on the landing
+     page is in it. Every view therefore inherits the scope rule for free —
+     including `views/citation.html` when reached through the `cite` shortcode
+     from, say, a blog post. */}}
+{{ $in_scope := partial "functions/metrics_scope" page }}
+
+{{ if and $doi $in_scope (site.Params.hugoblox.research_metrics.enable | default true) }}
   {{ if eq $style "compact" }}
     <span class="hb-metrics">
       <span class="__dimensions_badge_embed__" data-doi="{{ $doi }}"

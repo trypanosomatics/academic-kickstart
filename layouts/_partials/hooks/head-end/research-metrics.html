@@ -15,12 +15,11 @@
 {{ $enabled := site.Params.hugoblox.research_metrics.enable | default true }}
 {{ $doi := partial "functions/get_doi" . }}
 
-{{/* Only load the vendor scripts on pages that can actually show a badge:
-     a publication (its own DOI), and the landing page and publications
-     section, which render citation views. Everything else — blog, events,
-     projects, and taxonomy pages such as author profiles — uses the `card`
-     view, which carries no badge, so they load nothing. */}}
-{{ $needs := or $doi .IsHome (eq .Section "publications") }}
+{{/* Only load the vendor scripts on pages that can actually show a badge: a
+     publication (its own DOI), plus wherever `functions/metrics_scope` says
+     badges render. The metrics component asks the same function, so the two
+     cannot drift — that is the whole point of it living in one file. */}}
+{{ $needs := or $doi (partial "functions/metrics_scope" .) }}
 
 {{ if $doi }}
   {{/* Standard bibliographic metadata. Useful to Google Scholar independently
