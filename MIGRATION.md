@@ -324,6 +324,7 @@ Sources: [Netlify docs — repo permissions and linking](https://docs.netlify.co
 | 2026-09-04 | Phase 4 | 🚧 palette + dark mode done; fonts and overall styling not. |
 | 2026-09-06 | — | Work resumed on `migrate/hugoblox-kit`. Phase 1 branch left unmerged, to be deleted (fully contained in this branch, no unique commits). This log reconciled against git history. |
 | 2026-09-07 | Phase 4 | 🚧 hero banner: shortened + darkened; documented in `CONFIGURATION.md`. Toolchain brought up on a second machine (Go 1.27, pnpm pinned to 10.14). `pnpm build` clean: 466 pages / 0 warnings / 256 sitemap URLs. See §9.3. |
+| 2026-09-08 | Phase 2 | ✅ badges on the Featured Publications cards — `views/card.html` override; the last local code blocker for the §7 gate. See §9.5. |
 | 2026-09-07 | Phase 4 | ✅ reported narrow-viewport hero regression investigated — **not a bug**, the screenshot was a pre-`c151769` build. No code change. Headless-browser verification recipe added as §8.12. See §9.4. |
 
 ### 9.1 State as of 2026-09-06 — branch `migrate/hugoblox-kit` (HEAD `12bd4eb`)
@@ -384,15 +385,18 @@ superseding §8.11's "MapLibre active".
 
 **Remaining before the Phase 2 gate (§7) — see §5.5**
 
-- ⬜ Research-metrics badges on **list** views (compact / card / featured), not
-  just single + citation. §7 requires both.
+- ✅ Research-metrics badges on list views. Narrower than first written: this
+  site renders publications through only two views — `citation` (the
+  `/publications/` section and the landing block) and `article-grid`, a one-line
+  delegate to `card` (Featured Publications). `citation` was already done; the
+  `card` override closed the gap. `compact` is not used anywhere here.
 - ⬜ Full §7 verification on a Netlify **deploy preview**: contact form →
   Netlify Forms, RSS validity, `sitemap.xml`, Pagefind on the deployed site,
   no `jsdelivr` / `unpkg` references.
 - ⬜ External co-authors are no longer hyperlinked (Kit links only resolvable
   profiles) — decide keep vs. restore (§5.5.4).
-- ⬜ Pin exact module versions — `hugo mod get ./...` drifted to
-  `kit v4.8.0+incompatible` once (§5.5.6).
+- ✅ Exact module versions pinned in `go.mod`, with a comment saying why
+  (§5.5.6). Re-check on any deliberate upgrade.
 - ✅ `README.md` rewritten for the Hugo Blox stack (setup, build, layout,
   `archive/`). Netlify badge + `repository.url` still to update at repo rename
   (§8.7 step 6).
@@ -487,10 +491,13 @@ the defaults already permit it. They do for the Node *permission* sandbox
 
 #### 5.5 Phase 2 remaining
 
-1. **Altmetric + Dimensions badges** — not yet reinstated. The v4 overrides read
-   `$item.Params.doi`; Kit deprecates top-level `doi` in favour of
-   `hugoblox.ids.doi`, so do the front-matter move first, then write the
-   override against `_partials/views/citation.html` and `single.html`.
+1. ~~**Altmetric + Dimensions badges**~~ — **done 2026-09-08.** Single pages
+   (via `page_footer.html`), the citation view, and the `card` view that carries
+   Featured Publications. The last of those was a real regression against the
+   deployed v4 site, where `layouts/partials/li_card.html:68` put both badges in
+   the card's button row. Scope is deliberately limited to the landing page and
+   the publications section, matching v4 — see OVERRIDES.md. Verified by
+   screenshot: both cards show live Citations and Altmetric counts.
 2. ~~The flat `publication` string~~ — **done 2026-09-04.** All 32 migrated to
    `publication: {name, short_name, volume, issue, pages, publisher}`; the build
    is now warning-free (was 79 warnings at the start of Phase 2). Details in §8.9.
@@ -860,3 +867,105 @@ different product). Spoofed-`Referer` `curl`:
 `http://localhost:*` is added to the key's referrer list. Leaving it off is the
 tighter setting. This supersedes §8.11's "delete the key" recommendation — the
 key is in use again, with a billing alert in place.
+
+---
+
+## 9.5 Session 2026-09-08 — badges on the Featured Publications cards
+
+The last **local** code item on the Phase 2 gate list (§5.5.1). What §9.1 called
+"badges on compact / card / featured list views" was really one view: this site
+renders publications through `citation` (the `/publications/` section and the
+landing publications block — already done) and `article-grid`, which is a
+one-line delegate to `views/card.html` (Featured Publications). `compact` is
+used nowhere here.
+
+**It was a regression, not a new feature.** The deployed v4 site puts both
+badges in the card's button row — `layouts/partials/li_card.html:68-76` on
+`master`, with `content/home/featured.md` setting `view = 3` (card).
+
+### The scope trap
+
+`card.html` is also how **author, tag, category and publication_type pages**
+list publications. A first cut that simply added the badges to the view put
+badge markup on **207 pages** — and the head-end hook loads the vendor scripts
+only on the landing page, the publications section, and pages with their own
+DOI, so on ~200 of those the markup was dead: placeholder spans no script would
+ever come and animate.
+
+No rule based on the *view* can separate those pages from the landing page —
+they use the same view. The rule is therefore about the *page being rendered*,
+and after the audit below it lives in one file,
+`_partials/functions/metrics_scope.html`, which the metrics component, the card
+override and the head-end hook all ask. Scope: the landing page and the
+publications section.
+
+### Completeness audit — every view, not just the one reported
+
+`blox` ships five item views. Only `citation` and `card` can ever show a
+publication here (`article-grid` is a one-line delegate to `card`;
+`date-title-summary` and `slides-gallery` are used nowhere in this site), and
+both now carry badges. Views are dispatched from four places —
+`blox/content-collection/block.html`, `layouts/list.html`,
+`layouts/authors/term.html`, `layouts/_shortcodes/cite.html` — which is the list
+to re-check on a module upgrade. Full table in `OVERRIDES.md`.
+
+The audit found one latent hole beyond the reported one: the `cite` shortcode
+defaults to the `citation` view, so citing a publication from a blog post would
+have emitted badge markup on a page with no vendor scripts. Nothing uses `cite`
+today; centralising the scope rule closed it anyway.
+
+That "no vendor scripts" premise was then tested rather than assumed, since the
+whole scope design rests on it: a page carrying badge markup with no script tag
+renders **nothing** — both vendors, no error, no placeholder. Conversely one
+script tag in `<head>` serves every badge on the page, which is the vendors' own
+advice and something v4 got wrong (its home page fetches `badge.js` seven
+times). Measurements, plus the dynamic-injection caveat that falls out of them,
+are in `OVERRIDES.md` under "How the vendor scripts actually behave".
+
+Both directions are now clean, and both are worth re-running after any change
+here — badge markup with no script, and scripts with no badge markup:
+```bash
+for f in $(grep -rl 'altmetric-embed' public --include=*.html); do
+  grep -q 'd1bxh8uas1mnw7' "$f" || echo "BADGE, NO SCRIPT: $f"; done
+for f in $(grep -rl 'd1bxh8uas1mnw7' public --include=*.html); do
+  grep -q 'altmetric-embed' "$f" || echo "SCRIPT, NO BADGE: $f"; done
+```
+
+### A parity check that was measured wrong
+
+The first version of this section justified the scope with "the live v4 site
+shows 0 badges on author and tag pages". Every page checked returned 0 —
+**including the home page, which visibly has them.** The cause:
+`https://trypanosomatics.org/` 301s to `www.`, and `curl` without `-L` returns a
+47-byte redirect stub in which every count is 0. Same class of error as §9.4:
+the number was real, the thing being measured was not.
+
+Re-measured with `curl -sL https://www.trypanosomatics.org/…`, the picture is
+different and more interesting — the parity table is in `OVERRIDES.md`. In
+short: the landing page matches exactly (7 badges, though v4 reached them
+through the `compact` view rather than `citation`); taxonomy pages are 0 on both
+sides, so the scope decision stands on real evidence now; and **our
+`/publications/` list shows 10 badges where v4 showed none**, because v4 used
+the theme's unpatched citation view. That difference is a deliberate
+improvement, recorded so nobody reports it as a bug.
+
+### Verified
+
+- `pnpm build` clean; 256 sitemap URLs (unchanged).
+- Home 7 badge pairs (5 citation + **2 featured**) — the same total the live v4
+  site serves; `/publications/` and its 3 paginated pages 10 each; all 32
+  publication singles 1 each (every publication has a DOI); `/blog/`,
+  `/events/`, `/projects/`, author, tag, category and `publication_types` pages
+  0, scripts included.
+- **Zero** pages carrying badge markup without the vendor scripts (was 207 in
+  the first cut), and zero loading the scripts without markup — see the audit
+  above for both commands.
+- Screenshot at 1100 px (§8.12 recipe): both cards show live counts —
+  Citations 60 / Altmetric 26 and Citations 86 / Altmetric 14 — right-aligned on
+  the "Read more" row.
+
+### Also noted, not acted on
+
+The Kit `card` view renders no `page_links`, so the featured cards have no
+PDF / Cite / DOI buttons; the v4 card did. Not part of the §7 gate — a parity
+question for the visual pass.
