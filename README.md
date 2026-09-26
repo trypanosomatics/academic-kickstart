@@ -86,20 +86,23 @@ git-ignored and never deployed. `pnpm clean:search` removes it.
 ## 4. Common edits
 
 **A person's profile** — `data/authors/<slug>.yaml`, avatar at
-`assets/media/authors/<slug>.<ext>`. Their `content/authors/<slug>/_index.md` is
-only a stub that makes the page exist; the content lives in the data file.
+`assets/media/authors/<slug>.<ext>`. No `content/authors/<slug>/` file is
+needed: Hugo forces `/authors/<slug>/` into existence once *any* content
+anywhere — a post, talk, project or publication, not only a publication —
+cites the slug in an `authors:` list. Until then the person still shows on
+the People grid (that comes from `data/authors/` alone), just without a
+working profile link yet.
 
 **A new lab member** — `pnpm new:author "Full Name"` (or `scripts/new-author.sh
-"Full Name" [slug]`) scaffolds both files at once: the content stub via
-`hugo new` (picks up `archetypes/authors.md`, so it isn't `hugo`'s bare
-`draft: true` default — that draft flag would silently exclude the stub from
-the build) and a `data/authors/<slug>.yaml` pre-filled with the schema, the
-standing UNSAM affiliation, and `TODO`/empty placeholders for everything
-that's genuinely per-person (role, bio, email, `user_groups`). Hugo's own
-`hugo new` can't do the `data/` half — it only scaffolds `content/`; there's
-no upstream Kit equivalent, hence the script. The person won't show on the
+"Full Name" [slug]`) scaffolds `data/authors/<slug>.yaml`, pre-filled with the
+schema, a best-effort given/family split, the standing UNSAM affiliation, and
+`TODO`/empty placeholders for everything genuinely per-person (role, bio,
+email, `user_groups`). Hugo's own `hugo new` can't do this — it only
+scaffolds `content/`, and errors outright on a `data/` path; there's no
+upstream Kit equivalent, hence the script. The person won't show on the
 People grid until `user_groups` is set — deliberately, rather than guessing
-one for you.
+one for you — and won't have a working profile page until cited by some
+content.
 
 **Who appears in the People section, and in which group** — `user_groups` in
 their data file. The groups and their order are set on the `team-showcase`

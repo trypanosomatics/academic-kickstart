@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
-# Scaffold a new lab member: the content/authors/ stub (via `hugo new`, so it
-# picks up archetypes/authors.md) plus a pre-filled data/authors/<slug>.yaml.
-# `hugo new` cannot do the data/ half itself -- see README.md sec 4 and
-# MIGRATION.md sec 9 for why the site needs both files.
+# Scaffold a new lab member's data/authors/<slug>.yaml, pre-filled with the
+# schema and reasonable placeholders. `hugo new` cannot do this itself -- it
+# only targets content/, and errors outright on a data/ path -- see
+# README.md sec 4 and MIGRATION.md sec 9.9.
+#
+# No content/authors/<slug>/ stub is created. It isn't needed: Hugo forces
+# /authors/<slug>/ into existence once ANY content anywhere cites the slug in
+# an `authors:` list -- a post, talk, project or publication, not just a
+# publication. Until then the person still shows on the People grid (that
+# comes from data/authors/ alone), just without a working profile link.
 #
 # Usage:
 #   scripts/new-author.sh "Jane Doe" [slug]
 #
 # slug defaults to the display name, lowercased, accents stripped, spaces
 # and anything non-alphanumeric collapsed to a single hyphen.
+# Example: new-author.sh "Jane Doe" jane
 
 set -euo pipefail
 
@@ -36,20 +43,12 @@ fi
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$repo_root"
 
-content_stub="content/authors/$slug/_index.md"
 data_file="data/authors/$slug.yaml"
 
-if [ -e "$content_stub" ] || [ -e "$data_file" ]; then
-  echo "Already exists, aborting: $content_stub or $data_file" >&2
+if [ -e "$data_file" ]; then
+  echo "Already exists, aborting: $data_file" >&2
   exit 1
 fi
-
-if ! command -v hugo >/dev/null 2>&1; then
-  echo "hugo not found on PATH -- see CLAUDE.md's node/PATH note if this is WSL." >&2
-  exit 1
-fi
-
-hugo new "$content_stub" >/dev/null
 
 # Best-effort given/family split: last word is the family name, everything
 # before it is given. Wrong for compound-family-name cases -- fix by hand.
@@ -95,7 +94,6 @@ YAML
 
 cat <<MSG
 Created:
-  $content_stub
   $data_file
 
 Still needed by hand:
@@ -106,4 +104,8 @@ Still needed by hand:
     grid until this is set)
   - double-check the given/family name split above; it's just "last word is
     the family name"
+
+Note: $slug will show on the People grid immediately, but /authors/$slug/
+won't exist until something -- any post, talk, project or publication --
+cites "$slug" in its authors: list.
 MSG

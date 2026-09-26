@@ -1054,13 +1054,13 @@ problem with either).
 Two loose ends sitting uncommitted as of 2026-09-26, neither blocking a
 build:
 
-1. **`arianna`'s content stub** — `content/authors/arianna/_index.md` is
-   deleted (renamed to `content/authors/xxx/`, which just forces a stray
-   `/authors/xxx/` page instead). Per §9.6/OVERRIDES.md's "Avatar cropping"
-   neighbour discussion: without it, and with zero citations, her
-   `/authors/arianna/` page stops existing on a real (clean) build — verified
-   directly. Restore the stub (rename `xxx` back to `arianna`) unless the
-   plan is to accept losing that link.
+1. ~~`arianna`'s content stub~~ — **resolved by §9.10: decided to drop
+   `content/authors/` stubs entirely.** `content/authors/arianna/_index.md`
+   is deleted (currently sitting renamed to `content/authors/xxx/`, which
+   forces a stray `/authors/xxx/` page — delete that directory outright
+   rather than restoring it). Moot for her specifically anyway: her slug is
+   now cited by `content/projects/cell-segmentation/index.md`'s `authors:`
+   list, which is what forces `/authors/arianna/` to exist today.
 2. **`content/projects/cell-segmentation/index.md`'s `authors:` now lists
    `naiara` and `bruno`**, neither of whom has a `data/authors/*.yaml` file.
    Not a build error — Hugo will still create `/authors/naiara/` and
@@ -1078,24 +1078,46 @@ on a `data/` path (`target path "..." is not a known content format`). The
 HugoBlox authors doc doesn't offer an alternative either; creating an author
 is manual by design upstream.
 
-Two-file requirement is unavoidable (§9 "Authors files" discussion) — so the
-new script does both in one command:
+`scripts/new-author.sh "Full Name" [slug]` (wired to `pnpm new:author "Full
+Name"`) writes `data/authors/<slug>.yaml` — schema, a best-effort
+given/family split, the one affiliation everyone shares (UNSAM), and explicit
+`TODO`/empty placeholders for everything that's actually per-person.
+`user_groups` is left empty on purpose — the person won't render on the
+People grid until it's set, rather than the script guessing a group.
 
-- `archetypes/authors.md` (new) — makes `hugo new content/authors/<slug>/_index.md`
-  produce a correct stub. Without it, Hugo's built-in default archetype sets
-  `draft: true`, which silently **excludes the stub from the build** — tested
-  directly: a stub created via plain `hugo new` before this archetype existed
-  never made it into `public/` at all. A real footgun for anyone reaching for
-  the "obvious" command.
-- `scripts/new-author.sh "Full Name" [slug]` — runs the above for the content
-  stub, then hand-writes `data/authors/<slug>.yaml` with the schema, a
-  best-effort given/family split, the one affiliation everyone shares
-  (UNSAM), and explicit `TODO`/empty placeholders for everything that's
-  actually per-person. `user_groups` is left empty on purpose — the person
-  won't render on the People grid until it's set, rather than the script
-  guessing a group. Wired to `pnpm new:author "Full Name"`.
+No `content/authors/<slug>/` stub is created — see §9.10, decided the same
+session. The script's own output reminds the operator: the person shows on
+the People grid immediately (that's `data/authors/` alone), but has no
+working `/authors/<slug>/` page until *something* — any post, talk, project,
+or publication — cites the slug.
 
-Verified end to end with a throwaway name: clean build, correct stub (no
-`draft:`), person absent from the People grid while `user_groups` is empty,
-own profile page still forced into existence by the stub. Documented in
-`README.md` §4.
+## 9.10 Decision 2026-09-26: drop `content/authors/` stubs — citation-only author pages
+
+Superseded a recommendation made earlier this same session (keep all 20
+stubs as cheap insurance against a page silently vanishing if citations move
+around). Overridden by direct observation: `arianna` has zero publication
+citations but her `/authors/arianna/` page renders fine once she's cited by
+*any* content — a project, in the case that prompted this — not only a
+publication. The original "someone might go uncited for a while" concern is
+real, but the fix is smaller than a stub: the person still shows on the
+People grid regardless (`data/authors/` alone drives that), and gets a
+working profile link the moment they're cited by anything at all — a post
+announcing them, a talk, a project, not necessarily a paper.
+
+Net effect: `content/authors/` no longer needs to exist as a directory.
+`scripts/new-author.sh` and `README.md` §4 updated to match (§9.9). The 20
+existing `content/authors/<slug>/_index.md` stubs and the `content/authors/xxx/`
+leftover are being removed by hand, outside this session.
+
+**Two follow-ups this decision leaves open, not yet acted on:**
+
+- `archetypes/authors.md` (added earlier this session to fix `hugo new`'s
+  `draft: true` default on the now-abandoned stub) is orphaned — nothing
+  calls `hugo new content/authors/...` anymore. Delete it once the stub
+  removal lands, so it doesn't mislead the next person into thinking stubs
+  are still the convention.
+- `content/authors/_index.md` (the section root, not a per-slug stub) sets
+  `title: People` on the `/authors/` list page and documents why it must
+  keep rendering (§ near line 132's neighbour). If it goes too, `/authors/`
+  falls back to Hugo's default taxonomy title ("Authors") — decide whether
+  that's wanted before deleting it along with the per-slug stubs.
