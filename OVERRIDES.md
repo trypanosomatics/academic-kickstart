@@ -24,6 +24,28 @@ copy. Then update the version recorded here.
 
 ---
 
+## Wording tweaks: override the i18n string, not the template
+
+A block's copy (button labels, headings like "Find me on") usually comes from
+`i18n "some_key" | default "English fallback"`, not a literal in the template.
+`config/_default/module.yaml` mounts `source: i18n, target: i18n`, so a same-`id`
+entry in the site's own `i18n/en.yaml` overrides just that key — merged
+key-by-key on top of the module's `i18n/en.yaml`, everything else untouched. No
+`layouts/` copy, no row in the table above.
+
+Check the block's `.html` in the module cache for the `i18n "..."` key before
+reaching for a full template override — copying a block just to change a
+string means re-diffing that whole file on every future module upgrade for no
+reason.
+
+Current site overrides, in `i18n/en.yaml`:
+
+| Key | Module default | This site |
+|---|---|---|
+| `block_contact_follow_me` | "Find me on" | "Find us on" — `contact-info` doesn't branch this string on `identity.type: organization`, so it says "me" regardless of site type. |
+
+---
+
 ## Research metrics (Altmetric + Dimensions)
 
 The Academic v4 site carried these badges through four local template edits

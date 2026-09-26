@@ -1,0 +1,7 @@
+# Site-level i18n overrides. Mounted on top of the blox module's own i18n/
+# (config/_default/module.yaml: source: i18n, target: i18n) -- only the keys
+# listed here are overridden; everything else still comes from the module.
+# See OVERRIDES.md for why this exists instead of copying contact-info/block.html.
+
+- id: block_contact_follow_me
+  translation: Find us on
