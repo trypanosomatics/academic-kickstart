@@ -326,6 +326,8 @@ Sources: [Netlify docs — repo permissions and linking](https://docs.netlify.co
 | 2026-09-07 | Phase 4 | 🚧 hero banner: shortened + darkened; documented in `CONFIGURATION.md`. Toolchain brought up on a second machine (Go 1.27, pnpm pinned to 10.14). `pnpm build` clean: 466 pages / 0 warnings / 256 sitemap URLs. See §9.3. |
 | 2026-09-08 | Phase 2 | ✅ badges on the Featured Publications cards — `views/card.html` override; the last local code blocker for the §7 gate. See §9.5. |
 | 2026-09-07 | Phase 4 | ✅ reported narrow-viewport hero regression investigated — **not a bug**, the screenshot was a pre-`c151769` build. No code change. Headless-browser verification recipe added as §8.12. See §9.4. |
+| 2026-09-26 | Phase 4 | ✅ team-showcase weight ties broken; §5.5.4 decided (keep); People-grid avatar cropping fixed (`object-cover`); "Find us on" i18n override. See §9.6. |
+| 2026-09-26 | Phase 2 | ⚠️ `content/projects/` found never migrated (still pre-Kit field names) — logged as an open gap, not fixed. See §9.7. |
 
 ### 9.1 State as of 2026-09-06 — branch `migrate/hugoblox-kit` (HEAD `12bd4eb`)
 
@@ -995,6 +997,13 @@ across the full ratio range including the two most extreme portraits.
 Provisional — reachable in one revert if the crop looks wrong on a future
 avatar, per the trade-off note in `OVERRIDES.md`.
 
+**Contact block wording** — "Find me on" → "Find us on". Not in this repo's
+`layouts/` at all; it's the `blox` module's own `i18n/block_contact_follow_me`
+key (module cache, not the git tree — hence a repo-wide grep for the string
+coming up empty). Overridden via a new site `i18n/en.yaml`, which
+`module.yaml` already mounts on top of the module's own; no template copy
+needed. Pattern documented in `OVERRIDES.md` for future wording tweaks.
+
 **Follow-up, not a bug:** the previous entry here was wrong. `arianna`'s
 People card shows a generic silhouette because `assets/media/authors/arianna.webp`
 **is** a stock placeholder graphic — traced the full pipeline
@@ -1039,3 +1048,24 @@ Not part of the §7 gate, but a real Phase 2 gap worth closing before cutover:
 either migrate all 8 to a consistent YAML shape, or explicitly decide
 `content/projects/` stays on the old field names for good (`portfolio` has no
 problem with either).
+
+## 9.8 Open in the working tree, not yet decided
+
+Two loose ends sitting uncommitted as of 2026-09-26, neither blocking a
+build:
+
+1. **`arianna`'s content stub** — `content/authors/arianna/_index.md` is
+   deleted (renamed to `content/authors/xxx/`, which just forces a stray
+   `/authors/xxx/` page instead). Per §9.6/OVERRIDES.md's "Avatar cropping"
+   neighbour discussion: without it, and with zero citations, her
+   `/authors/arianna/` page stops existing on a real (clean) build — verified
+   directly. Restore the stub (rename `xxx` back to `arianna`) unless the
+   plan is to accept losing that link.
+2. **`content/projects/cell-segmentation/index.md`'s `authors:` now lists
+   `naiara` and `bruno`**, neither of whom has a `data/authors/*.yaml` file.
+   Not a build error — Hugo will still create `/authors/naiara/` and
+   `/authors/bruno/` term pages from the citation alone, same as any external
+   co-author on a publication (§5.5.4) — but there's no profile behind them:
+   no photo, role, or bio, and no People-grid card. Fine if they're meant as
+   plain (uncredited-profile) citations; add `data/authors/naiara.yaml` and
+   `data/authors/bruno.yaml` if they're actually joining the lab.
