@@ -52,6 +52,11 @@ polluted history. Do not build on them; they are deleted at cutover.
   from WSL at any viewport size — recipe, the ~500 px window-width clamp and its
   iframe workaround, and how to reduce a render to numbers: `MIGRATION.md` §8.12.
   Before filing a visual regression, check the page is not stale (§9.4).
+- **`rm -rf public resources` before trusting a "this no longer exists"
+  result.** Neither `hugo server`'s live reload nor `hugo --gc` deletes a page
+  Hugo no longer generates — `--gc` only collects the *resource* cache
+  (processed images), not orphaned page output. A removed/renamed page can
+  keep serving from a stale `public/` long after the source is gone. §9.6.
 
 ## The migration — `MIGRATION.md` is the runbook
 

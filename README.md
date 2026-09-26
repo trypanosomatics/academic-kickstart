@@ -103,6 +103,23 @@ section's `id:` must match its anchor in `config/_default/menus.yaml`.
 numbers) and put the DOI under `hugoblox.ids.doi` so the Altmetric and
 Dimensions badges pick it up.
 
+**A new project** — a folder under `content/projects/` with an `index.md`.
+Unlike publications, `content/projects/` was never rewritten to the Kit's
+front-matter shape during the migration — every existing project still uses
+the pre-migration fields verbatim (most still `+++` TOML, one `---` YAML), and
+the `portfolio` block that renders them reads those same fields, so match what
+they already do rather than the Kit's own docs:
+
+- `authors: [...]` — unchanged from the old front matter; list slugs from
+  `data/authors/`, e.g. `authors: ["fernan", "emir"]`.
+- `links:` (optional, list) — buttons on the project card. `type: github` on
+  an entry auto-fills the "Code" label and icon; otherwise set `name`/`icon`
+  explicitly. Omit the field, or leave `url: ""`, if there's no link yet — an
+  empty URL renders no button, not a broken one.
+- **Thumbnail:** the block does **not** read an `image:` front-matter field —
+  drop a file literally named `featured.*`, `cover.*`, or `thumbnail.*` next
+  to `index.md` (same convention as the old site).
+
 ## 5. About `archive/`
 
 `archive/home-widgets/` holds the **old Academic v4 page-builder widgets** as

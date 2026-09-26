@@ -1002,3 +1002,40 @@ People card shows a generic silhouette because `assets/media/authors/arianna.web
 the processed output to confirm: correctly resolved and cropped at every
 step, it's just not a photo of her. Nothing to fix in code; someone needs to
 drop in a real `arianna.<ext>`.
+
+**Gotcha confirmed the hard way, same session:** testing "does removing X
+still work" against a running `hugo server` (or a `hugo --gc` build that
+reused an existing `public/`) gave a false negative here — a page Hugo no
+longer generates can still be sitting in `public/` from before, and neither
+`hugo server`'s live reload nor `--gc` deletes orphaned page output (`--gc`
+only collects the *resource* cache — processed images etc). Confirmed by
+dumping `site.Taxonomies.authors` directly: 115 keys, no `arianna`, yet
+`/authors/arianna/` still served until `rm -rf public resources` before
+rebuilding. Same class of trap as §9.4 ("stale HTML"), now generalised in
+`CLAUDE.md`: wipe `public/` and `resources/` before trusting any
+not-there-anymore result, not just visual checks.
+
+## 9.7 `content/projects/` was never migrated — front matter is still pre-Kit
+
+Found while adding a new project (`cell-segmentation`) and it appeared not to
+render — actually the same stale-`public/` trap above; a clean rebuild showed
+it fine on its own page, `/projects/`, and the homepage portfolio block.
+
+But real, separate finding along the way: **`content/projects/` front matter
+was never rewritten in Phase 2.** Only the folder was `git mv`'d
+(`project/` → `projects/`, §5 step 3); the fields inside were left exactly as
+the old Academic v4 site wrote them. 7 of 8 existing projects are still `+++`
+TOML; one (`diagnostics`) is `---` YAML but with the same old field names
+(`authors`, `image: {caption, focal_point, preview_only}`). The `portfolio`
+block tolerates this fine — it reads `authors` unchanged, ignores `image:`
+front matter entirely (resolves a card thumbnail via
+`Resources.GetMatch "{featured,cover,thumbnail}*"`, a page-bundle file, not a
+front-matter field), and reads an optional `links:` list for card buttons
+(`type: github` auto-labels "Code"). README.md §4 now documents this so new
+projects match what already works instead of guessing at Kit-native fields
+that publications use but projects never adopted.
+
+Not part of the §7 gate, but a real Phase 2 gap worth closing before cutover:
+either migrate all 8 to a consistent YAML shape, or explicitly decide
+`content/projects/` stays on the old field names for good (`portfolio` has no
+problem with either).
