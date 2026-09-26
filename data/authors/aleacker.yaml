@@ -8,4 +8,4 @@ role: Former Lab Member (2005 -- 2012)
 bio: "# Previous positions in the lab\n \n * 2005-2012 PhD Student"
 user_groups:
 - Past Lab Members
-weight: 10
+weight: 10  # tenure 2005-2012 (role)

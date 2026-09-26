@@ -34,5 +34,5 @@ education:
   year: 2023
 user_groups:
 - Past Lab Members
-weight: 10
+weight: 60  # tenure 2015-2023 (role)
 email: lionel.u.l@iib.unsam.edu.ar

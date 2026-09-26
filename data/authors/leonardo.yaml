@@ -12,5 +12,5 @@ bio: "# Previous positions in the lab\n\n * 2007-2013 PhD Student\n * 2014 Postd
   \nInstitut Pasteur Paris, France.\nhttps://research.pasteur.fr/en/member/leonardo-gabriel-panunzi/"
 user_groups:
 - Past Lab Members
-weight: 10
+weight: 20  # tenure 2007-2014 (role)
 email: leonardopnnz@gmail.com

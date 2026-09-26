@@ -41,5 +41,5 @@ education:
   year: 2018
 user_groups:
 - Past Lab Members
-weight: 10
+weight: 80  # tenure 2016-2023 (role; bio says "2018-2012", likely a typo)
 email: lbracco@iib.unsam.edu.ar
