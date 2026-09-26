@@ -9,7 +9,8 @@
     "dev:search": "hugo --gc && pagefind --site public --output-path static/pagefind && hugo server --disableFastRender",
     "build": "hugo --gc --minify && pnpm run pagefind",
     "pagefind": "pagefind --site public",
-    "clean:search": "rm -rf static/pagefind"
+    "clean:search": "rm -rf static/pagefind",
+    "new:author": "bash scripts/new-author.sh"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.12",

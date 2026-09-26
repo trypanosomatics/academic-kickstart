@@ -89,6 +89,18 @@ git-ignored and never deployed. `pnpm clean:search` removes it.
 `assets/media/authors/<slug>.<ext>`. Their `content/authors/<slug>/_index.md` is
 only a stub that makes the page exist; the content lives in the data file.
 
+**A new lab member** — `pnpm new:author "Full Name"` (or `scripts/new-author.sh
+"Full Name" [slug]`) scaffolds both files at once: the content stub via
+`hugo new` (picks up `archetypes/authors.md`, so it isn't `hugo`'s bare
+`draft: true` default — that draft flag would silently exclude the stub from
+the build) and a `data/authors/<slug>.yaml` pre-filled with the schema, the
+standing UNSAM affiliation, and `TODO`/empty placeholders for everything
+that's genuinely per-person (role, bio, email, `user_groups`). Hugo's own
+`hugo new` can't do the `data/` half — it only scaffolds `content/`; there's
+no upstream Kit equivalent, hence the script. The person won't show on the
+People grid until `user_groups` is set — deliberately, rather than guessing
+one for you.
+
 **Who appears in the People section, and in which group** — `user_groups` in
 their data file. The groups and their order are set on the `team-showcase`
 block in `content/_index.md`.

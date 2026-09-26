@@ -1067,5 +1067,35 @@ build:
    `/authors/bruno/` term pages from the citation alone, same as any external
    co-author on a publication (§5.5.4) — but there's no profile behind them:
    no photo, role, or bio, and no People-grid card. Fine if they're meant as
-   plain (uncredited-profile) citations; add `data/authors/naiara.yaml` and
-   `data/authors/bruno.yaml` if they're actually joining the lab.
+   plain (uncredited-profile) citations; use `scripts/new-author.sh` (below)
+   if they're actually joining the lab.
+
+## 9.9 `scripts/new-author.sh` — the missing `hugo new` for authors
+
+`hugo new data/authors/<slug>.yaml` doesn't exist and can't — confirmed
+directly: Hugo's archetype system only targets `content/`, and errors outright
+on a `data/` path (`target path "..." is not a known content format`). The
+HugoBlox authors doc doesn't offer an alternative either; creating an author
+is manual by design upstream.
+
+Two-file requirement is unavoidable (§9 "Authors files" discussion) — so the
+new script does both in one command:
+
+- `archetypes/authors.md` (new) — makes `hugo new content/authors/<slug>/_index.md`
+  produce a correct stub. Without it, Hugo's built-in default archetype sets
+  `draft: true`, which silently **excludes the stub from the build** — tested
+  directly: a stub created via plain `hugo new` before this archetype existed
+  never made it into `public/` at all. A real footgun for anyone reaching for
+  the "obvious" command.
+- `scripts/new-author.sh "Full Name" [slug]` — runs the above for the content
+  stub, then hand-writes `data/authors/<slug>.yaml` with the schema, a
+  best-effort given/family split, the one affiliation everyone shares
+  (UNSAM), and explicit `TODO`/empty placeholders for everything that's
+  actually per-person. `user_groups` is left empty on purpose — the person
+  won't render on the People grid until it's set, rather than the script
+  guessing a group. Wired to `pnpm new:author "Full Name"`.
+
+Verified end to end with a throwaway name: clean build, correct stub (no
+`draft:`), person absent from the People grid while `user_groups` is empty,
+own profile page still forced into existence by the stub. Documented in
+`README.md` §4.
