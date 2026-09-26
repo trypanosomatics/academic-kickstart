@@ -393,8 +393,8 @@ superseding §8.11's "MapLibre active".
 - ⬜ Full §7 verification on a Netlify **deploy preview**: contact form →
   Netlify Forms, RSS validity, `sitemap.xml`, Pagefind on the deployed site,
   no `jsdelivr` / `unpkg` references.
-- ⬜ External co-authors are no longer hyperlinked (Kit links only resolvable
-  profiles) — decide keep vs. restore (§5.5.4).
+- ✅ External co-authors — **decided 2026-09-26: keep** current behaviour (Kit
+  links only resolvable profiles; no restore work). §5.5.4.
 - ✅ Exact module versions pinned in `go.mod`, with a comment saying why
   (§5.5.6). Re-check on any deliberate upgrade.
 - ✅ `README.md` rewritten for the Hugo Blox stack (setup, build, layout,
@@ -506,11 +506,13 @@ the defaults already permit it. They do for the Node *permission* sandbox
    (Play / Open Sans / PT Mono) and overall styling are not. Kit font packs live
    in the module's `data/fonts/`; a `tryps` pack would be authored the same way
    as the theme pack.
-4. **External co-authors are no longer hyperlinked.** Kit links an author only
-   when it can resolve profile data, so lab members link to their profiles and
-   external co-authors render as plain text. Their taxonomy pages still exist
-   and are still in the sitemap; nothing links to them. Arguably an improvement
-   — needs a decision, not a silent change.
+4. ~~**External co-authors are no longer hyperlinked.**~~ **Decided 2026-09-26:
+   keep.** Kit links an author only when it can resolve profile data, so lab
+   members link to their profiles and external co-authors render as plain
+   text — that stays, no template work to restore the old blanket linking.
+   Their taxonomy pages still exist and are still in the sitemap, orphaned
+   (nothing links to them); harmless, and not the same decision — leave them
+   unless someone asks to `noindex` or drop them from the taxonomy.
 5. ~~**README** — still describes the pinned 0.69.2 workflow.~~ **Done** — the
    branch `README.md` is the Hugo Blox version. Only the Netlify badge and
    `repository.url` remain, at repo rename (§8.7 step 6).
