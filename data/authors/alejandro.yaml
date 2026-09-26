@@ -38,5 +38,5 @@ education:
   year: 2014
 user_groups:
 - Past Lab Members
-weight: 70  # tenure 2016-2023 (role)
+weight: 20  # tenure 2016-2023 (role), most-recent-first order
 email: aricci@iib.unsam.edu.ar

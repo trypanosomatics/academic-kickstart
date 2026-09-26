@@ -8,7 +8,7 @@ role: Former Lab Member (2016 -- 2023)
 # One-line summary shown on the author cards at the foot of a page.
 # `bio` below is the full biography, used on the author's own profile page.
 short_bio: "PhD Fellow and teaching assistant."
-bio: "# Previous positions in the lab\n\n * 2016-2018 Undergraduate Student (Eng. Thesis)\n * 2018-2012\
+bio: "# Previous positions in the lab\n\n * 2016-2018 Undergraduate Student (Eng. Thesis)\n * 2018-2023\
   \ (PhD Student)"
 affiliations:
 - name: Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)
@@ -41,5 +41,5 @@ education:
   year: 2018
 user_groups:
 - Past Lab Members
-weight: 80  # tenure 2016-2023 (role; bio says "2018-2012", likely a typo)
+weight: 10  # tenure 2016-2023 (role), most-recent-first order
 email: lbracco@iib.unsam.edu.ar

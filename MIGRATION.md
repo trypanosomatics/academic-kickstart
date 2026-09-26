@@ -400,9 +400,12 @@ superseding §8.11's "MapLibre active".
 - ✅ `README.md` rewritten for the Hugo Blox stack (setup, build, layout,
   `archive/`). Netlify badge + `repository.url` still to update at repo rename
   (§8.7 step 6).
-- 🚧 `team-showcase` — `sort_by: weight` / `sort_ascending: true` now set on the
-  block (`content/_index.md`), but members still need distinct per-group weights;
-  today they mostly share one value so order inside a group is still a tie-break
+- 🚧 `team-showcase` — `sort_by: weight` / `sort_ascending: true` set on the
+  block (`content/_index.md`). Ties broken by hand for Investigators, one each
+  in Grad Students and Alumni, and all of Past Lab Members (weight orders that
+  group most-recent-tenure-first, from the years in each person's `role` field
+  — see `data/authors/*.yaml` comments). Alumni still has a 5-way tie at
+  weight 10 (arianna, florencia, franco, ssneider, sebastian), untouched
   (Phase 1 finding).
 
 **Phase 3 (cutover) — not started**
