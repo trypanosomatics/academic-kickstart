@@ -1109,15 +1109,12 @@ Net effect: `content/authors/` no longer needs to exist as a directory.
 existing `content/authors/<slug>/_index.md` stubs and the `content/authors/xxx/`
 leftover are being removed by hand, outside this session.
 
-**Two follow-ups this decision leaves open, not yet acted on:**
-
-- `archetypes/authors.md` (added earlier this session to fix `hugo new`'s
-  `draft: true` default on the now-abandoned stub) is orphaned — nothing
-  calls `hugo new content/authors/...` anymore. Delete it once the stub
-  removal lands, so it doesn't mislead the next person into thinking stubs
-  are still the convention.
-- `content/authors/_index.md` (the section root, not a per-slug stub) sets
-  `title: People` on the `/authors/` list page and documents why it must
-  keep rendering (§ near line 132's neighbour). If it goes too, `/authors/`
-  falls back to Hugo's default taxonomy title ("Authors") — decide whether
-  that's wanted before deleting it along with the per-slug stubs.
+- ✅ `archetypes/authors.md` removed — it was never a HugoBlox Kit archetype
+  (the module ships exactly two: `faq.md`, `questions.md`); it was added and
+  now retired within this same session, purely to patch `hugo new`'s
+  `draft: true` default for the stub approach this decision abandoned.
+- **Decided: leave `content/authors/_index.md` (the section root, not a
+  per-slug stub) as is.** It sets `title: People` on the `/authors/` list
+  page and documents why the page must keep rendering (neighbour of the
+  §1/§8.10-area discussion). Only the 20 per-slug stubs and the
+  `content/authors/xxx/` leftover are being removed.
