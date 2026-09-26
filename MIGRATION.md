@@ -974,3 +974,28 @@ improvement, recorded so nobody reports it as a bug.
 The Kit `card` view renders no `page_links`, so the featured cards have no
 PDF / Cite / DOI buttons; the v4 card did. Not part of the §7 gate — a parity
 question for the visual pass.
+
+---
+
+## 9.6 Session 2026-09-26 — team-showcase weight ties, avatar cropping
+
+Weights: broke the remaining ties from the Phase 1 finding for Investigators,
+one each in Grad Students/Alumni, and all of Past Lab Members (ordered
+most-recent-tenure-first, from the years in each person's `role` field — see
+comments in `data/authors/*.yaml`). Alumni still has a 5-way tie at weight 10,
+untouched.
+
+§5.5.4 decided: **keep** (recorded above).
+
+**Avatar cropping fixed for the whole People grid** — `object-contain` →
+`object-cover` override on `team-showcase`, full writeup in `OVERRIDES.md`
+under "Avatar cropping on the People grid". Root cause was source-image aspect
+ratio, not anything migration-specific; fix verified by screenshot (§8.12)
+across the full ratio range including the two most extreme portraits.
+Provisional — reachable in one revert if the crop looks wrong on a future
+avatar, per the trade-off note in `OVERRIDES.md`.
+
+**Found, not fixed:** `arianna`'s People card shows the placeholder silhouette
+instead of `assets/media/authors/arianna.webp` (`$profile.avatar` resolves nil
+for her specifically) — an avatar-resolution issue, unrelated to the crop
+override. Needs its own investigation.

@@ -14,6 +14,7 @@ Version at time of copy: `v0.0.0-20260527025321-61f41d3667f1`
 | File | Upstream source | Local change |
 |---|---|---|
 | `_partials/functions/process_responsive_image.html` | same path | Guarantee a non-nil `fallback`. Upstream only emits breakpoints where the source is at least as wide as the requested size, so an image narrower than all of them returns `fallback` as `""` and every caller doing `.fallback.RelPermalink` errors the build. Triggered here by `assets/media/authors/aleacker.jpg` (72×89 against sizes 160/240/320/480). Upstream bug; the patch is at the end of the file, clearly marked. |
+| `_partials/hbx/blocks/team-showcase/block.html` | `blox/team-showcase/block.html` | Not a bug — a deliberate content-vs-code trade-off. See "Avatar cropping" below. |
 
 ## When upgrading the blox module
 
@@ -229,6 +230,45 @@ author data via `functions/get_authors_data`.
 shows name and role only — what the old site did, since its card used the short
 `bio` front-matter field, which was empty for some people. Currently `aleacker`
 and `mercedes`; add `short_bio:` to their data file to give them a line.
+
+---
+
+## Avatar cropping on the People grid (`team-showcase`)
+
+The stock block puts every avatar in a forced-square box with `object-contain`
+— it fits the whole image inside the square rather than cropping to fill it.
+The module's own README says why: it expects **pre-cropped square images**
+("Use square WebP avatars... ~400×400px... Names center-cropped").
+
+This site's avatars were never held to that rule — 20 lab members over a
+decade, uploaded whatever aspect ratio their photo happened to be. `object-contain`
+made that visible: a square source fills the box edge-to-edge and the card's
+`rounded-2xl` corners read clean; anything else leaves a `bg-gray-100` /
+`dark:bg-gray-800` letterbox bar with a hard rectangular seam inside the
+rounded card. Measured against every avatar's actual dimensions, aspect ratio
+alone predicted the effect exactly — e.g. `ssneider.jpg` 1602×2156 (ratio
+0.743, worst offender) down to `paula.jpg` 1408×1400 (ratio 1.006, barely
+visible).
+
+**Changed both occurrences of `object-contain` → `object-cover`** in this
+block only (line-for-line diff otherwise). `object-cover` center-crops any
+aspect ratio to fill the square, so no more seam regardless of source shape —
+verified by screenshot (§8.12 recipe) across the full range, including the two
+tallest portraits (`raul.jpg` 1200×1599, `ssneider.jpg` 1602×2156): both crop
+to a clean headshot with no awkward framing, since `object-center` was already
+the anchor.
+
+**Trade-off, so it's a documented choice and not a silent one:** this crops
+rather than shows the whole photo. Fine for portraits centered on a face (all
+20 here); would cut off a group photo or an off-center subject. If a future
+avatar looks wrong here, center-crop *that* file to square rather than
+reverting this override — reverting brings back the letterbox seam for
+everyone else.
+
+**Noticed in passing, not fixed:** `arianna`'s card shows the generic
+placeholder silhouette instead of `assets/media/authors/arianna.webp` — an
+avatar-resolution issue upstream of this override (`$profile.avatar` itself is
+nil for her), unrelated to the crop mode. Worth a look separately.
 
 ---
 
