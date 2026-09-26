@@ -995,7 +995,10 @@ across the full ratio range including the two most extreme portraits.
 Provisional — reachable in one revert if the crop looks wrong on a future
 avatar, per the trade-off note in `OVERRIDES.md`.
 
-**Found, not fixed:** `arianna`'s People card shows the placeholder silhouette
-instead of `assets/media/authors/arianna.webp` (`$profile.avatar` resolves nil
-for her specifically) — an avatar-resolution issue, unrelated to the crop
-override. Needs its own investigation.
+**Follow-up, not a bug:** the previous entry here was wrong. `arianna`'s
+People card shows a generic silhouette because `assets/media/authors/arianna.webp`
+**is** a stock placeholder graphic — traced the full pipeline
+(`resources.GetMatch` → `get_author_profile` → `.Fit` → `<img>`) and decoded
+the processed output to confirm: correctly resolved and cropped at every
+step, it's just not a photo of her. Nothing to fix in code; someone needs to
+drop in a real `arianna.<ext>`.

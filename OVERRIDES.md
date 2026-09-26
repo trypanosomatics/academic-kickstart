@@ -265,10 +265,14 @@ avatar looks wrong here, center-crop *that* file to square rather than
 reverting this override — reverting brings back the letterbox seam for
 everyone else.
 
-**Noticed in passing, not fixed:** `arianna`'s card shows the generic
-placeholder silhouette instead of `assets/media/authors/arianna.webp` — an
-avatar-resolution issue upstream of this override (`$profile.avatar` itself is
-nil for her), unrelated to the crop mode. Worth a look separately.
+**Noticed in passing, resolved by inspection:** `arianna`'s card shows a
+generic silhouette. Not a bug — `assets/media/authors/arianna.webp` **is**
+that silhouette. Confirmed by tracing the pipeline (`resources.GetMatch`
+finds it, `get_author_profile` returns it as `.avatar`, `.Fit` processes it,
+the `<img>` renders it) and by decoding the processed output: a real,
+valid, 600×600 stock placeholder graphic, correctly resolved and cropped
+throughout. She just never uploaded a photo. Content fix — a real
+`arianna.<ext>` — not a template one.
 
 ---
 
