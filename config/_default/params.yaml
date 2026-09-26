@@ -177,6 +177,41 @@ hugoblox:
       style: apa # apa | mla | chicago | ieee
 
   # ────────────────────────────────────────────────────────────────────────────
+  # RESEARCH METRICS
+  # Altmetric + Dimensions badges. Where they render is decided by
+  # layouts/_partials/functions/metrics_scope.html (landing page and the
+  # publications section); how they look is decided here, per context.
+  #
+  # Every key is optional and overrides the matching preset in
+  # layouts/_partials/components/research-metrics.html, which documents the
+  # value each vendor accepts. In short:
+  #   dimensions  small_circle | medium_circle | large_circle |
+  #               small_rectangle | large_rectangle
+  #   altmetric   donut | medium-donut | large-donut |
+  #               bar | medium-bar | large-bar | 1 | 4
+  #   size        sm (20px) | md (40px) | lg (64px) — the common height the two
+  #               vendors are forced to so they sit on one baseline
+  # ────────────────────────────────────────────────────────────────────────────
+  research_metrics:
+    enable: true
+    styles:
+      # A publication's own page.
+      single:
+        dimensions: medium_circle
+        altmetric: medium-donut
+        size: lg
+      # Citation rows: /publications/ and the landing page's list block.
+      citation:
+        dimensions: small_rectangle
+        altmetric: "4"
+        size: sm
+      # Featured Publications cards.
+      card:
+        dimensions: small_circle
+        altmetric: donut
+        size: md
+
+  # ────────────────────────────────────────────────────────────────────────────
   # SEARCH
   # Site search
   # ────────────────────────────────────────────────────────────────────────────

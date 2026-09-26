@@ -1,0 +1,18 @@
+{{/* Should research-metric badges render on this page? Takes a page, returns a
+     bool.
+
+     The badges are only useful where the two vendor scripts are loaded, and
+     those are loaded only here — see `hooks/head-end/research-metrics.html`,
+     which asks this same function. Keeping the test in one place is what stops
+     the two drifting apart: badge markup on a page without the scripts is
+     invisible (nothing ever animates the placeholder spans), and scripts on a
+     page without badges are two third-party requests for nothing.
+
+     Scope is the landing page and the publications section. Deliberately NOT
+     author, tag, category or publication_type pages: they list publications
+     through the same `card` view as the landing page's Featured Publications
+     block, so view alone cannot tell them apart, and the v4 site shows no
+     badges there (checked live, following the redirect to www — all four
+     return zero). */}}
+
+{{ return (or .IsHome (eq .Section "publications")) }}

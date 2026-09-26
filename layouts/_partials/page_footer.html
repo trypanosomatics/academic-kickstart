@@ -8,7 +8,7 @@
        DOI, so it is inert on posts, talks and projects. */}}
   {{ if partial "functions/get_doi" . }}
     <div class="grid grid-cols-1 md:grid-cols-[200px_auto] gap-4 my-6">
-      {{ partial "components/research-metrics" (dict "page" . "style" "donut") }}
+      {{ partial "components/research-metrics" (dict "page" . "style" "single") }}
     </div>
   {{ end }}
 
