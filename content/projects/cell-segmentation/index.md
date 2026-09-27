@@ -7,7 +7,12 @@ summary: "Automated cell image analysis for drug discovery"
 
 # People on this project -- same syntax as the old front matter, unchanged.
 # List slugs from data/authors/, e.g. authors: ["fernan", "emir"]
-authors: []
+authors:
+  - naiara
+  - bruno
+  - arianna
+  - emir
+  - fernan
 
 # Tags for filtering
 tags:
