@@ -282,11 +282,20 @@
                 </div>
                 {{ end }}
                 
-                {{ $bio := "" }}
-                {{ with $profile.bio }}{{ $bio = printf "%v" . }}{{ end }}
-                {{ with $bio }}
+                {{/* LOCAL: prefer the one-line `short_bio`, never raw `bio`.
+                     `bio` is the full biography -- headings, lists, several
+                     paragraphs -- meant for the profile page, not a clamped
+                     card excerpt; rendered here it showed raw, unrendered
+                     markdown ("# ...", "* ..."). Deliberately no fallback to
+                     `bio`: an author with no short_bio shows no excerpt at
+                     all, matching page_author_card.html. get_author_profile
+                     does not pass short_bio through, so read $authors (the
+                     raw data map already in scope) directly. */}}
+                {{ $short := "" }}
+                {{ with (index $authors $profile.slug) }}{{ with .short_bio }}{{ $short = . }}{{ end }}{{ end }}
+                {{ with $short }}
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                  {{ . }}
+                  {{ . | markdownify | emojify }}
                 </p>
                 {{ end }}
                 
@@ -477,10 +486,12 @@
                 {{ end }}
               </div>
               {{ end }}
-              {{ $bio := "" }}
-              {{ with $profile.bio }}{{ $bio = printf "%v" . }}{{ end }}
-              {{ with $bio }}
-              <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{{ . }}</p>
+              {{/* LOCAL: prefer short_bio, never raw bio -- see the twin
+                   block above for the full explanation. */}}
+              {{ $short := "" }}
+              {{ with (index $authors $profile.slug) }}{{ with .short_bio }}{{ $short = . }}{{ end }}{{ end }}
+              {{ with $short }}
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{{ . | markdownify | emojify }}</p>
               {{ end }}
 
               {{ $interests_raw := $profile.interests }}

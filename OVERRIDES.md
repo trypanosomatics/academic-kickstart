@@ -296,6 +296,36 @@ valid, 600×600 stock placeholder graphic, correctly resolved and cropped
 throughout. She just never uploaded a photo. Content fix — a real
 `arianna.<ext>` — not a template one.
 
+### Card excerpt: prefer `short_bio`, never raw `bio`
+
+Same block, a second fix. The stock card prints `$profile.bio` raw, clamped
+to 2 lines by CSS (`line-clamp-2`) — no `markdownify`. `bio` in this site's
+data is the full biography (headings, lists, several paragraphs), meant for
+the profile page, not a 2-line card excerpt: rendered here it showed literal
+`# ...` / `* ...` markdown syntax on anyone whose bio opens with a heading —
+most of Past Lab Members.
+
+Fixed the same way `page_author_card.html` (the publication-byline card,
+"Author cards — short bio" above) already handles it: prefer `short_bio`,
+and **deliberately no fallback to `bio`** — an author
+with no `short_bio` shows no excerpt at all, matching that card's behaviour
+and the old Academic v4 site's (its card used the short `bio` TOML field,
+empty for some people). `get_author_profile` doesn't pass `short_bio`
+through, so the fix reads it from `$authors` — the raw `get_authors_data`
+map this block already has in scope — rather than re-fetching it.
+
+`short_bio` **is** markdownified here (`emojify` too), unlike the old raw
+`bio` print — a one-liner shouldn't need it, but it costs nothing and keeps
+the two card types (`page_author_card.html`, `team-showcase`) consistent.
+
+Verified per-slug against the raw data (temporary `warnf` dump, removed
+before committing): every author's short excerpt matches their own
+`short_bio`; `aleacker` and `mercedes` (no `short_bio` set) show no excerpt,
+not a stray value borrowed from someone else's card — a first pass at
+verifying this by scanning forward for the next `line-clamp-2` in the HTML
+gave a false positive for exactly that reason (landed on the *next* card's
+paragraph), corrected by scoping the check to each card's own boundary.
+
 ---
 
 ## Typography — Google Fonts URL
