@@ -6,17 +6,18 @@ name:
   family: Ricci
 role: Former Lab Member (2016 -- 2023)
 # One-line summary shown on the author cards at the foot of a page.
-# `bio` below is the full biography, used on the author's own profile page.
 short_bio: "PhD Fellow. Processing big data to draw biological conclusions."
-bio: "# About me \n\nI specialize in the use of bioinformatics to process data and draw conclusions from\
-  \ biological experiments, specially those resulting in large amounts of data, such as high-throughput\
-  \ microarrays. I also use said data to create predictors that infer new biological knowledge or help\
-  \ designing new experiments.\n\nI'm doing a PhD in Molecular Biology and Biotechnology in the \"Instituto\
-  \ de Investigaciones Biotecnológicas\" (IIB) at the \"Universidad de San Martín\" (UNSAM, Argentina).\n\
-  \nI gave talks about my research at the \"VIII Congreso Argentino de Bioinformática y Biología Computacional\"\
-  \ (Argentina, Misiones, 2017) and at “ASTMH 67th Annual Meeting” (United Stated, New Orleans, 2018),\
-  \ amongst other places.\n\nI have a Bachelor's Degree in Biological Sciences from the University of\
-  \ Buenos Aires (UBA)."
+# `bio` below is the full biography, used on the author's own profile page.
+bio: |
+  # About me
+
+  I specialize in the use of bioinformatics to process data and draw conclusions from biological experiments, specially those resulting in large amounts of data, such as high-throughput microarrays. I also use said data to create predictors that infer new biological knowledge or help designing new experiments.
+
+  I'm doing a PhD in Molecular Biology and Biotechnology in the "Instituto de Investigaciones Biotecnológicas" (IIB) at the "Universidad de San Martín" (UNSAM, Argentina).
+
+  I gave talks about my research at the "VIII Congreso Argentino de Bioinformática y Biología Computacional" (Argentina, Misiones, 2017) and at “ASTMH 67th Annual Meeting” (United Stated, New Orleans, 2018), amongst other places.
+
+  I have a Bachelor's Degree in Biological Sciences from the University of Buenos Aires (UBA).
 affiliations:
 - name: Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)
   url: http://www.conicet.gob.ar

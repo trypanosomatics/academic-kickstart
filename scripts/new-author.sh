@@ -4,12 +4,6 @@
 # only targets content/, and errors outright on a data/ path -- see
 # README.md sec 4 and MIGRATION.md sec 9.9.
 #
-# No content/authors/<slug>/ stub is created. It isn't needed: Hugo forces
-# /authors/<slug>/ into existence once ANY content anywhere cites the slug in
-# an `authors:` list -- a post, talk, project or publication, not just a
-# publication. Until then the person still shows on the People grid (that
-# comes from data/authors/ alone), just without a working profile link.
-#
 # Usage:
 #   scripts/new-author.sh "Jane Doe" [slug]
 #
@@ -71,7 +65,18 @@ role: "TODO"
 # One-line summary shown on the author cards at the foot of a page.
 short_bio: ""
 # \`bio\` below is the full biography, used on the author's own profile page.
-bio: "# About me"
+# Supports Markdown (headings, lists, links, bold/italic, ...) -- rendered
+# through markdownify. Written as a YAML literal block scalar (the \`|\`)
+# so it reads and edits like an ordinary Markdown file, not one escaped
+# line -- replace this placeholder text.
+bio: |
+  # About me
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua.
+
+  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+  ut aliquip ex ea commodo consequat.
 affiliations:
 - name: Universidad de San Martín
   url: http://www.unsam.edu.ar
@@ -99,7 +104,8 @@ Created:
 Still needed by hand:
   - avatar at assets/media/authors/$slug.<ext> (any aspect ratio; team-showcase
     center-crops it -- see OVERRIDES.md "Avatar cropping on the People grid")
-  - role, short_bio, bio, email
+  - role, short_bio, email
+  - bio (currently lorem ipsum placeholder text)
   - user_groups (empty right now -- the person won't appear on the People
     grid until this is set)
   - double-check the given/family name split above; it's just "last word is

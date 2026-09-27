@@ -6,16 +6,14 @@ name:
   family: Sneidermanis
 role: Undergrad Student (BSc Thesis)
 # One-line summary shown on the author cards at the foot of a page.
-# `bio` below is the full biography, used on the author's own profile page.
 short_bio: "Undergrad student pursuing a bachelor's degree thesis. Drug discovery and cheminformatics"
-bio: "# About me \n\nI am currently pursuing a bachelor’s degree in Biotechnology at the National University\
-  \ of San Martín (UNSAM). I am equally passionate about computer science and biotechnology, and I aim\
-  \ to build a career in Bioinformatics.\n\nIn the lab, I am collaborating on updating and improving the\
-  \ TDR Targets website, integrating genomes and datasets from multiple online resources to create a functional\
-  \ platform that supports drug discovery for neglected diseases. This work is helping me strengthen my\
-  \ skills in software development, software architecture, data integration, and, in particular, my growth\
-  \ in cheminformatics. My bachelor’s thesis focuses on Neglected diseases, such as Chagas, leveraging\
-  \ curated chemogenomic data to contribute to this global health challenge."
+# `bio` below is the full biography, used on the author's own profile page.
+bio: |
+  # About me
+
+  I am currently pursuing a bachelor’s degree in Biotechnology at the National University of San Martín (UNSAM). I am equally passionate about computer science and biotechnology, and I aim to build a career in Bioinformatics.
+
+  In the lab, I am collaborating on updating and improving the TDR Targets website, integrating genomes and datasets from multiple online resources to create a functional platform that supports drug discovery for neglected diseases. This work is helping me strengthen my skills in software development, software architecture, data integration, and, in particular, my growth in cheminformatics. My bachelor’s thesis focuses on Neglected diseases, such as Chagas, leveraging curated chemogenomic data to contribute to this global health challenge.
 affiliations:
 - name: Universidad de San Martín
   url: http://www.unsam.edu.ar

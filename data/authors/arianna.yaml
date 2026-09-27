@@ -6,9 +6,10 @@ name:
   family: Zuccolo Niño
 role: Undergrad Student (BSc Thesis)
 # One-line summary shown on the author cards at the foot of a page.
-# `bio` below is the full biography, used on the author's own profile page.
 short_bio: "Undergrad student pursuing a bachelor's degree thesis"
-bio: '# About me'
+# `bio` below is the full biography, used on the author's own profile page.
+bio: |
+  # About me
 affiliations:
 - name: Universidad de San Martín
   url: http://www.unsam.edu.ar
@@ -16,15 +17,18 @@ links:
 - icon: at-symbol
   url: mailto:arianna2003@hotmail.com.ar
   label: E-mail
+- icon: brands/linkedin
+  url: https://www.linkedin.com/in/arianna-zuccolo-nino/
+  label: linkedin
 interests:
-- Biochemistry of Proteins
-- Molecular Biology
-- Chagas Diseases
-- Recombinant Proteins
+- Microscopy
+- Cell Segmentation
+- Chagas Disease
+- Cell Biology
 education:
 - degree: BSc in Biotechnology (in progress)
   institution: Universidad Favaloro
-  year: 2025
+  year: 2026
 user_groups:
 - Alumni
 weight: 10

@@ -6,12 +6,12 @@ name:
   family: Quinteros
 role: PhD Student
 # One-line summary shown on the author cards at the foot of a page.
-# `bio` below is the full biography, used on the author's own profile page.
 short_bio: "Undergrad biotechnology student, interested in bioinformatics"
-bio: "# About me\nI am currently finishing my bachelor’s degree in Biotechnology at the University of\
-  \ San Martín (UNSAM). \nI’m doing a graduate thesis in the “Instituto de Investigaciones Biotecnológicas”\
-  \ (IIB) at the “Universidad de San Martín” (UNSAM), which involves high-throughput analysis of peptide\
-  \ arrays to screen antigenic markers in different treatments of Chagas Disease."
+# `bio` below is the full biography, used on the author's own profile page.
+bio: |
+  # About me
+  I am currently finishing my bachelor’s degree in Biotechnology at the University of San Martín (UNSAM).
+  I’m doing a graduate thesis in the “Instituto de Investigaciones Biotecnológicas” (IIB) at the “Universidad de San Martín” (UNSAM), which involves high-throughput analysis of peptide arrays to screen antigenic markers in different treatments of Chagas Disease.
 affiliations:
 - name: Universidad de San Martín
   url: http://www.unsam.edu.ar

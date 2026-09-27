@@ -5,7 +5,11 @@ name:
   given: Alejandro
   family: Ackermann
 role: Former Lab Member (2005 -- 2012)
-bio: "# Previous positions in the lab\n \n * 2005-2012 PhD Student"
+# `bio` below is the full biography, used on the author's own profile page.
+bio: |
+  # Previous positions in the lab
+
+   * 2005-2012 PhD Student
 user_groups:
 - Past Lab Members
 weight: 80  # tenure 2005-2012 (role), most-recent-first order

@@ -7,15 +7,23 @@ name:
   display: Trypanosomatics
 role: A Trypanosome in the Shell
 # One-line summary shown on the author cards at the foot of a page.
-# `bio` below is the full biography, used on the author's own profile page.
 short_bio: "Using and generating data to guide discovery of new drugs and diagnostics."
-bio: "Our laboratory is interested in the study of human pathogens, particularly\ntrypanosomes and also\
-  \ others that cause so-called *Neglected Tropical Diseases*. \n\nWe develop computational tools and\
-  \ produce (and re-use) large data sets to\nformulate and guide our research hypotheses in the quest\
-  \ for new drugs and\ndiagnostics. Smart and intensive data integration, data mining,\nand high-throughput\
-  \ assays and experiments are at the core of our research\nactivities.\n\nIn particular, we have a special\
-  \ interest in the study of trypanosomes such as\n_Trypanosoma cruzi_ (causative of Chagas disease).\
-  \ \n\nWellcome to our electronic home in the web. Feel free to browse and poke\naround."
+# `bio` below is the full biography, used on the author's own profile page.
+bio: |
+  Our laboratory is interested in the study of human pathogens, particularly
+  trypanosomes and also others that cause so-called *Neglected Tropical Diseases*.
+
+  We develop computational tools and produce (and re-use) large data sets to
+  formulate and guide our research hypotheses in the quest for new drugs and
+  diagnostics. Smart and intensive data integration, data mining,
+  and high-throughput assays and experiments are at the core of our research
+  activities.
+
+  In particular, we have a special interest in the study of trypanosomes such as
+  _Trypanosoma cruzi_ (causative of Chagas disease).
+
+  Wellcome to our electronic home in the web. Feel free to browse and poke
+  around.
 affiliations:
 - name: Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET)
   url: http://www.conicet.gob.ar

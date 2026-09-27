@@ -5,11 +5,19 @@ name:
   given: Mercedes
   family: Didier Garnham
 role: PhD Student
-bio: "# About me \n\nI am currently doing my bachelor’s degree in Biotechnology at the University of Hurlingham\
-  \ (UNAHUR). I work in Bioinformatics, using computer science and programming to analize chemogenomic\
-  \ information. I’m researching new compounds that might be useful to treat Chagas disease by using genome-wide\
-  \ data and chemical libraries at IIBIO-CONICET.\n\n# Previous positions in the lab\n\n * 2018-2020 Undergrad\
-  \ Student\n\n# Current Position\n\n * 2021-- PhD Student"
+# `bio` below is the full biography, used on the author's own profile page.
+bio: |
+  # About me
+
+  I am currently doing my bachelor’s degree in Biotechnology at the University of Hurlingham (UNAHUR). I work in Bioinformatics, using computer science and programming to analize chemogenomic information. I’m researching new compounds that might be useful to treat Chagas disease by using genome-wide data and chemical libraries at IIBIO-CONICET.
+
+  # Previous positions in the lab
+
+   * 2018-2020 Undergrad Student
+
+  # Current Position
+
+   * 2021-- PhD Student
 affiliations:
 - name: Universidad Nacional de Hurlingham
   url: http://www.unahur.edu.ar

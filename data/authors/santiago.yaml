@@ -6,11 +6,17 @@ name:
   family: Carmona
 role: Former Lab Member (2007 -- 2015)
 # One-line summary shown on the author cards at the foot of a page.
-# `bio` below is the full biography, used on the author's own profile page.
 short_bio: "Present address: Ludwig Center for Cancer Research, University of Lausanne"
-bio: "# Previous positions in the lab\n\n * 2007-2010 Undergrad Student (BSc Thesis)\n * 2010-2015 PhD\
-  \ Student \n\n# Current Position\n\nLudwig Institute for Cancer Research - University of Lausanne, Switzerland.\
-  \ https://unil.ch/dof/carmona"
+# `bio` below is the full biography, used on the author's own profile page.
+bio: |
+  # Previous positions in the lab
+
+   * 2007-2010 Undergrad Student (BSc Thesis)
+   * 2010-2015 PhD Student
+
+  # Current Position
+
+  Ludwig Institute for Cancer Research - University of Lausanne, Switzerland. https://unil.ch/dof/carmona
 links:
 - icon: academicons/google-scholar
   url: https://scholar.google.com/citations?user=H7ILPkgAAAAJ
