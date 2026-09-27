@@ -328,6 +328,8 @@ Sources: [Netlify docs — repo permissions and linking](https://docs.netlify.co
 | 2026-09-07 | Phase 4 | ✅ reported narrow-viewport hero regression investigated — **not a bug**, the screenshot was a pre-`c151769` build. No code change. Headless-browser verification recipe added as §8.12. See §9.4. |
 | 2026-09-26 | Phase 4 | ✅ team-showcase weight ties broken; §5.5.4 decided (keep); People-grid avatar cropping fixed (`object-cover`); "Find us on" i18n override. See §9.6. |
 | 2026-09-26 | Phase 2 | ⚠️ `content/projects/` found never migrated (still pre-Kit field names) — logged as an open gap, not fixed. See §9.7. |
+| 2026-09-26/27 | Phase 4 | ✅ `bio:` converted to YAML block scalars across all 20 authors, `short_bio` preferred over raw `bio` on cards, `scripts/new-author.sh` added then simplified to data-only, `content/authors/` stubs decided unnecessary. See §9.9–§9.10. |
+| 2026-09-27 | Phase 4 | ✅ Play/Open Sans split fixed for real — role, affiliation, and name text across four blocks; one section-title block (`content-collection`) fixed from `<div>` to `<h2>`; navbar font wired to the previously-inert `--hb-font-nav`. See §9.11. |
 
 ### 9.1 State as of 2026-09-06 — branch `migrate/hugoblox-kit` (HEAD `12bd4eb`)
 
@@ -803,6 +805,32 @@ before calling `fnm env`.
 export PATH="$HOME/.local/share/fnm/aliases/default/bin:$PATH"
 ```
 
+### §8.12's Chrome recipe can fail outright — Windows interop not registered
+
+Distinct from the ~500px clamp above: sometimes the Windows binary can't be
+exec'd from WSL at all —
+
+```
+/mnt/c/Program Files/Google/Chrome/Application/chrome.exe: cannot execute binary file: Exec format error
+```
+
+That error is WSL's own interop layer failing, not Chrome. Confirm with
+`ls /proc/sys/fs/binfmt_misc/` — normally there's a `WSLInterop` entry
+alongside `register`/`status`; if it's missing (only `register`/`status`
+present), nothing routes `.exe` execution to `/init`, and even
+`/mnt/c/WINDOWS/system32/wsl.exe` fails the identical way from inside the
+same shell — confirming it's interop-wide, not a Chrome-specific problem.
+
+Not resolved in-session (observed 2026-09-27; the earlier §8.12 write-up used
+this recipe successfully, so it can regress between sessions on the same
+box). Likely needs restoring at the Windows/WSL level (`wsl --shutdown` and
+restart, or checking `interop.enabled` isn't set to false in `/etc/wsl.conf`
+or `.wslconfig`) rather than anything fixable from inside a single shell.
+**Fall back to direct CSS/HTML inspection** (grep the compiled CSS for the
+selector in question, check class lists in the built HTML) for anything
+that's really a "which rule wins" question rather than a genuine visual
+judgement call — it's more precise for that class of question anyway.
+
 ## 9.4 Session 2026-09-07 (second) — the narrow-viewport "regression" was stale HTML
 
 **Report:** at a reduced window width the hero banner image was missing —
@@ -1118,3 +1146,55 @@ leftover are being removed by hand, outside this session.
   page and documents why the page must keep rendering (neighbour of the
   §1/§8.10-area discussion). Only the 20 per-slug stubs and the
   `content/authors/xxx/` leftover are being removed.
+
+## 9.11 Session 2026-09-27 — Play/Open Sans actually applied everywhere it should be
+
+Prompted by a real screenshot comparing `localhost:1313` against the live
+`trypanosomatics.org`: names, roles, affiliations and section titles were
+reading in Open Sans (`--hb-font-body`) where the old site used Play
+(`--hb-font-heading`). Two rounds, because the first round's verification
+method — "the CSS mechanism resolves correctly" — wasn't the same claim as
+"every place it should apply does."
+
+**Round 1 — role, affiliation, and (once the screenshot arrived) name text.**
+`--hb-font-heading` is wired to exactly `h1,h2,h3,h4,h5,h6`; role and
+affiliation are plain `<div>`/`<p>` elements everywhere they appear, so they
+never inherited it. Fixed with the literal Tailwind utility
+`font-[family-name:var(--hb-font-heading)]`, added directly in four places:
+`_partials/hbx/blocks/team-showcase/block.html` (People-grid card, both
+layout variants — role + affiliation), `authors/term.html` (new override —
+profile page role + affiliation), `_partials/page_author_card.html`
+(publication byline — role), and `_partials/hbx/blocks/resume-biography/block.html`
+(new override — the homepage "About" card's **name**, which the screenshot
+caught: it renders as `<h1>` only when a `name_pronunciation` field is set,
+which nothing in this dataset does, so it's a plain `<div>` for every
+profile — same gap as role/affiliation, different block, missed by the first
+pass's audit). Full reasoning and the self-correction in `OVERRIDES.md`
+"Play on role/affiliations, not just headings."
+
+**Round 2 — section titles and the navbar**, after being asked directly
+whether every section title needs its own override and whether a global
+switch was missing. Audited all of them: `team-showcase`, `tag-cloud`,
+`portfolio`, `contact-info` were already real `<h2>`s, no fix needed — the
+global `h1-h6` rule already covers genuine headings, always did. **One
+block wasn't**: `content-collection` (Recent Posts, Featured Publications,
+Recent & Upcoming Talks, and the landing-page publications list all route
+through it) used a plain `<div>`. Changed to `<h2>` — one fix, four section
+titles, not four overrides. The navbar was a different, genuinely global
+gap: `--hb-font-nav` is declared in the font pack (defaults to
+`var(--hb-font-heading)`) but no rule ever consumed it — identical shape to
+the already-documented `--hb-font-size-base` gap. Fixed with one CSS rule in
+`hugo-blox/blox/site/style.css`: `.nav-link, .nav-dropdown-link,
+.navbar-brand { font-family: var(--hb-font-nav); }` — covers the top bar,
+dropdowns, and site-title link in one place. Both documented in
+`OVERRIDES.md` "Section titles: mostly already headings, one wasn't" and
+`STYLING.md` §5.
+
+**Environment note:** `MIGRATION.md` §8.12's Chrome screenshot recipe failed
+outright this session (WSL interop not registered, see that section) —
+verification here was done entirely by tracing the compiled CSS and built
+HTML instead, which is precise for "which selector wins" but did not catch
+the `resume-biography` gap until a real screenshot from the user's own
+browser surfaced it. Lesson recorded in `OVERRIDES.md`: enumerating every
+template that calls `get_author_profile` would have caught it without
+needing that screenshot.

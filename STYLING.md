@@ -167,6 +167,15 @@ pulled (`html{font-size:18px}` above 58em):
 @media screen and (min-width: 58em) { html { font-size: 18px; } }
 ```
 
+**Same gap, `--hb-font-nav`.** Declared (defaults to `var(--hb-font-heading)`)
+but never consumed either — `.nav-link`/`.nav-dropdown-link`/`.navbar-brand`
+set colour and weight, no `font-family`, so the navbar fell back to
+`--hb-font-body`. Wired up here too:
+
+```css
+.nav-link, .nav-dropdown-link, .navbar-brand { font-family: var(--hb-font-nav); }
+```
+
 **Useful `--hb-*` variables** to override on `:root` (or `.dark`):
 
 ```

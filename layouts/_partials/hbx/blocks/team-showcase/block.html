@@ -275,9 +275,9 @@
                   {{ if and (not $roleText) $first_affiliation }}
                     {{ $roleText = $first_affiliation }}
                   {{ end }}
-                  {{ with $roleText }}<p class="font-medium">{{ . }}</p>{{ end }}
+                  {{ with $roleText }}<p class="font-medium font-[family-name:var(--hb-font-heading)]">{{ . }}</p>{{ end }}
                   {{ if and $show_organizations $first_affiliation }}
-                    <p class="text-sm mt-1">{{ $first_affiliation }}</p>
+                    <p class="text-sm mt-1 font-[family-name:var(--hb-font-heading)]">{{ $first_affiliation }}</p>
                   {{ end }}
                 </div>
                 {{ end }}
@@ -480,9 +480,9 @@
                 {{ if and (not $roleText) $first_affiliation }}
                   {{ $roleText = $first_affiliation }}
                 {{ end }}
-                {{ with $roleText }}<p class="font-medium">{{ . }}</p>{{ end }}
+                {{ with $roleText }}<p class="font-medium font-[family-name:var(--hb-font-heading)]">{{ . }}</p>{{ end }}
                 {{ if and $show_organizations $first_affiliation }}
-                  <p class="text-sm mt-1">{{ $first_affiliation }}</p>
+                  <p class="text-sm mt-1 font-[family-name:var(--hb-font-heading)]">{{ $first_affiliation }}</p>
                 {{ end }}
               </div>
               {{ end }}

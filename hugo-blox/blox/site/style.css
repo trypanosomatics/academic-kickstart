@@ -2,6 +2,20 @@
    Concatenated into the Tailwind entry by the module's css.html, so Tailwind
    directives (@apply, theme(), variants) work here. See STYLING.md. */
 
+/* ── Nav font ──────────────────────────────────────────────────────────────
+   Same gap as --hb-font-size-base below: --hb-font-nav defaults to
+   var(--hb-font-heading) in the font pack's :root block, but the module
+   never consumes it (checked in blox v0.0.0-20260527025321) -- .nav-link,
+   .nav-dropdown-link and .navbar-brand set colour/weight but no
+   font-family, so nav text fell back to --hb-font-body (Open Sans) instead
+   of Play. Wire it up here; covers the top navbar and its dropdowns in one
+   rule, no per-template override needed.                                   */
+.nav-link,
+.nav-dropdown-link,
+.navbar-brand {
+  font-family: var(--hb-font-nav);
+}
+
 /* ── Type scale ─────────────────────────────────────────────────────────────
    The Academic v4 site set the root to 18px on desktop:
        html{font-size:13.86px}

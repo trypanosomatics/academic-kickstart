@@ -226,6 +226,7 @@
       "focus:ring-4",
       "focus:ring-primary-300",
       "focus:z-20",
+      "font-[family-name:var(--hb-font-heading)]",
       "font-bold",
       "font-medium",
       "font-mono",

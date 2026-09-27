@@ -14,7 +14,10 @@ Version at time of copy: `v0.0.0-20260527025321-61f41d3667f1`
 | File | Upstream source | Local change |
 |---|---|---|
 | `_partials/functions/process_responsive_image.html` | same path | Guarantee a non-nil `fallback`. Upstream only emits breakpoints where the source is at least as wide as the requested size, so an image narrower than all of them returns `fallback` as `""` and every caller doing `.fallback.RelPermalink` errors the build. Triggered here by `assets/media/authors/aleacker.jpg` (72×89 against sizes 160/240/320/480). Upstream bug; the patch is at the end of the file, clearly marked. |
-| `_partials/hbx/blocks/team-showcase/block.html` | `blox/team-showcase/block.html` | Not a bug — a deliberate content-vs-code trade-off. See "Avatar cropping" below. |
+| `_partials/hbx/blocks/team-showcase/block.html` | `blox/team-showcase/block.html` | Not a bug — a deliberate content-vs-code trade-off. See "Avatar cropping" below. Also carries the role/affiliation font fix below. |
+| `authors/term.html` | same path | Role/affiliation font fix — see "Play on role/affiliations, not just headings" below. Otherwise verbatim. |
+| `_partials/hbx/blocks/resume-biography/block.html` | `blox/resume-biography/block.html` | Same font fix, on the name and affiliations. Otherwise verbatim. |
+| `_partials/hbx/blocks/content-collection/block.html` | `blox/content-collection/block.html` | Section title was a `<div>`, now a real `<h2>`. See "Section titles" below. Otherwise verbatim. |
 
 ## When upgrading the blox module
 
@@ -325,6 +328,103 @@ not a stray value borrowed from someone else's card — a first pass at
 verifying this by scanning forward for the next `line-clamp-2` in the HTML
 gave a false positive for exactly that reason (landed on the *next* card's
 paragraph), corrected by scoping the check to each card's own boundary.
+
+### Play on role/affiliations, not just headings
+
+`--hb-font-heading` (Play) is wired to exactly one selector in the module's
+CSS: `h1,h2,h3,h4,h5,h6`. Person names on the People grid and the profile
+page *are* an `<h3>`/`<h1>`, so they already got Play with no override
+needed. **Role and affiliation text do not** — both are plain `<div>`/`<p>`
+elements with only colour/size utility classes, so they silently fell back
+to `--hb-font-body` (Open Sans). Matches the Academic v4 site, which set
+these fields in the heading face to read as structured identity (name,
+title, org), distinct from free-text prose.
+
+Fixed by adding the literal Tailwind v4 arbitrary-value utility
+`font-[family-name:var(--hb-font-heading)]` directly to each role/affiliation
+element, in three places:
+
+- `_partials/hbx/blocks/team-showcase/block.html` — the People-grid card
+  (both layout variants), on `$roleText` and `$first_affiliation`.
+- `authors/term.html` — the individual profile page (new override, otherwise
+  verbatim), on role and every affiliation link.
+- `_partials/page_author_card.html` — the publication-byline card, on role
+  only (this card doesn't show affiliations).
+
+No new CSS file or `:root` variable needed — Tailwind's JIT scanner picks up
+the class because it's written literally in each template (not built from a
+variable), the same "scanner safety" rule the Preact block components already
+follow. Verified compiled (`.font-\[family-name\:var\(--hb-font-heading\)\]{font-family:var(--hb-font-heading)}`
+present in the built CSS) and applied on all three surfaces in the built HTML.
+
+Could not confirm by screenshot in the first pass — Windows-Chrome interop
+(§8.12's recipe) failed with `binfmt_misc` reporting no registered
+interpreter, a different failure from the earlier documented ones. Verified
+by direct CSS/HTML inspection instead — correctly, as far as it went: the
+CSS mechanism (`--hb-font-heading` set un-layered at `:root`, beating
+Tailwind's own `@layer theme` default) really does work. What that pass
+missed was a fourth block never checked, caught only once a real screenshot
+arrived.
+
+#### The follow-up: `resume-biography`'s name is *never* a real heading
+
+A user-supplied screenshot (`localhost:1313` vs. live `trypanosomatics.org`)
+showed the "Trypanosomatics" org name on the homepage "About" card still in
+the body face, disproving "usernames already get Play" as a blanket claim.
+Root cause: `blox/resume-biography/block.html`'s name field only renders as
+`<h1>` when `name_pronunciation` is set (a ruby-annotation feature for
+phonetic name glosses); otherwise — every single profile in this dataset,
+nobody sets that field — it renders as a plain `<div class="text-3xl
+font-bold ...">`. Same gap as role/affiliation, different block, so it slid
+past the audit that covered `team-showcase`, `authors/term.html` and
+`page_author_card.html`.
+
+Fixed the same way, in a fourth new override,
+`_partials/hbx/blocks/resume-biography/block.html`: added
+`font-[family-name:var(--hb-font-heading)]` to both the `<h1>` and `<div>`
+name branches (belt-and-suspenders — the `<h1>` branch would already inherit
+Play, but nothing currently exercises it) and to the affiliation wrapper.
+`role` on this block *is* a real `<h3>` already and needed no change.
+
+**Lesson for next time:** "the CSS mechanism resolves correctly" and "every
+place that mechanism is supposed to apply actually does" are two different
+claims — verifying the first doesn't establish the second. Enumerating every
+block that renders a name/role/affiliation (`grep -rl` for `get_author_profile`
+across `layouts/`) would have caught this without needing the screenshot.
+
+### Section titles: mostly already headings, one wasn't — plus the navbar
+
+Two follow-up questions after the name/role/affiliation fixes: do "Recent
+Posts" / "Featured Publications" / "Recent & Upcoming Talks" need the same
+per-block treatment, and is there a *global* switch instead of one-off fixes?
+
+**Audited every block title on the homepage.** `team-showcase` ("This is
+Us"), `tag-cloud` ("Popular Topics"), `portfolio` ("Projects"), `contact-info`
+("Contact") all already render their title as a real `<h2>` — no fix needed,
+they were never the problem. **Exactly one wasn't:** `content-collection` —
+the block behind Recent Posts, Featured Publications, Recent & Upcoming
+Talks, *and* the landing-page publications list — used a plain `<div
+class="mb-6 text-3xl font-bold ...">`. One block, reused four times on this
+page, so one fix (`<div>` → `<h2>`, same classes) covers all four section
+titles at once — not four separate overrides.
+
+**So yes, there is a global mechanism — `h1,h2,h3,h4,h5,h6{font-family:
+var(--hb-font-heading)}` — and it already covers every genuine heading.**
+Every per-element fix in this file so far (role, affiliation, the
+`resume-biography` name, this collection title) was needed only because that
+*specific* element wasn't a real heading tag upstream, not because the global
+rule has any gap. Nothing here calls for a broader CSS selector or a new
+`:root` override.
+
+**Navbar text was a different, genuinely global gap.** `--hb-font-nav`
+exists for exactly this — declared in the font pack, defaulting to
+`var(--hb-font-heading)` — but the module never writes a rule that consumes
+it (`.nav-link` etc. set colour/weight only). Identical shape to the already-
+documented `--hb-font-size-base` gap in `STYLING.md` §5. Fixed with one CSS
+rule there, not a template override: `.nav-link, .nav-dropdown-link,
+.navbar-brand { font-family: var(--hb-font-nav); }`. This one **is** the
+single global switch the navbar needed — covers the top bar, dropdowns, and
+the site-title brand link in one place, no per-page template touched.
 
 ---
 

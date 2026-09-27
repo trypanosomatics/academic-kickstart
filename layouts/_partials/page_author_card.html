@@ -1,6 +1,7 @@
 {{/* Override of blox `_partials/page_author_card.html` (v0.0.0-20260527025321).
-     Upstream verbatim except for the bio block near the end, which prefers a
-     `short_bio` from data/authors/<slug>.yaml. See OVERRIDES.md. */}}
+     Upstream verbatim except: the bio block near the end, which prefers a
+     `short_bio` from data/authors/<slug>.yaml; and `role`, which now carries
+     font-[family-name:var(--hb-font-heading)]. See OVERRIDES.md. */}}
 {{ $profile := .profile }}
 {{ $page := .page }}
 {{ $site_type := site.Params.hugoblox.identity.type | humanize | default "Person" }}
@@ -62,7 +63,7 @@
     </div>
 
     {{ with $profile.role }}
-    <div class="text-sm font-bold text-neutral-700 dark:text-neutral-300">
+    <div class="text-sm font-bold text-neutral-700 dark:text-neutral-300 font-[family-name:var(--hb-font-heading)]">
     {{. | markdownify | emojify}}
     </div>
     {{end}}
