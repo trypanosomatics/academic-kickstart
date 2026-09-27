@@ -121,3 +121,7 @@ Parity baseline (256 sitemap URLs / 262 author links / 359 pages, captured
   pointers into this repo (it is public).
 - Update `MIGRATION.md` §9 when you complete a step; keep it reconciled with
   actual git state, not intentions.
+- **Do not `git commit` without asking first.** Make the edits, rebuild, verify
+  — then stop and check before committing, even for a fix that's clearly
+  correct. The user often wants several related changes (this session's, or a
+  follow-up request) squashed into one commit rather than one per step.
