@@ -28,7 +28,9 @@ links:
 - icon: academicons/orcid
   url: https://orcid.org/0000-0002-9709-7552
 interests:
-- Chemogenomics, Biochemistry, High-Throughput Screenings
+- Chemogenomics
+- Biochemistry
+- High-Throughput Screenings
 education:
 - degree: PhD in Molecular Biology and Biotechnology
   institution: IIBIO-CONICET

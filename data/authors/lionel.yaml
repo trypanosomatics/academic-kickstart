@@ -27,7 +27,9 @@ links:
 - icon: academicons/orcid
   url: https://orcid.org/0000-0002-6202-9779
 interests:
-- Chemogenomics, Neglected diseases, Drug Discovery
+- Chemogenomics
+- Neglected diseases
+- Drug Discovery
 education:
 - degree: Ms in Biotechnology
   institution: Universidad Nacional de Quilmes
